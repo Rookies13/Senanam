@@ -44,6 +44,11 @@ https://sangchul.kr/entry/vscode-Language-Support-for-JavaTM-by-Red-Hat-%ED%99%9
 
 https://goodteacher.tistory.com/614
 
+(6) maven project manager
+(microsoft)
+(7) java project manager
+(microsoft)
+
 2. Git 설정
 (1) Git가입
 (2) Rookies13 Oraganization 가입
