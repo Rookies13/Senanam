@@ -1,5 +1,9 @@
 # senashop
+구조 tomcat + jsp + java + oracle 
 ![image](https://github.com/Rookies13/Senanam/assets/140288335/2a7b5ca5-b523-4eed-9cae-950686ee14f3)
+![image](https://github.com/Rookies13/Senanam/assets/140288335/c65cf4c5-1eb6-47a5-bc30-e667be9dfbb8)
+
+
 
 사전 환경 구축
 1. JDK 설치 및 환경 설정
