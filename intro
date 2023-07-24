@@ -1,9 +1,0 @@
-기간: 20230722 ~ 20230905
-개발환경 : APACHE TOMECAT 
-
-Apache Tomcat 설치:
-
-Apache Tomcat공식 웹사이트(https://tomcat.apache.org/)
-C:\apache-tomcat 디렉토리에 설치
-JDK(Java Development Kit)를 설치
-환경 변수를 설정
