@@ -30,6 +30,10 @@ Visual Studio Code를 실행한 후, 확장 기능(Extensions) 메뉴에서 "Jav
 
 https://sangchul.kr/entry/vscode-Language-Support-for-JavaTM-by-Red-Hat-%ED%99%95%EC%9E%A5%ED%8C%A9-%EC%97%90%EB%9F%AC
 
+(5) Community Server Connector
+
+https://goodteacher.tistory.com/614
+
 2. Git 설정
 (1) Git가입
 (2) Rookies13 Oraganization 가입
