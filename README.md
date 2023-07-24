@@ -24,6 +24,16 @@ The `JAVA PROJECTS` view allows you to manage your dependencies. More details ca
    https://www.oracle.com/java/technologies/downloads/#jdk20-windows
 2. 톰캣
    https://tomcat.apache.org/download-10.cgi
+tomcat-users.xml
+##마지막 줄 추가
+   <role rolename="manager-gui"/>
+  <role rolename="admin"/>
+  <user username="admin" password="admin" roles="admin,manager-gui"/>
+  
+3. maven
+   https://maven.apache.org/download.cgi
+   https://hianna.tistory.com/764
+   https://sogno-ing.tistory.com/166
 
 개발환경구축
 1. Visaul Code 환경
@@ -49,6 +59,15 @@ cmd - lsnrctl status 확인 후 진행.
 Visual Studio Code를 실행한 후, 확장 기능(Extensions) 메뉴에서 "Java Extension Pack"을 검색하여 설치합니다. 이 확장 기능은 Java 개발에 필요한 기능들을 제공합니다.
 
 https://sangchul.kr/entry/vscode-Language-Support-for-JavaTM-by-Red-Hat-%ED%99%95%EC%9E%A5%ED%8C%A9-%EC%97%90%EB%9F%AC
+
+(5) Community Server Connector
+
+https://goodteacher.tistory.com/614
+
+(6) maven project manager
+(microsoft)
+(7) java project manager
+(microsoft)
 
 2. Git 설정
 (1) Git가입
