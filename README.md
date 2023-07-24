@@ -16,7 +16,9 @@ tomcat-users.xml
    https://maven.apache.org/download.cgi
    https://hianna.tistory.com/764
    https://sogno-ing.tistory.com/166
-
+   https://www.youtube.com/watch?v=74I687FsITo
+   https://www.youtube.com/watch?v=RiPot1ne8rI
+   
 개발환경구축
 1. Visaul Code 환경
 (1) Java 개발 확장팩 설치:
