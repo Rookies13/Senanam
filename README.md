@@ -1,4 +1,6 @@
 # senashop
+![image](https://github.com/Rookies13/Senanam/assets/140288335/2a7b5ca5-b523-4eed-9cae-950686ee14f3)
+
 사전 환경 구축
 1. JDK 설치 및 환경 설정
    https://www.oracle.com/java/technologies/downloads/#jdk20-windows
