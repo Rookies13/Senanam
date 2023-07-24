@@ -21,6 +21,9 @@ Visual Studio Code를 실행하고, 왼쪽 사이드바에서 "Extensions" 아�
 (2) Rookies13 Oraganization 가입
       git remote set-url origin https://Rookies13@github.com/Rookies13/Senanam.git
 
+3. oracle 21c
+   https://jack-of-all-trades.tistory.com/456
+
 웹 브라우저 미리보기:
 1. Live Server
 Visual Studio Code에는 Live Server와 같은 확장팩을 설치하여 웹 브라우저에서 실시간으로 웹 페이지를 미리 볼 수 있습니다.
