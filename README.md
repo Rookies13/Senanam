@@ -4,6 +4,16 @@
    https://www.oracle.com/java/technologies/downloads/#jdk20-windows
 2. 톰캣
    https://tomcat.apache.org/download-10.cgi
+tomcat-users.xml
+##마지막 줄 추가
+   <role rolename="manager-gui"/>
+  <role rolename="admin"/>
+  <user username="admin" password="admin" roles="admin,manager-gui"/>
+  
+3. maven
+   https://maven.apache.org/download.cgi
+   https://hianna.tistory.com/764
+   https://sogno-ing.tistory.com/166
 
 개발환경구축
 1. Visaul Code 환경
