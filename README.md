@@ -35,8 +35,11 @@ Welcome to the VS Code Java world. Here is a guideline to help you get started t
 
 
 > If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+
   >"rsp-ui.rsp.java.home": "C:\\Program Files\\Zulu\\zulu-17",
+
   > "java.jdt.ls.java.home": "C:\\Program Files\\Zulu\\zulu-17", or "java.home": "C:\\Program Files\\Zulu\\zulu-17",
+
 The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
 
 # Senanam
@@ -70,6 +73,9 @@ https://goodteacher.tistory.com/614
 (7) java project manager (microsoft) 설치 
 
 
+## Debugging
+
+![image](https://github.com/Rookies13/Senanam/assets/140288335/095c32f9-8392-4cce-88e4-73a0c3aa3a8a)
 
 
 
