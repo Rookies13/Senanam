@@ -1,3 +1,61 @@
+## Getting Started
+
+Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+1. git clone
+  >  C:\git 생성
+  > cmd termianl
+     - git clone https://(사용자이름)@github.com/Rookies13/Senanam.git
+
+2. vscode - new window
+  > open folder - git -> Senanam 
+
+## Folder Structure
+
+└─Maven_shop
+    ├─.vscode
+    └─senashop
+        ├─.vscode
+        ├─src
+        │  └─main
+        │      ├─java
+        │      └─webapp
+        │          └─WEB-INF
+        └─target
+            ├─classes
+            ├─maven-archiver
+            ├─maven-status
+            │  └─maven-compiler-plugin
+            │      └─compile
+            │          └─default-compile
+            └─senashop
+                └─WEB-INF
+                    └─classes
+
+## Dependency Management
+1. **JDK : ZULU-17**
+     https://www.azul.com/downloads/?package=jdk#zulu
+   ![image](https://github.com/Rookies13/Senanam/assets/140288335/65728b13-509f-4600-8076-01e97317052c)
+
+
+2. **Tomcat : tomcat 8.5.91 (32/64-bit Windwows service Installer)**
+      https://tomcat.apache.org/download-80.cgi
+![image](https://github.com/Rookies13/Senanam/assets/140288335/5cd29ba7-f936-494b-a897-e652ce8a93d1)
+
+
+3. **build system : apache-maven-3.9.3-bin.zip**
+     https://maven.apache.org/download.cgi
+  ![image](https://github.com/Rookies13/Senanam/assets/140288335/8769b277-b1bd-4456-9428-7bd520c8353a)
+
+> Path
+  ![image](https://github.com/Rookies13/Senanam/assets/140288335/1180f5a5-dd59-40a5-a180-891566b5f4a8)
+
+
+
+> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+  >"rsp-ui.rsp.java.home": "C:\\Program Files\\Zulu\\zulu-17",
+  > "java.jdt.ls.java.home": "C:\\Program Files\\Zulu\\zulu-17", or "java.home": "C:\\Program Files\\Zulu\\zulu-17",
+The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+
 # Senanam
 
 VSCODE - Tomcat - JSP - JAVA 개발환경 구성
