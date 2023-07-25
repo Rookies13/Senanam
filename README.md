@@ -11,25 +11,8 @@ Welcome to the VS Code Java world. Here is a guideline to help you get started t
 
 ## Folder Structure
 
-└─Maven_shop
-    ├─.vscode
-    └─senashop
-        ├─.vscode
-        ├─src
-        │  └─main
-        │      ├─java
-        │      └─webapp
-        │          └─WEB-INF
-        └─target
-            ├─classes
-            ├─maven-archiver
-            ├─maven-status
-            │  └─maven-compiler-plugin
-            │      └─compile
-            │          └─default-compile
-            └─senashop
-                └─WEB-INF
-                    └─classes
+![image](https://github.com/Rookies13/Senanam/assets/140288335/f343552d-85f7-49e6-9bb9-06e0872f90ad)
+
 
 ## Dependency Management
 1. **JDK : ZULU-17**
