@@ -1,0 +1,19 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  <display-name>senashop</display-name>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file> <!--시작할 페이지 설정-->
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>create</servlet-name>
+    <servlet-class>create</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>create</servlet-name> <!--여기에 자바 파일 클래스 이름 -->
+   <url-pattern>/create</url-pattern> <!-- URI페이지 경로 / 해당 페이지로 direction 됩니다. jsp에서 불러옴.  -->
+  </servlet-mapping>
+</web-app>
