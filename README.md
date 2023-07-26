@@ -87,7 +87,9 @@ https://goodteacher.tistory.com/614
 
 2. **stasging -> comiit**
       >
-![image](https://github.com/Rookies13/Senanam/assets/140288335/60031138-da2e-4257-99d1-f06a7b750d6d)
+
+![image](https://github.com/Rookies13/Senanam/assets/140288335/4c649456-c23d-49a0-9fc4-4da635604d52)
+
 
 (1) 소스제어 - (날짜, 이름) - 변경사항 적고 커밋.  
 
