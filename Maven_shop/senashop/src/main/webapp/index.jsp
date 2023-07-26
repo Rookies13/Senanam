@@ -8,6 +8,9 @@
     <li>테스트 로그인 <a href="login.jsp">JSP page</a>.
     <li>테스트 회원가입 <a href="create">servlet</a>.
 </ul>
+<ul>
 
+    asdfsadfsadf
+</ul>
 </body>
 </html>
