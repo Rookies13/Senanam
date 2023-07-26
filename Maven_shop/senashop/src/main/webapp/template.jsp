@@ -31,10 +31,9 @@
 					<li><a href="elements.html">Elements</a></li>
 				</ul>
 			</nav>
-<!--기능구현
+<!--기능구현-->
 
 
-기능구현 종료-->
 		<!-- Footer -->
 			<footer id="footer">
 			<div class="copyright">
