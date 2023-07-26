@@ -7,6 +7,8 @@
 <ul>
     <li>테스트 로그인 <a href="login.jsp">JSP page</a>.
     <li>테스트 회원가입 <a href="create">servlet</a>.
+    <li><a href="boardList.jsp">게시판 글쓰기</a>
+            
 </ul>
 
 </body>
