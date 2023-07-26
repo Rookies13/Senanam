@@ -31,7 +31,7 @@
 			session.setAttribute("user_id", id);
 			session.setAttribute("user_name", name);
 					
-			response.sendRedirect("login_welcome.jsp"); // 페이지이동
+			response.sendRedirect("index.jsp"); // 페이지이동
 					
 		} else{ // 로그인 실패
 			response.sendRedirect("login_fail.jsp"); // 실패 페이지
