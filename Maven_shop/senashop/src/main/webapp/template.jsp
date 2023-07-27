@@ -29,6 +29,7 @@
 					<li><a href="index.html">Home</a></li>
 					<li><a href="generic.html">Generic</a></li>
 					<li><a href="elements.html">Elements</a></li>
+<<<<<<< HEAD
 					<li><a href="boardList.jsp">게시판</a></li>
 				</ul>
 			</nav>
@@ -36,6 +37,13 @@
 
 
 기능구현 종료-->
+=======
+				</ul>
+			</nav>
+<!--기능구현-->
+
+
+>>>>>>> ca93058220e81489e88f8f74a08dd6188564ad6c
 		<!-- Footer -->
 			<footer id="footer">
 			<div class="copyright">
