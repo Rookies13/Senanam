@@ -101,12 +101,7 @@
 					</table>
 					<div align ="right">
 					<input type="submit" value="결제">
-					</div>
-					
-					
-						
-							
-						
+					</div>						
 	</div>
 </section>
 
