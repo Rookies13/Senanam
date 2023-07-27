@@ -17,13 +17,19 @@
    <url-pattern>/create</url-pattern> <!-- URI페이지 경로 / 해당 페이지로 direction 됩니다. jsp에서 불러옴.  -->
   </servlet-mapping>
   <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>LoginServlet</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/LoginServlet</url-pattern>
-    </servlet-mapping>
-
+      <servlet-name>LoginServlet</servlet-name>
+      <servlet-class>LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>LoginServlet</servlet-name>
+      <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+      <servlet-name>MyPage</servlet-name>
+      <servlet-class>MyPage</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>MyPage</servlet-name>
+      <url-pattern>/MyPage</url-pattern>
+  </servlet-mapping>
 </web-app>
