@@ -16,9 +16,9 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String user = "C##root";
-        String password = "1234";
+        String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+        String user = "c##shopm";
+        String password = "0000";
 
         String id = request.getParameter("id");
         String pw = request.getParameter("pw");

@@ -21,7 +21,7 @@
 			<a href="index.jsp" class="logo"><strong>세 나</strong> shop</a>
 			<nav>
 				<% if(id != null) {%>
-				<a href="logout.jsp"><%=id %>님 로그아웃</a>
+				<a href="LogoutServlet"><%=id %>님 로그아웃</a>
 				<% } else { %>
 				<a href="login.jsp">로그인</a>
 				<% } %>
@@ -34,7 +34,7 @@
 		<nav id="menu">
 			<ul class="links">
 				<li><a href="index.jsp">Home</a></li>
-				<li><a href="MyPage">Generic</a></li>
+				<li><a href="mypage.jsp">마이페이지</a></li>
 				<li><a href="elements.html">Elements</a></li>
 			</ul>
 		</nav>

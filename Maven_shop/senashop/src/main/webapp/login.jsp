@@ -14,105 +14,15 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="stylesheet" href="assets/css/login.css" />
 	</head>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Noto Sans KR", sans-serif;
-        }
-
-        .wrap {
-            width: 100%;
-            height: 600px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .login {
-            width: 30%;
-            height: 600px;
-            background: rgb(0, 0, 0);
-            border-radius: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        h2 {
-            color: #ffffff;
-            font-size: 2em;
-        }
-
-        h4 {
-            color: #ffffff;
-        }
-
-        .login_id {
-            margin-top: 20px;
-            width: 80%;
-        }
-
-        .login_id input {
-            width: 100%;
-            height: 50px;
-            border-radius: 30px;
-            margin-top: 10px;
-            padding: 0px 20px;
-            border: 1px solid white;
-            outline: none;
-            background-color:#ffffff;
-            color:black;
-        }
-
-        .login_pw {
-            margin-top: 20px;
-            width: 80%;
-        }
-
-        .login_pw input {
-            width: 100%;
-            height: 50px;
-            border-radius: 30px;
-            margin-top: 10px;
-            padding: 0px 20px;
-            border: 1px solid white;
-            outline: none;
-            background-color:#ffffff;
-            color:black;
-        }
-
-        .submit {
-            margin-top: 20px;
-            width: 80%;
-        }
-        
-        .join_user{
-            margin-top: 10px;
-            color:white;
-        }
-
-        .submit button {
-            width: 100%;
-            height: 80px;
-            border: 0;
-            outline: none;
-            border-radius: 40px;
-            background: linear-gradient(to left, rgb(255, 255, 255), rgb(52, 52, 59));
-            color: rgb(0, 0, 0);
-            font-size: 1.2em;
-            letter-spacing: 2px;
-        }
-    </style>
 	<body style="background-color: rgb(74, 74, 88);">
 		<header id="header">
 			<a href="index.jsp" class="logo"><strong>세 나</strong> shop</a>
 			<nav>
 				<% if(id != null) {%>
-				<a href="logout.jsp"> <%= id%> 로그아웃</a>
+				<!--<a href="logout.jsp"> <%= id%> 로그아웃</a>-->
+                <a href="LogoutServlet"> <%= id%> 로그아웃</a>
 				<% } else { %>
 				<a href="login.jsp">로그인</a>
 				<% } %>
