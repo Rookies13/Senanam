@@ -29,6 +29,7 @@
 					<li><a href="index.html">Home</a></li>
 					<li><a href="generic.html">Generic</a></li>
 					<li><a href="elements.html">Elements</a></li>
+					<li><a href="boardList.jsp">게시판</a></li>
 				</ul>
 			</nav>
 <!--기능구현
