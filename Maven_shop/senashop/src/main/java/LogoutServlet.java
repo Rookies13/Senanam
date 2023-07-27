@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-//webServlet 호출 web.xml 생략 class내 선언. 
+//webServlet 호출 web.xml 생략 class내 선언 가능. 
 @WebServlet("/LogoutServlet")
 public class LogoutServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
