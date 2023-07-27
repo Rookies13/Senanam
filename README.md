@@ -98,3 +98,10 @@ https://goodteacher.tistory.com/614
 
 ![image](https://github.com/Rookies13/Senanam/assets/140288335/cee195f9-657f-486f-bb3c-b9a4a2f8570b)
 
+### DB 
+ > info  **AWS RDS oracle**
+
+## ERD 
+
+![image](https://github.com/Rookies13/Senanam/assets/140288335/f699666a-b181-4dfc-8ae5-b12c54908145)
+
