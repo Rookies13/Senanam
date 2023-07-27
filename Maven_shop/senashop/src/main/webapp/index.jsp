@@ -21,7 +21,7 @@
 			<a href="index.jsp" class="logo"><strong>세 나</strong> shop</a>
 			<nav>
 				<% if(id != null) {%>
-				<a href="logout.jsp">로그아웃</a>
+				<a href="logout.jsp"><%=id %>님 로그아웃</a>
 				<% } else { %>
 				<a href="login.jsp">로그인</a>
 				<% } %>
@@ -39,12 +39,12 @@
 			</ul>
 		</nav>
 		<!-- Header -->
-		<img src="images/img4.jpg" id=mainImage alt="slide" style ="display: block; margin: 0 auto; height:700px"/>
+		<img src="images/img6.jpg" id=mainImage alt="slide" style ="display: block; margin: 0 auto; height:700px"/>
 
 		<script>
 			var myImage = document.getElementById("mainImage");
 			var imageArray = [ "images/img1.jpg",
-					"images/img2.jpg", "images/img3.jpg","images/img4.jpg" ];
+					"images/img2.jpg", "images/img3.jpg","images/img4.jpg","images/img5.jpg","images/img6.jpg" ];
 			var imageIndex = 0;
 		
 			function changeImage() {

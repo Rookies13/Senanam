@@ -112,7 +112,7 @@
 			<a href="index.jsp" class="logo"><strong>세 나</strong> shop</a>
 			<nav>
 				<% if(id != null) {%>
-				<a href="logout.jsp">로그아웃</a>
+				<a href="logout.jsp"> <%= id%> 로그아웃</a>
 				<% } else { %>
 				<a href="login.jsp">로그인</a>
 				<% } %>
@@ -127,12 +127,13 @@
 				<li><a href="index.jsp">Home</a></li>
 				<li><a href="generic.html">Generic</a></li>
 				<li><a href="elements.html">Elements</a></li>
+                <li><a href="LoginServlet">Elements</a></li>
 			</ul>
 		</nav>
 		<!-- Header -->
 		<section id="main">
 
-            <form action="login_ok.jsp" method="post"> 
+            <form action="LoginServlet" method="post"> 
                 <div class="wrap">
                     <div class="login">
                         <h2>Log-in</h2>
