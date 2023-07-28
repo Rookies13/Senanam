@@ -29,7 +29,7 @@
 					<li><a href="index.html">Home</a></li>
 					<li><a href="generic.html">Generic</a></li>
 					<li><a href="elements.html">Elements</a></li>
-					<li><a href="board.jsp">게시판</a></li>
+					<li><a href="boardList.jsp">게시판</a></li>
 				</ul>
 			</nav>
 
@@ -41,6 +41,9 @@
                             <div class="6u$ 12u$(xsmall)">
                                 <input type="text" name="subject" id="subject" value placeholder="제목">
                             </div>
+							<div>
+								첨부파일 : <input type="file">
+							</div>
                             <div class="12u$">
                                 <textarea name="content" id="subject" placeholder="내용" rows="6" style="resize: none;"></textarea>
                             </div>
