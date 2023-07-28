@@ -25,7 +25,7 @@ public class termServlet extends HttpServlet {
         } else {
             // One or both checkboxes are not checked, redirect back to the form
             out.println("<script>");
-            out.println("alert('모든 약관에 동의해주세요!');");
+            out.println("alert('동의합니다를 누르면 해당 약관에 동의 가능합니다. 모든 약관에 동의해주세요!');");
             out.println("window.location.href='terms.jsp';");
             out.println("</script>");
         }
