@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/register")
 public class joinServlet extends HttpServlet {
-    // Oracle DB 연결 정보
+    // Oracle DB 연결 정보 하드코딩
     private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe";
     private static final String DB_USERNAME = "YOUR_ID";
     private static final String DB_PASSWORD = "YOUR_PW";

@@ -93,6 +93,7 @@
                 위의 개인정보 처리 방침은 [2023년 7월 28일]부터 시행됩니다.
             </textarea>
             <br>
+
             <label>
                 <input type="checkbox" name="privacy_agree" value="true" style="appearance: checkbox; -webkit-appearance: checkbox; -moz-appearance: checkbox; margin-right: 5px; background-color: black; border: 1px solid black; width: 16px; height: 16px;">
                 동의합니다

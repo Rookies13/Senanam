@@ -26,7 +26,7 @@
         <input type="email" id="email" name="email" required><br>
 
         <label for="mobile">전화번호:</label>
-        <input type="tel" id="mobile" name="mobile" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" placeholder="000-0000-0000" required><br>
+        <input type="text" id="mobile" name="mobile" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" placeholder="000-0000-0000" required><br>
 
         <label for="zipcode">우편번호:</label>
         <input type="text" id="zipcode" name="zipcode" required><br>
