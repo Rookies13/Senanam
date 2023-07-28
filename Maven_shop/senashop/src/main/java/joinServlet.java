@@ -35,6 +35,22 @@ public class joinServlet extends HttpServlet {
         String ADDRESS1 = request.getParameter("address1");
         String ADDRESS2 = request.getParameter("address2");
 
+        if (isIdExists(ID)) {
+            out.println("<script>");
+            out.println("alert('이미 사용 중인 ID입니다. 다른 ID를 입력해주세요.');");
+            out.println("window.location.href='join.jsp';");
+            out.println("</script>");
+            return; // 회원가입 거부
+        }
+
+        if (isNameExists(NAME)) {
+            out.println("<script>");
+            out.println("alert('이미 사용 중인 닉네임입니다. 다른 닉네임을 입력해주세요.');");
+            out.println("window.location.href='join.jsp';");
+            out.println("</script>");
+            return; // 회원가입 거부
+        }
+
         if (!PASSWD.equals(CONFIRM_PASSWD)) {
             out.println("<script>");
             out.println("alert('비밀번호가 일치하지 않습니다. 다시 시도해주세요.');");
@@ -47,14 +63,6 @@ public class joinServlet extends HttpServlet {
         if (!isValidPassword(PASSWD)) {
             out.println("<script>");
             out.println("alert('비밀번호는 최소 8자리 이상이어야 하며, 영문자와 숫자를 포함해야 합니다.');");
-            out.println("window.location.href='join.jsp';");
-            out.println("</script>");
-            return; // 회원가입 거부
-        }
-
-        if (isIdExists(ID)) {
-            out.println("<script>");
-            out.println("alert('이미 사용 중인 ID입니다. 다른 ID를 입력해주세요.');");
             out.println("window.location.href='join.jsp';");
             out.println("</script>");
             return; // 회원가입 거부
@@ -120,6 +128,39 @@ public class joinServlet extends HttpServlet {
             String sql = "SELECT COUNT(*) FROM member WHERE ID = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, ID);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (pstmt != null)
+                    pstmt.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    // ID 중복 확인 메서드
+    private boolean isNameExists(String NAME) {
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            String sql = "SELECT COUNT(*) FROM member WHERE NAME = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, NAME);
             rs = pstmt.executeQuery();
             if (rs.next()) {
                 int count = rs.getInt(1);
