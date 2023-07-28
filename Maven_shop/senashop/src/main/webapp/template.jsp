@@ -35,75 +35,90 @@
 <section>
 	<div style="padding: 80px;">
 	<h1>결제</h1>				
-					<h3>상품</h3>
-					<div class="table-wrapper">
-						<table>
-							<tbody>
-							<tr>
-								<td>Item 1</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-							</tr>
-							<tr>
-								<td>Item 2</td>
-								<td>Vis ac commodo adipiscing arcu aliquet.</td>
-								<td>19.99</td>
-							</tr>
-							<tr>
-								<td>Item 3</td>
-								<td> Morbi faucibus arcu accumsan lorem.</td>
-								<td>29.99</td>
-							</tr>
-							<tr>
-								<td>Item 4</td>
-								<td>Vitae integer tempus condimentum.</td>
-								<td>19.99</td>
-							</tr>
-							<tr>
-								<td>Item 5</td>
-								<td>Ante turpis integer aliquet porttitor.</td>
-								<td>29.99</td>
-							</tr>
-							</tbody>
-						</table>
+	<h3>상품</h3>
+	<div class="table-wrapper">
+		<table>
+			<tbody>				
+<%@ page import="java.sql.*" %>
+
+<%
+// 데이터베이스 접속 정보 설정
+	String dbUrl = "jdbc:oracle:thin:@localhost:1521:xe"; // 오라클 서버 주소와 포트번호
+	String dbUser = "system"; // 오라클 계정 사용자명
+	String dbPassword = "1234"; // 오라클 계정 비밀번호
+
+	Connection conn = null;
+	Statement stmt = null;
+	ResultSet rs = null;
+
+	try {
+	// 오라클 JDBC 드라이버 로딩
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+
+	// 데이터베이스에 접속
+		conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+
+	// 쿼리 실행을 위한 Statement 객체 생성
+		stmt = conn.createStatement();
+
+	// 쿼리 작성 및 실행 예시
+		String sqlQuery = "SELECT * FROM order_product";
+		rs = stmt.executeQuery(sqlQuery);
+
+	// 결과 처리
+	while (rs.next()) {
+		out.println("<tr>");
+		out.println("<td>"+rs.getString("order_num")+"</td>");
+		out.println("<td>"+rs.getString("PID")+"</td>");
+		out.println("<td>"+rs.getString("PROD_CNT")+"</td>");
+		out.println("<td>"+rs.getString("PROD_PRICE")+"</td>");
+		out.println("</tr>");
+	}
+
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+	// 리소스 해제
+	try {
+	if (rs != null) rs.close();
+	if (stmt != null) stmt.close();
+	if (conn != null) conn.close();
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+}
+%>
+			</tbody>
+		</table>
+
+
+
 						<h3>배송지</h3>
 						<form action="elements.html" method="get">
 							우편번호<input type="text" name="zipcode"><br/>
 							배달지<input type="text" name="address"><br/>
 						
 					</div>
-					<h3>마일리지</h3>
-					<table>
-						<tr>
-						  <th>결제금액</th>
-						  <td><span class="bold txt_blue">65000원</span></td>
-						</tr>
-						<tr>
-						  <th> 포 인 트 </th>
-						  <td>
-							사용가능 포인트 : <span name="left_pnt">7210</span>p <span><input type="checkbox" id="chk_use" onclick="chkPoint(65000,7210,5000,100)">포인트 전체 사용</span>
-							<span style="float:right">포인트는 최소 5000p부터 100p단위로 사용 가능합니다.</span>
-						  </td>
-						</tr>
-						<tr>
-						  <td></td>
-						  <td>
-							<span> <input type="number" name="use_pnt" id="use_pnt" min="5000" max="65000" onchange="changePoint(65000,7210,5000,100)"></span> p 
-							<span> ( 남은포인트 : </span><span name="left_pnt" id="left_pnt">7210</span>p )
-						  </td>
-						</tr>
-						<tr>
-						  <td></td>
-						  <td>
-							  <p class="bold txt_red"> 최종 결제 금액 : <span class="bold txt_red" id="result_pnt">65000</span> 원</p>
-						  </td>
-						</tr>
-					</table>
+
 					<div align ="right">
 					<input type="submit" value="결제">
 					</div>						
 	</div>
 </section>
+
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
 
 
 		<!-- Footer -->
