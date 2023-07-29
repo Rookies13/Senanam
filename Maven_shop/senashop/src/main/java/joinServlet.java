@@ -2,9 +2,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/register")
 public class joinServlet extends HttpServlet {
-    // Oracle DB 연결 정보 하드코딩
+    // Oracle DB 연결 정보 하드코딩 추후 변경 가능
     private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe";
     private static final String DB_USERNAME = "YOUR_ID";
     private static final String DB_PASSWORD = "YOUR_PW";
@@ -70,23 +70,16 @@ public class joinServlet extends HttpServlet {
 
         // DB 연결 및 회원 정보 삽입
         Connection conn = null;
-        PreparedStatement pstmt = null;
+        Statement stmt = null;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-            String sql = "INSERT INTO member (ID, PASSWD, NAME, EMAIL, MOBILE, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMCHECK) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, ID);
-            pstmt.setString(2, PASSWD);
-            pstmt.setString(3, NAME);
-            pstmt.setString(4, EMAIL);
-            pstmt.setString(5, MOBILE);
-            pstmt.setString(6, ZIPCODE);
-            pstmt.setString(7, ADDRESS1);
-            pstmt.setString(8, ADDRESS2);
-            pstmt.setInt(9, 0);
-            pstmt.setString(10, "T");
-            pstmt.executeUpdate();
+            stmt = conn.createStatement();
+            String sql = "INSERT INTO member (ID, PASSWD, NAME, EMAIL, MOBILE, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMCHECK) "
+                    + "VALUES ('" + ID + "', '" + PASSWD + "', '" + NAME + "', '" + EMAIL + "', '" + MOBILE + "', '"
+                    + ZIPCODE
+                    + "', '" + ADDRESS1 + "', '" + ADDRESS2 + "', 0, 'T')";
+            stmt.executeUpdate(sql);
 
             out.println("<script>");
             out.println("alert('회원 가입이 완료되었습니다!');");
@@ -101,8 +94,8 @@ public class joinServlet extends HttpServlet {
             out.println("</script>");
         } finally {
             try {
-                if (pstmt != null)
-                    pstmt.close();
+                if (stmt != null)
+                    stmt.close();
                 if (conn != null)
                     conn.close();
             } catch (SQLException e) {
@@ -120,15 +113,14 @@ public class joinServlet extends HttpServlet {
     // ID 중복 확인 메서드
     private boolean isIdExists(String ID) {
         Connection conn = null;
-        PreparedStatement pstmt = null;
+        Statement stmt = null;
         ResultSet rs = null;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-            String sql = "SELECT COUNT(*) FROM member WHERE ID = ?";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, ID);
-            rs = pstmt.executeQuery();
+            stmt = conn.createStatement();
+            String sql = "SELECT COUNT(*) FROM member WHERE ID = '" + ID + "'";
+            rs = stmt.executeQuery(sql);
             if (rs.next()) {
                 int count = rs.getInt(1);
                 return count > 0;
@@ -139,8 +131,8 @@ public class joinServlet extends HttpServlet {
             try {
                 if (rs != null)
                     rs.close();
-                if (pstmt != null)
-                    pstmt.close();
+                if (stmt != null)
+                    stmt.close();
                 if (conn != null)
                     conn.close();
             } catch (SQLException e) {
@@ -150,18 +142,17 @@ public class joinServlet extends HttpServlet {
         return false;
     }
 
-    // ID 중복 확인 메서드
+    // 이름 중복 확인 메서드
     private boolean isNameExists(String NAME) {
         Connection conn = null;
-        PreparedStatement pstmt = null;
+        Statement stmt = null;
         ResultSet rs = null;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-            String sql = "SELECT COUNT(*) FROM member WHERE NAME = ?";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, NAME);
-            rs = pstmt.executeQuery();
+            stmt = conn.createStatement();
+            String sql = "SELECT COUNT(*) FROM member WHERE NAME = '" + NAME + "'";
+            rs = stmt.executeQuery(sql);
             if (rs.next()) {
                 int count = rs.getInt(1);
                 return count > 0;
@@ -172,8 +163,8 @@ public class joinServlet extends HttpServlet {
             try {
                 if (rs != null)
                     rs.close();
-                if (pstmt != null)
-                    pstmt.close();
+                if (stmt != null)
+                    stmt.close();
                 if (conn != null)
                     conn.close();
             } catch (SQLException e) {
