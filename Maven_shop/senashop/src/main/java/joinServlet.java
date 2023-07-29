@@ -34,6 +34,8 @@ public class joinServlet extends HttpServlet {
         String ZIPCODE = request.getParameter("zipcode");
         String ADDRESS1 = request.getParameter("address1");
         String ADDRESS2 = request.getParameter("address2");
+        String USER_LEVEL = request.getParameter("user_level");
+        String TERMCHECK = request.getParameter("termCheck");
 
         if (isIdExists(ID)) {
             out.println("<script>");
@@ -78,7 +80,7 @@ public class joinServlet extends HttpServlet {
             String sql = "INSERT INTO member (ID, PASSWD, NAME, EMAIL, MOBILE, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMCHECK) "
                     + "VALUES ('" + ID + "', '" + PASSWD + "', '" + NAME + "', '" + EMAIL + "', '" + MOBILE + "', '"
                     + ZIPCODE
-                    + "', '" + ADDRESS1 + "', '" + ADDRESS2 + "', 0, 'T')";
+                    + "', '" + ADDRESS1 + "', '" + ADDRESS2 + "', '" + USER_LEVEL + "', '" + TERMCHECK + "')";
             stmt.executeUpdate(sql);
 
             out.println("<script>");
