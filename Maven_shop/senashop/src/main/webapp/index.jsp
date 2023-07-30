@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page import="db.DatabaseConnectionPool" %>
+<jsp:useBean id="db" class="db.DatabaseConnectionPool" scope="page" />
 <!--
 	Binary by TEMPLATED
 	templated.co @templatedco
