@@ -92,7 +92,7 @@
                     <th>작성자</th>
                     <th>상품번호</th>
                     <th>수량</th>
-                    <th>날짜</th>
+                    <th>가격</th>
                     <th>선택</th>
                 </tr>
             </thead>
@@ -102,9 +102,9 @@
                   out.print("<tr>");
                   out.print("<td>"+result.getString("CART_NUM")+"</td>");
                   out.print("<td>"+result.getString("USER_ID")+"</td>");
-                  out.print("<td>"+result.getString("PROD_NUM")+"</td>");
-                  out.print("<td>"+result.getString("QUANTITY")+"</td>");
-                  out.print("<td>"+result.getString("INDATE")+"</td>");
+                  out.print("<td>"+result.getString("PRODUCT_NUM")+"</td>");
+                  out.print("<td>"+result.getString("PRODUCT_COUNT")+"</td>");
+                  out.print("<td>"+result.getString("PRODUCT_PRICE")+"</td>");
                   out.print("<td><input type=\"checkbox\" name=\"selectedItems\" value=\"" + result.getString("CART_NUM") + "\"></td>");
                   out.print("</tr>");
                 }
