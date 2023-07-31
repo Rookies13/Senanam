@@ -35,7 +35,7 @@
 		<nav id="menu">
 			<ul class="links">
 				<li><a href="index.jsp">Home</a></li>
-				<li><a href="generic.html">Generic</a></li>
+				<li><a href="mypage.jsp">마이페이지</a></li>
 				<li><a href="elements.html">Elements</a></li>
                 <li><a href="LoginServlet">Elements</a></li>
 			</ul>

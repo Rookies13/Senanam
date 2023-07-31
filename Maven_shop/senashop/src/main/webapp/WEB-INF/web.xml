@@ -37,12 +37,12 @@
       <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-      <servlet-name>MyPage</servlet-name>
-      <servlet-class>MyPage</servlet-class>
+      <servlet-name>ModifyServlet</servlet-name>
+      <servlet-class>ModifyServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-      <servlet-name>MyPage</servlet-name>
-      <url-pattern>/MyPage</url-pattern>
+      <servlet-name>ModifyServlet</servlet-name>
+      <url-pattern>/ModifyServlet</url-pattern>
   </servlet-mapping>
-
+  
 </web-app>

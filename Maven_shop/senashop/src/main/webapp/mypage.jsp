@@ -38,10 +38,21 @@
     List<Orders> orders_o = queryDAO.selectOrderByUser(pkey, "Order History");
     int tupleCount_c = orders_c.size();
     int tupleCount_o = orders_o.size();
+    
+    //리소스 해제 
+    orders_c.clear();
+    orders_o.clear();
 %>
 <html>
     <head>
 		<title>세나샵</title>
+    <script>
+      if(!<%=
+      session.getAttribute("user_id")%>) {
+        alert("로그인 후 이용해주세요.");
+        location.href="login.jsp";
+      }
+    </script>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -67,7 +78,7 @@
 		<nav id="menu">
 			<ul class="links">
 				<li><a href="index.jsp">Home</a></li>
-				<li><a href="generic.html">Generic</a></li>
+				<li><a href="mypage.jsp">마이페이지</a></li>
 				<li><a href="elements.html">Elements</a></li>
                 <li><a href="LoginServlet">Elements</a></li>
 			</ul>
@@ -80,8 +91,22 @@
             <div class="grade">등급: <%= m.getUserLv() %></div>
             <div class="name"><%= id%></div>
           </div>
-          <div class="modify">정보수정</div>
+          <!--회원정보 평문 전송-->
+          <div class="modify">
+            <% %>
+            <form action ="ModifyServlet" method="GET">
+              <input type="hidden" name="id" value="<%= m.getId()%>">
+              <input type="hidden" name="name" value="<%= m.getNm()%>">
+              <input type="hidden" name="mobile" value="<%= m.getMb()%>">
+              <input type="hidden" name="email" value="<%= m.getEm()%>">
+              <input type="hidden" name="zipcode" value="<%= m.getZc()%>">
+              <input type="hidden" name="address1" value="<%= m.getAd1()%>">
+              <input type="hidden" name="address2" value="<%= m.getAd2()%>">
+              <input type="submit" value="회원 정보 수정">
+            </form>
+          </div>
           <% } %>
+          <% member = null; %>
         </div>
         <div class="summaryContainer">
           <div class="item">
@@ -183,7 +208,7 @@
           </a>
           <a href="#" class="item">
             <div class="icon">ii</div>
-            <div class="text">설정</div>
+            <div class="text">회원탈퇴</div>
             <div class="right"> > </div>
           </a>
         </div>
@@ -223,6 +248,7 @@
             <td><%= board.getType() %></td>
           </tr>
         <% } %>
+        <% boardList_q.clear(); %>
       </table>
 
     <div class="copyright">

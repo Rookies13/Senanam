@@ -47,10 +47,14 @@ List<Board> boardList = queryDAO.selectBoardByUser(pkey, "h");
     //queryDAO.selectUser(column);
     List<Orders> orders_c = queryDAO.selectOrderByUser(pkey, "Cart");
     orders_c.size();
+    orders_c.clear();
     List<Members> member = queryDAO.selectUser(column);
     for (Members m : member) {
         m.getUserLv();
+        member.clear();
     }
+    //Members membea = (Members) request.getAttribute("member");
+    //List<Members> mea = (List<Members>) request.getAttribute("member");
 
 
     int tupleCount_h = boardList_h.size();
