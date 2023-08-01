@@ -70,7 +70,7 @@
                                 // 데이터베이스에 접속
                                 conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
-                                String orderNumberParam = request.getParameter("order_number");
+                                String orderNumberParam = request.getParameter("order_num");
                                 String sqlQuery;
                                 if (orderNumberParam != null && !orderNumberParam.isEmpty()) {
                                     // 주문번호 파라미터가 있을 경우 해당 주문번호로 검색
@@ -90,13 +90,13 @@
                                 while (rs.next()) {
                                     out.println("<tr>");
                                     out.println("<td>" + rs.getString("order_num") + "</td>");
-                                    out.println("<td>" + rs.getString("PID") + "</td>");
-                                    out.println("<td>" + rs.getString("PROD_CNT") + "</td>");
-                                    out.println("<td>" + rs.getString("PROD_PRICE") + "</td>");
+                                    out.println("<td>" + rs.getString("PRODUCT_NUM") + "</td>");
+                                    out.println("<td>" + rs.getString("PRODUCT_COUNT") + "</td>");
+                                    out.println("<td>" + rs.getString("PRODUCT_PRICE") + "</td>");
                                     out.println("</tr>");
                                     // 상품 수량과 가격을 곱해서 총 가격 계산
-                                    int prodCnt = rs.getInt("PROD_CNT");
-                                    int prodPrice = rs.getInt("PROD_PRICE");
+                                    int prodCnt = rs.getInt("PRODUCT_COUNT");
+                                    int prodPrice = rs.getInt("PRODUCT_PRICE");
                                     totalPrice += prodCnt * prodPrice;
                                 }
                                 // 총 가격 출력

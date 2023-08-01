@@ -1,41 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<<<<<<< HEAD
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Result</title>
-</head>
-<body>
-    <%-- 입력 받은 숫자를 ","로 분리하여 리스트로 변환 --%>
-    <% 
-    String numbers = request.getParameter("CART_NUM");
-    List<Integer> list = new ArrayList<>();
-
-    if (numbers != null && !numbers.isEmpty()) {
-        String[] elements = numbers.split(",");
-
-        for (String element : elements) {
-            try {
-                int value = Integer.parseInt(element.trim());
-                list.add(value);
-            } catch (NumberFormatException e) {
-                // 숫자로 변환할 수 없는 경우는 무시하거나 예외 처리할 수 있습니다.
-            }
-        }
-    }
-    %>
-
-    <%-- 리스트 출력 --%>
-    <h2>입력한 숫자들을 리스트로 변환한 결과:</h2>
-    <ul>
-        <% for (Integer value : list) { %>
-            <li><%= value %></li>
-        <% } %>
-    </ul>
-=======
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.DriverManager" %>
 <%@ page import="java.sql.PreparedStatement" %>
@@ -52,7 +15,7 @@
 <body>
     <%-- 입력받은 CART_NUM들을 ","로 분리하여 리스트로 저장 --%>
     <%
-    String cartNums = request.getParameter("cartNums");
+    String cartNums = request.getParameter("CART_NUM");
     String[] cartNumArray = cartNums.split(",");
     List<String> cartNumList = new ArrayList<>();
     for (String cartNum : cartNumArray) {
@@ -64,7 +27,7 @@
     <h2>검색 결과:</h2>
     <%
     String jdbcUrl = "jdbc:oracle:thin:@localhost:1521:xe";
-    String dbUser = "system";
+    String dbUser = "C##junho";
     String dbPassword = "1234";
 
     Connection connection = null;
@@ -90,7 +53,7 @@
         resultSet = selectStatement.executeQuery();
 
         // ORDER_PRODUCT 테이블에 검색 결과를 삽입
-        String insertSql = "INSERT INTO ORDER_PRODUCT (ORDER_NUM, PID, PROD_CNT, PROD_PRICE) " +
+        String insertSql = "INSERT INTO ORDER_PRODUCT (ORDER_NUM, PRODUCT_NUM, PRODUCT_COUNT, PRODUCT_PRICE) " +
                            "VALUES (?, ?, ?, ?)";
         insertStatement = connection.prepareStatement(insertSql);
 
@@ -121,7 +84,8 @@
         try { if (insertStatement != null) insertStatement.close(); } catch (Exception e) { }
         try { if (connection != null) connection.close(); } catch (Exception e) { }
     }
+    response.sendRedirect("order.jsp?order_num=" + uniqueId);
     %>
->>>>>>> eb748b51bd8da2e1c21e2163e798f7e7a120ff52
+    
 </body>
 </html>

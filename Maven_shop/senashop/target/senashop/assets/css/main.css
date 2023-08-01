@@ -2067,7 +2067,10 @@
 		display: block;
 		float: left;
 		margin-right: -2em;
+<<<<<<< HEAD
+=======
 		opacity: 0;
+>>>>>>> eb748b51bd8da2e1c21e2163e798f7e7a120ff52
 		width: 1em;
 		z-index: -1;
 	}
@@ -4552,4 +4555,8 @@
 				padding: 3em 0 1em 0;
 			}
 
+<<<<<<< HEAD
 		}
+=======
+		}
+>>>>>>> eb748b51bd8da2e1c21e2163e798f7e7a120ff52
