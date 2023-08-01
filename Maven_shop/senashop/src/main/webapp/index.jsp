@@ -37,14 +37,10 @@
 			<ul class="links">
 				<li><a href="index.jsp">Home</a></li>
 				<li><a href="mypage.jsp">마이페이지</a></li>
-<<<<<<< HEAD
-				<li><a href="elements.html">Elements</a></li>
-=======
 				<li><a href="">상품검색</a></li>
 				<li><a href="">장바구니</a></li>
 				<li><a href="">문의게시판</a></li>
 				<li><a href="qna.jsp">Q&A</a></li>
->>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
 			</ul>
 		</nav>
 		<!-- Header -->

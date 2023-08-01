@@ -6,10 +6,7 @@
 <%@ page import="db.model.Orders" %>
 <%@ page import="db.model.Board" %>
 <%@ page import="db.model.Members" %>
-<<<<<<< HEAD
 <%@ page import="db.model.Cart" %>
-=======
->>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
 
 <%@page import="java.sql.Connection"%>
 <%@ page import="java.util.List" %>
@@ -32,7 +29,6 @@
     List<Members> member = queryDAO.selectUser(pkey);
 
     //게시글 조회 
-<<<<<<< HEAD
     List<Board> boardList_free = queryDAO.selectBoardByUser(pkey, "A");
     List<Board> boardList_qna = queryDAO.selectBoardByUser(pkey, "B");
     List<Board> boardList_sec = queryDAO.selectBoardByUser(pkey, "C");
@@ -45,40 +41,23 @@
     //주문 조회
     List<Cart> orders_c = queryDAO.selectCartByUser(pkey);
     List<Orders> orders_o = queryDAO.selectOrderByUser(pkey);
-=======
-    List<Board> boardList_h = queryDAO.selectBoardByUser(pkey, "h");
-    List<Board> boardList_q = queryDAO.selectBoardByUser(pkey, "q");
-    int tupleCount_h = boardList_h.size();
-    int tupleCount_q = boardList_q.size();
-
-    //주문 조회
-    List<Orders> orders_c = queryDAO.selectOrderByUser(pkey, "Cart");
-    List<Orders> orders_o = queryDAO.selectOrderByUser(pkey, "Order History");
->>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
     int tupleCount_c = orders_c.size();
     int tupleCount_o = orders_o.size();
     
     //리소스 해제 
     orders_c.clear();
     orders_o.clear();
-<<<<<<< HEAD
     boardList_free.clear();
     boardList_qna.clear();
     boardList_sec.clear();
     boardList_star.clear();
-=======
->>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
 %>
 <html>
     <head>
 		<title>세나샵</title>
     <script>
-<<<<<<< HEAD
       if(!<%=
       session.getAttribute("user_id")%>) {
-=======
-      if(!<%= session.getAttribute("user_id")%>) {
->>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
         alert("로그인 후 이용해주세요.");
         location.href="login.jsp";
       }
@@ -140,7 +119,6 @@
         </div>
         <div class="summaryContainer">
           <div class="item">
-<<<<<<< HEAD
             <div class="number"><%= tupleCount_qna %></div>
             <div>상품문의</div>
           </div>
@@ -154,17 +132,6 @@
           </div>
           <div class="item">
             <div class="number"><%= tupleCount_star * 100 %></div>
-=======
-            <div class="number"><%= tupleCount_q %></div>
-            <div>상품문의</div>
-          </div>
-          <div class="item">
-            <div class="number"><%= tupleCount_h %></div>
-            <div>상품후기</div>
-          </div>
-          <div class="item">
-            <div class="number">0</div>
->>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
             <div>적립금(point)</div>
           </div>
         </div>
@@ -286,11 +253,7 @@
           <th>Country</th>
         </tr>
         <%-- Loop through the boardList and display the data --%>
-<<<<<<< HEAD
         <% for (Board board : boardList_qna) { %>
-=======
-        <% for (Board board : boardList_q) { %>
->>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
           <tr>
             <td><%= board.getSubject() %></td>
             <td><%= board.getBoardNumber() %></td>
@@ -298,11 +261,7 @@
             <td><%= board.getType() %></td>
           </tr>
         <% } %>
-<<<<<<< HEAD
         <% boardList_qna.clear(); %>
-=======
-        <% boardList_q.clear(); %>
->>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
       </table>
 
     <div class="copyright">
