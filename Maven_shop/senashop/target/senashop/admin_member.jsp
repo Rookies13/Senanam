@@ -139,12 +139,12 @@
         int mem_level = Integer.parseInt(request.getParameter("mem_level"));
 
         // 데이터베이스 연결 정보 설정
-        String dbURL = "jdbc:oracle:thin:@//localhost:1521/xe";
-        String dbUser = "c##root";
-        String dbPassword = "1234";
+        dbURL = "jdbc:oracle:thin:@//localhost:1521/xe";
+        dbUser = "c##root";
+        dbPassword = "1234";
 
-        Connection conn = null;
-        Statement stmt = null;
+        conn = null;
+        stmt = null;
 
         try {
             // JDBC 드라이버 로드
