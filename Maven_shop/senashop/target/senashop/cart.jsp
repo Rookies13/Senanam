@@ -51,9 +51,9 @@
     	
 
          <h1>Received Parameters:</h1>
-        <p>Parameter 1: <%= request.getParameter("productNum") %></p>
-        <p>Parameter 2: <%= request.getParameter("productCount") %></p>
-        <p>Parameter 3: <%= request.getParameter("productPrice") %></p>
+        <p>Parameter 1: <%= request.getParameter("param1") %></p>
+        <p>Parameter 2: <%= request.getParameter("param2") %></p>
+        <p>Parameter 3: <%= request.getParameter("param3") %></p>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>

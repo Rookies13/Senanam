@@ -1,11 +1,5 @@
 <!DOCTYPE HTML>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.SQLException"%>
-<%@page import="java.sql.*"%>
 <!--
 	Binary by TEMPLATED
 	templated.co @templatedco
@@ -38,22 +32,16 @@
 					<li><a href="productsearch.jsp">Search</a></li>
 				</ul>
 			</nav>
+<!--기능구현-->
 
-		
 
-      
-        <!-- Footer -->
+		<!-- Footer -->
 			<footer id="footer">
 			<div class="copyright">
-			<a>Made with team 세나남</a>
-            </div>
-		    </footer>
-    	
-
-         <h1>Received Parameters:</h1>
-        <p>Parameter 1: <%= request.getParameter("productNum") %></p>
-        <p>Parameter 2: <%= request.getParameter("productCount") %></p>
-        <p>Parameter 3: <%= request.getParameter("productPrice") %></p>
+			Made with team 세나남</a>
+		</div>
+			</footer>
+		
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
@@ -61,5 +49,6 @@
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
 	</body>
 </html>

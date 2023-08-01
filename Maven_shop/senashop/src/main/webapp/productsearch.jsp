@@ -6,6 +6,12 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.*"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%
+    String id = (String)session.getAttribute("user_id");
+    String name = (String)session.getAttribute("user_name");
+%>
 <!--
 	Binary by TEMPLATED
 	templated.co @templatedco
@@ -45,9 +51,15 @@
         <section id="search">
         <div class="container">
         <form action="productsearch.jsp" method="get">
-            <input type="text" name="searchKeyword" placeholder="상품명을 입력하세요">
+        <div class="row uniform 50%">
+        <div class="4u 12u$(xsmall)">
+            <input type="text" name="searchKeyword" placeholder="상품명을 입력하세요" size="20">
+        </div>
+        <div class="6u 12u$(xsmall)">
             <button type="submit" value="search">Search</button>
+        </div>
         </form>
+        </div>
         </div>
         </section>
 
@@ -80,45 +92,53 @@
                         String productIamges = rs.getString("PRODUCT_IMAGES");
                         String productText = rs.getString("PRODUCT_TEXT");
                         int productPrice = rs.getInt("PRODUCT_PRICE");
+                        int productNumber = rs.getInt("PRODUCT_NUMBER");
         %>
     <div class="container">
-    <table>
+                <table class="alt">
+                <thead>
                     <tr>
-                        <td>
-                            <img src="<%= productIamges %>" alt="상품이미지" width=200 height=200>
-                        </td>
-                        <td>
-                            <h3>상품명</h3>
-                            <p><%= productName %></p>
-                            <h3>상품명</h3>
-                            <p><%= productText %></p>
-                        </td>
-                        <td>
-                            <ul>
-                                <h3>상품가격</h3>
-                                <p><%= productPrice %></p>
-                                <li>무료배송</li>
-                            </ul>
-                        </td>
-                        <td>
+                        <th>image</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><img src="<%= productIamges %>" height="100"></td>
+                        <td><%= productName %></td>
+                        <td><p><%= productText %></p><a>무료배송</a></td>
+                        <td><p><%= productPrice %>원</p><button onclick="handleButtonClick()">장바구니</button>
+                        <select id="myselect">
+                            <option value="">개수선택</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
 
-                             <button onclick="handleButtonClick()">장바구니</button>
 
+                            
                             <script>
-                                // JavaScript 함수를 정의합니다.
+                                // JavaScript 함수 정의
                                 function handleButtonClick() {
-                                    // 전달할 파라미터 값을 변수에 저장합니다.
-                                    const param1 = "<%= productName %>";
-                                    const param2 = "<%= productPrice %>";
-                                    const param3 = "<%= productText %>";
+                                    // 전달할 파라미터 값을 변수에 저장
+                                    const productNum = "<%= productNumber %>";
+                                    const productCount = document.getElementById("myselect").value;
+                                    const productPrice = "<%= productPrice %>";
+                                    const userId = "<%= id %>";
 
-                                    // 파라미터 값을 URL에 추가하여 다른 JSP 파일로 리다이렉트
-                                    window.location.href = 'cart.jsp?param1=' + param1 + '&param2=' + param2 + '&param3=' + param3;
+                                    // 파라미터 값을 URL에 추가하여 장바구니 JSP 파일로 리다이렉트
+                                    window.location.href = 'cart.jsp?productNum=' + productNum + '&productCount=' + productCount + '&productPrice=' + productPrice + '&userId=' + userId;
                                 }
                             </script>
                         </td>
                     </tr>
-                </table>
+                </tbody>
+            </table>
       </div>
                         
         <%
@@ -133,106 +153,117 @@
                     }
                 } else {
         %>
-                <div class="container">
-                 <table>
+
+        <%!
+    public class Product {
+        private String productName;
+        private double price;
+        private String description;
+        private String image;
+
+        public Product(String productName, double price, String description, String image) {
+            this.productName = productName;
+            this.price = price;
+            this.description = description;
+            this.image = image;
+        }
+
+        public String getProductName() {
+            return productName;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getImage() {
+            return image;
+        }
+    }
+%>
+
+<%!
+    private List<Product> getProducts() {
+        List<Product> productList = new ArrayList<>();
+
+        try {
+            // Oracle 데이터베이스 연결 정보 설정
+            String dbUrl = "jdbc:oracle:thin:@localhost:1521:xe"; // 데이터베이스 URL
+            String dbUsername = "c##test"; // 데이터베이스 사용자명
+            String dbPassword = "love2468"; // 데이터베이스 비밀번호
+
+            // 데이터베이스 연결
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+
+            // SQL 쿼리 실행
+            String sql = "SELECT * FROM PRODUCT";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // 상품 데이터를 리스트에 추가
+            while (rs.next()) {
+                String productName = rs.getString("PRODUCT_NAME");
+                int price = rs.getInt("PRODUCT_PRICE");
+                String description = rs.getString("PRODUCT_TEXT");
+                String image = rs.getString("PRODUCT_IMAGES");
+                int productNumber = rs.getInt("PRODUCT_NUMBER");
+
+                Product product = new Product(productName, price, description, image);
+                productList.add(product);
+            }
+
+            // 리소스 정리
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return productList;
+    }
+%>
+            <div class="container">
+                 <table class="alt">
+                 <thead>
                     <tr>
-                        <td>
-                            <img src="images/ball.jpg" alt="상품이미지" width=200 height=200>
-                        </td>
-                        <td>
-                            <h3>상품명</h3>
-                            <p>ㅁㅁ</p>
-                            <h3>상품명</h3>
-                            <p>ㅁㅁ</p>
-                        </td>
-                        <td>
-                            <ul>
-                                <h3>상품가격</h3>
-                                <p>ㅁㅁ</p>
-                                <li>무료배송</li>
-                            </ul>
+                        <th>image</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    <% List<Product> productList = getProducts(); %>
+                    <% for (Product product : productList) { %>
+                    <tbody>
+                    <tr>
+                        <td><img src="<%= product.getImage() %>" height="100"></td>
+                        <td><%= product.getProductName() %></td>
+                        <td><p><%= product.getDescription() %></p><a>무료배송</a></td>
+                        <td><p><%= product.getPrice() %>원</p>
+                        
                         </td>
                     </tr>
-                 </table>
-                </div>
-                <div class="container">
-                 <table>
-                    <tr>
-                        <td>
-                            <img src="images/ball.jpg" alt="상품이미지" width=200 height=200>
-                        </td>
-                        <td>
-                            <h3>상품명</h3>
-                            <p>ㅁㅁ</p>
-                            <h3>상품명</h3>
-                            <p>ㅁㅁ</p>
-                        </td>
-                        <td>
-                            <ul>
-                                <h3>상품가격</h3>
-                                <p>ㅁㅁ</p>
-                                <li>무료배송</li>
-                            </ul>
-                        </td>
-                    </tr>
-                 </table>
-                </div>
-                <div class="container">
-                 <table>
-                    <tr>
-                        <td>
-                            <img src="images/ball.jpg" alt="상품이미지" width=200 height=200>
-                        </td>
-                        <td>
-                            <h3>상품명</h3>
-                            <p>ㅁㅁ</p>
-                            <h3>상품명</h3>
-                            <p>ㅁㅁ</p>
-                        </td>
-                        <td>
-                            <ul>
-                                <h3>상품가격</h3>
-                                <p>ㅁㅁ</p>
-                                <li>무료배송</li>
-                            </ul>
-                        </td>
-                    </tr>
-                 </table>
-                </div>
-                <div class="container">
-                 <table>
-                    <tr>
-                        <td>
-                            <img src="images/ball.jpg" alt="상품이미지" width=200 height=200>
-                        </td>
-                        <td>
-                            <h3>상품명</h3>
-                            <p>ㅁㅁ</p>
-                            <h3>상품명</h3>
-                            <p>ㅁㅁ</p>
-                        </td>
-                        <td>
-                            <ul>
-                                <h3>상품가격</h3>
-                                <p>ㅁㅁ</p>
-                                <li>무료배송</li>
-                            </ul>
-                        </td>
-                    </tr>
-                 </table>
+                    <% } %>
+                    </table>
                 </div>
         <%
                 }
         %>
     
 
-   
-        <!-- Footer -->
+            <!-- Footer -->
 			<footer id="footer">
 			<div class="copyright">
 			<a>Made with team 세나남</a>
             </div>
 		    </footer>
+        
     	
 
 		<!-- Scripts -->
@@ -241,5 +272,7 @@
 			<script src="assets/js/skel.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+
+            
 	</body>
 </html>
