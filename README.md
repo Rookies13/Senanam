@@ -103,5 +103,6 @@ https://goodteacher.tistory.com/614
 
 ## ERD 
 
-![image](https://github.com/Rookies13/Senanam/assets/140288335/f699666a-b181-4dfc-8ae5-b12c54908145)
+![image](https://github.com/Rookies13/Senanam/assets/140288335/96ccfe4e-cb3c-4bad-b533-b956ef630e87)
+
 
