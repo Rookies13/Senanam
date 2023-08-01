@@ -22,7 +22,7 @@ public class termServlet extends HttpServlet {
 
         if (termsAgree && privacyAgree) {
             HttpSession session = request.getSession();
-            session.setAttribute("termCheck", "T");
+            session.setAttribute("termCheck", "Y");
             // Both checkboxes are checked, proceed to join.jsp
             response.sendRedirect("join.jsp");
         } else {

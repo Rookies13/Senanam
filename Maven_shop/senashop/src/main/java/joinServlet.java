@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/register")
 public class joinServlet extends HttpServlet {
     // Oracle DB 연결 정보 하드코딩 추후 변경 가능
-    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe?useUnicode=true&characterEncoding=UTF-8";
-    private static final String DB_USERNAME = "YOUR_ID";
-    private static final String DB_PASSWORD = "YOUR_PW";
+    private static final String DB_URL = "jdbc:oracle:thin:@//aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521/orcl?useUnicode=true&characterEncoding=UTF-8";
+    private static final String DB_USERNAME = "admin";
+    private static final String DB_PASSWORD = "12345678";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
