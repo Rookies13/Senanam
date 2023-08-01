@@ -11,9 +11,8 @@
 <%
 // 파라미터에서 값들을 받아옵니다.
 String orderNumber = request.getParameter("order_number");
-String ID = request.getParameter("ID");
+String ID="testID";
 String totalPrice = request.getParameter("total_price");
-String cartOrOrderHistory = "ORDER"; // 이 값은 ORDERLIST 테이블에 맞게 수정해주세요.
 String address = request.getParameter("address");
 String zipcode = request.getParameter("zipcode");
 
@@ -33,16 +32,15 @@ try {
     conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
     // INSERT 쿼리 작성
-    String sqlQuery = "INSERT INTO \"SYSTEM\".\"ORDERLIST\" (\"ORDER_NUM\", \"ID\", \"TOTAL_PRICE\", \"CART_OR_ORDER_HISTORY\", \"ADDRESS\", \"ZIPCODE\") VALUES (?, ?, ?, ?, ?, ?)";
+    String sqlQuery = "INSERT INTO \"SYSTEM\".\"ORDERLIST\" (\"ORDER_NUM\", \"ID\", \"TOTAL_PRICE\", \"ADDRESS\", \"ZIPCODE\") VALUES (?, ?, ?, ?, ?)";
     pstmt = conn.prepareStatement(sqlQuery);
 
     // INSERT 쿼리에 값들을 매핑
-    pstmt.setInt(1, Integer.parseInt(orderNumber));
+    pstmt.setLong(1, Long.parseLong(orderNumber));
     pstmt.setString(2, ID);
-    pstmt.setInt(3, Integer.parseInt(totalPrice));
-    pstmt.setString(4, cartOrOrderHistory);
-    pstmt.setString(5, address);
-    pstmt.setInt(6, Integer.parseInt(zipcode));
+    pstmt.setLong(3, Long.parseLong(totalPrice));
+    pstmt.setString(4, address);
+    pstmt.setLong(5, Long.parseLong(zipcode));
 
     // INSERT 쿼리 실행
     int rowsAffected = pstmt.executeUpdate();
@@ -59,6 +57,7 @@ try {
     }
 
 } catch (Exception e) {
+    out.print("error");
     e.printStackTrace();
 } finally {
     // 리소스 해제
