@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,6 +38,7 @@ public class joinServlet extends HttpServlet {
         String ADDRESS2 = request.getParameter("address2");
         String USER_LEVEL = request.getParameter("user_level");
         String TERMCHECK = request.getParameter("termCheck");
+        Timestamp CREATED_AT = new Timestamp(new Date().getTime());
 
         if (isIdExists(ID)) {
             out.println("<script>");
@@ -77,10 +80,12 @@ public class joinServlet extends HttpServlet {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
             stmt = conn.createStatement();
-            String sql = "INSERT INTO member (ID, PASSWD, NAME, EMAIL, MOBILE, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMCHECK) "
+
+            String sql = "INSERT INTO member (ID, PASSWD, NAME, EMAIL, MOBILE, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMCHECK, CREATED_AT) "
                     + "VALUES ('" + ID + "', '" + PASSWD + "', '" + NAME + "', '" + EMAIL + "', '" + MOBILE + "', '"
                     + ZIPCODE
-                    + "', '" + ADDRESS1 + "', '" + ADDRESS2 + "', '" + USER_LEVEL + "', '" + TERMCHECK + "')";
+                    + "', '" + ADDRESS1 + "', '" + ADDRESS2 + "', '" + USER_LEVEL + "', '" + TERMCHECK + "', '"
+                    + CREATED_AT + "')";
             stmt.executeUpdate(sql);
 
             out.println("<script>");
