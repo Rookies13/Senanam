@@ -6,7 +6,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @WebServlet("/term")
 public class termServlet extends HttpServlet {
@@ -21,8 +20,6 @@ public class termServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         if (termsAgree && privacyAgree) {
-            HttpSession session = request.getSession();
-            session.setAttribute("termCheck", "Y");
             // Both checkboxes are checked, proceed to join.jsp
             response.sendRedirect("join.jsp");
         } else {
