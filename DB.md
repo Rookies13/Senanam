@@ -1,6 +1,7 @@
 ## AWS RDS oracle
 
-![image](https://github.com/Rookies13/Senanam/assets/140288335/f699666a-b181-4dfc-8ae5-b12c54908145)
+![image](https://github.com/Rookies13/Senanam/assets/140288335/917bdc0c-dd11-423d-8a65-2e22bf4daaac)
+
 
 
 # TEST 접속 정보
@@ -9,7 +10,7 @@
 
 
 엔드포인트 : 
-aws.ce0twkaphola.ap-northeast-2.rds.amazonaws.com
+aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com
 
 사용자 : 
 admin / 12345678
