@@ -6,6 +6,7 @@
 <%@ page import="db.model.Orders" %>
 <%@ page import="db.model.Board" %>
 <%@ page import="db.model.Members" %>
+<%@ page import="db.model.Cart" %>
 
 <%@page import="java.sql.Connection"%>
 <%@ page import="java.util.List" %>
@@ -38,8 +39,8 @@
     int tupleCount_star = boardList_star.size();
 
     //주문 조회
-    List<Orders> orders_c = queryDAO.selectOrderByUser(pkey, "Cart");
-    List<Orders> orders_o = queryDAO.selectOrderByUser(pkey, "Order History");
+    List<Cart> orders_c = queryDAO.selectCartByUser(pkey);
+    List<Orders> orders_o = queryDAO.selectOrderByUser(pkey);
     int tupleCount_c = orders_c.size();
     int tupleCount_o = orders_o.size();
     

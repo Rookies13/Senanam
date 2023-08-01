@@ -3,6 +3,7 @@ import java.io.PrintWriter;
 import java.rmi.ServerException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.sql.Connection;
 
 import db.QueryDAO;
 import db.model.Members;
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ModifyServlet extends HttpServlet {
-    private String id;
+    static String id;
     private String name;
     private String mobile;
     private String email;
@@ -27,6 +28,7 @@ public class ModifyServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServerException, IOException, ServletException {
+        id = request.getParameter("id");
         name = request.getParameter("name");
         mobile = request.getParameter("mobile");
         email = request.getParameter("email");
@@ -46,7 +48,7 @@ public class ModifyServlet extends HttpServlet {
         out.println("<h2>회원 정보 수정</h2>");
 
         out.println("<form action= 'ModifyServlet' method='post'>");
-        out.println("<label for=\"username\">ID:</label>");
+        out.println("아이디: <input type='text' name='name' value='" + id + "' readonly><br>");
 
         out.println("이름:<input type='text' name='name' value='" + name + "'><br>");
 
@@ -72,7 +74,7 @@ public class ModifyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String id = (String)request.getAttribute("id");
+        // String id = request.getParameter("id");
         String updatedName = request.getParameter("name");
         String updatedMobile = request.getParameter("mobile");
         String updatedEmail = request.getParameter("email");

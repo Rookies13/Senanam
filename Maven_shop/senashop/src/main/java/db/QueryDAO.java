@@ -16,6 +16,7 @@ import java.util.Map;
 import db.model.Board;
 import db.model.Members;
 import db.model.Orders;
+import db.model.Cart;
 
 //0730-이순빈-쿼리 실행 환경 구성
 public class QueryDAO {
@@ -23,7 +24,18 @@ public class QueryDAO {
     private static final String SELECT_USER_BY_ID = "SELECT * FROM MEMBER WHERE id = ?";
     private static final String SELECT_ALL_USERS = "SELECT * FROM MEMBER";
     private static final String SELECT_ALL_BOARD = "SELECT * FROM BOARD";
-    private static final String SELECT_ORDER_BY_USER = "SELECT * FROM ORDERS where id = ? AND cart_or_order_history = ?";
+
+    // CART PRODUCT
+    private static final String SELECT_CART_PRODUCT_BY_USER = "SELECT * FROM CART_PRODUCT where id = ?";
+
+    // ORDER TABLE
+    private static final String SELECT_ORDER_TABLE_BY_USER = "SELECT * FROM ORDER_TABLE where id = ?";
+
+    // ORDER PRODUCT
+    private static final String SELECT_ORDER_PRODUCT_BY_USER = "SELECT * FROM ORDER_TABLE where id = ? AND cart_or_order_history = ?";
+
+    private static final String SELECT_CART_BY_USER = "SELECT * FROM ORDERS where id = ?";
+
     private static final String SELECT_BOARD_BY_ID_AND_TYPE = "SELECT * FROM board WHERE id = ? AND type = ?";
     private static final String SELECT_SPEC_USERS = "SELECT * FROM USER where id = ?;";
 
@@ -73,13 +85,12 @@ public class QueryDAO {
         return member;
     }
 
-    public List<Orders> selectOrderByUser(String id, String type) {
+    public List<Orders> selectOrderByUser(String id) {
         List<Orders> orders = new ArrayList<>();
 
         try (Connection connection = DatabaseConnectionPool.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ORDER_BY_USER);) {
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ORDER_TABLE_BY_USER);) {
             preparedStatement.setString(1, id);
-            preparedStatement.setString(2, type);
             System.out.println(preparedStatement);
 
             ResultSet rs = preparedStatement.executeQuery();
@@ -87,11 +98,38 @@ public class QueryDAO {
             while (rs.next()) {
                 int orderNum = rs.getInt("ORDER_NUMBER");
                 int totP = rs.getInt("TOTAL_PRICE");
-                String cOrO = rs.getString("CART_OR_ORDER_HISTORY");
+                // String cOrO = rs.getString("CART_OR_ORDER_HISTORY");
                 String address = rs.getString("ADDRESS");
                 String zipC = rs.getString("ZIPCODE");
+                orders.add(new Orders(orderNum, id, totP, id, address, zipC));
+                // orders.add(new Orders(orderNum, id, totP, address, zipC));
+                // orders.add(new
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return orders;
+    }
 
-                orders.add(new Orders(orderNum, id, totP, cOrO, address, zipC));
+    public List<Cart> selectCartByUser(String id) {
+        List<Cart> orders = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnectionPool.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CART_PRODUCT_BY_USER);) {
+            preparedStatement.setString(1, id);
+            System.out.println(preparedStatement);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+
+                int cartNumber = rs.getInt("CART_NUMBER");
+                String productNumber = rs.getString("PRODUCT_NUM");
+                int productCnt = rs.getInt("PRODUCT_COUNT");
+                int productPrice = rs.getInt("PRODUCT_PRICE"); // PRODUCT_PRICE
+
+                orders.add(new Cart(cartNumber, productNumber, productCnt, productPrice, id));
+                // orders.add(new Orders(orderNum, id, totP, cOrO, address, zipC));
 
             }
         } catch (SQLException e) {
