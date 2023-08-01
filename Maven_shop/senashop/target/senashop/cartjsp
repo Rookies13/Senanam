@@ -116,9 +116,11 @@
         <input type="submit" value="선택한 항목 삭제">
     </form>
 
-    <form action="purchase.jsp" method="post">
-        <!-- 선택한 항목들의 번호를 저장하는 숨은 필드(hidden input) -->
-        <input type="hidden" name="selectedItems" id="selectedItems" value="">
+    <form action="orderProcess.jsp" method="post">
+        <!-- PRODUCT_NUM, PRODUCT_COUNT, PRODUCT_PRICE를 전송하기 위한 숨은 필드(hidden input) 추가 -->
+        <input type="hidden" name="PRODUCT_NUM" id="PRODUCT_NUM" value="">
+        <input type="hidden" name="PRODUCT_COUNT" id="PRODUCT_COUNT" value="">
+        <input type="hidden" name="PRODUCT_PRICE" id="PRODUCT_PRICE" value="">
         <input type="button" value="구매하기" onclick="purchaseItems()">
     </form>
 
@@ -126,17 +128,25 @@
     <script>
         function purchaseItems() {
             var checkboxes = document.getElementsByName("selectedItems");
-            var selectedItems = [];
-
+            var selectedProductNum = [];
+            var selectedProductCount = [];
+            var selectedProductPrice = [];
+    
             for (var i = 0; i < checkboxes.length; i++) {
                 if (checkboxes[i].checked) {
-                    selectedItems.push(checkboxes[i].value);
+                    var row = checkboxes[i].parentNode.parentNode;
+                    selectedProductNum.push(row.cells[2].innerText);
+                    selectedProductCount.push(row.cells[3].innerText);
+                    selectedProductPrice.push(row.cells[4].innerText);
                 }
             }
-
-            // 숨은 필드에 선택한 항목들의 번호를 설정합니다.
-            document.getElementById("selectedItems").value = selectedItems.join(",");
-            // 폼을 submit하여 purchase.jsp로 데이터를 전송합니다.
+    
+            // PRODUCT_NUM, PRODUCT_COUNT, PRODUCT_PRICE의 값을 설정합니다.
+            document.getElementById("PRODUCT_NUM").value = selectedProductNum.join(",");
+            document.getElementById("PRODUCT_COUNT").value = selectedProductCount.join(",");
+            document.getElementById("PRODUCT_PRICE").value = selectedProductPrice.join(",");
+    
+            // 선택한 항목들의 값을 가지고 orderProcess.jsp로 폼을 전송합니다.
             document.forms[1].submit();
         }
     </script>
