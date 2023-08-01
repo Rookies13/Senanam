@@ -54,6 +54,7 @@
         <p>Parameter 1: <%= request.getParameter("productNum") %></p>
         <p>Parameter 2: <%= request.getParameter("productCount") %></p>
         <p>Parameter 3: <%= request.getParameter("productPrice") %></p>
+		<p>Parameter 3: <%= request.getParameter("userId") %></p>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>

@@ -25,6 +25,7 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body>
+    
 
 		<!-- Header -->
 			<header id="header">
@@ -47,7 +48,7 @@
 
 		
 
-        <!--기능구현-->
+        <!--검색-->
         <section id="search">
         <div class="container">
         <form action="productsearch.jsp" method="get">
@@ -72,9 +73,9 @@
             if (searchKeyword != null && !searchKeyword.isEmpty()) {
                 try {
                     // 데이터베이스 연결 정보 설정
-                    String dbUrl = "jdbc:oracle:thin:@localhost:1521:xe"; // 데이터베이스 URL
-                    String dbUsername = "c##test"; // 데이터베이스 사용자명
-                    String dbPassword = "love2468"; // 데이터베이스 비밀번호
+                    String dbUrl = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl"; // 데이터베이스 URL
+                    String dbUsername = "admin"; // 데이터베이스 사용자명
+                    String dbPassword = "12345678"; // 데이터베이스 비밀번호
 
                     // 데이터베이스 연결
                     Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -92,7 +93,7 @@
                         String productIamges = rs.getString("PRODUCT_IMAGES");
                         String productText = rs.getString("PRODUCT_TEXT");
                         int productPrice = rs.getInt("PRODUCT_PRICE");
-                        int productNumber = rs.getInt("PRODUCT_NUMBER");
+                        int productNumber = rs.getInt("PRODUCT_NUM");
         %>
     <div class="container">
                 <table class="alt">
@@ -119,10 +120,7 @@
                             <option value="5">5</option>
                             <option value="6">6</option>
                         </select>
-
-
-                            
-                            <script>
+                        <script>
                                 // JavaScript 함수 정의
                                 function handleButtonClick() {
                                     // 전달할 파라미터 값을 변수에 저장
@@ -135,6 +133,8 @@
                                     window.location.href = 'cart.jsp?productNum=' + productNum + '&productCount=' + productCount + '&productPrice=' + productPrice + '&userId=' + userId;
                                 }
                             </script>
+                            
+                            
                         </td>
                     </tr>
                 </tbody>
@@ -160,12 +160,14 @@
         private double price;
         private String description;
         private String image;
+        private double productNumber;
 
-        public Product(String productName, double price, String description, String image) {
+        public Product(String productName, double price, String description, String image, double productNumber) {
             this.productName = productName;
             this.price = price;
             this.description = description;
             this.image = image;
+            this. productNumber = productNumber;
         }
 
         public String getProductName() {
@@ -183,6 +185,10 @@
         public String getImage() {
             return image;
         }
+
+        public double getProductNumber() {
+            return productNumber;
+        }
     }
 %>
 
@@ -192,9 +198,9 @@
 
         try {
             // Oracle 데이터베이스 연결 정보 설정
-            String dbUrl = "jdbc:oracle:thin:@localhost:1521:xe"; // 데이터베이스 URL
-            String dbUsername = "c##test"; // 데이터베이스 사용자명
-            String dbPassword = "love2468"; // 데이터베이스 비밀번호
+            String dbUrl = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl"; // 데이터베이스 URL
+            String dbUsername = "admin"; // 데이터베이스 사용자명
+            String dbPassword = "12345678"; // 데이터베이스 비밀번호
 
             // 데이터베이스 연결
             Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -211,9 +217,9 @@
                 int price = rs.getInt("PRODUCT_PRICE");
                 String description = rs.getString("PRODUCT_TEXT");
                 String image = rs.getString("PRODUCT_IMAGES");
-                int productNumber = rs.getInt("PRODUCT_NUMBER");
+                int productNumber = rs.getInt("PRODUCT_NUM");
 
-                Product product = new Product(productName, price, description, image);
+                Product product = new Product(productName, price, description, image, productNumber);
                 productList.add(product);
             }
 
@@ -246,7 +252,28 @@
                         <td><%= product.getProductName() %></td>
                         <td><p><%= product.getDescription() %></p><a>무료배송</a></td>
                         <td><p><%= product.getPrice() %>원</p>
-                        
+                        <button onclick="handleButtonClick2('<%= product.getProductNumber() %>', '<%= product.getPrice() %>')">장바구니</button>
+                        <select id="myselect">
+                            <option value="">개수선택</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+
+                        <script>
+                        // JavaScript 함수 정의
+                        function handleButtonClick2(productNum, productPrice) {
+                            // 전달할 파라미터 값을 변수에 저장
+                            const productCount = document.getElementById("myselect").value;
+                            const userId = "<%= id %>";
+
+                            // 파라미터 값을 URL에 추가하여 장바구니 JSP 파일로 리다이렉트
+                            window.location.href = 'cart.jsp?productNum=' + productNum + '&productCount=' + productCount + '&productPrice=' + productPrice + '&userId=' + userId;
+                            }
+                        </script>
                         </td>
                     </tr>
                     <% } %>
