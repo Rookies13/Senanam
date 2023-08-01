@@ -59,7 +59,7 @@
         pstmt.setInt(1, count);
         pstmt.setString(2, subject);
         pstmt.setString(3, content);
-        pstmt.setTimestamp(4, id);
+        pstmt.setString(4, id);
         pstmt.setTimestamp(5, date);
         pstmt.executeUpdate();
 

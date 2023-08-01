@@ -91,7 +91,9 @@ public class ModifyServlet extends HttpServlet {
         if (updated) {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
+            out.println("<script>");
             out.println("<script>alert('수정 완료 되었습니다.');</script>");
+            out.println("</script>");
 
             response.sendRedirect("mypage.jsp");
         } else {

@@ -15,7 +15,6 @@
 	String id = (String)session.getAttribute("user_id");
 	String name = (String)session.getAttribute("user_name");
     
-    //SelectDAO selectDAO = new SelectDAO();
     QueryDAO queryDAO = new QueryDAO();
 
     // Call the DAO method to fetch the data
@@ -25,18 +24,16 @@
     //회원 조회 
     String pkey = id;
     
-    //List<Map<String, Object>> infoData = queryDAO.fetchAllData(table1, pkey);
     List<Members> member = queryDAO.selectUser(pkey);
 
     //게시글 조회 
-    List<Board> boardList_free = queryDAO.selectBoardByUser(pkey, "A");
-    List<Board> boardList_qna = queryDAO.selectBoardByUser(pkey, "B");
-    List<Board> boardList_sec = queryDAO.selectBoardByUser(pkey, "C");
-    List<Board> boardList_star = queryDAO.selectBoardByUser(pkey, "D");
-    int tupleCount_free = boardList_free.size();
-    int tupleCount_qna = boardList_qna.size();
-    int tupleCount_sec = boardList_sec.size();
-    int tupleCount_star = boardList_star.size();
+    Map<String, List<Board>> boards = queryDAO.selectAllBoardByUser(pkey);
+      int[] counts = new int[4];
+      for (String boardType : boards.keySet()) {
+          List<Board> boardList = boards.get(boardType);
+          int count = boardList.size();
+          counts[boardType.charAt(0) - 'A'] = count;
+      }
 
     //주문 조회
     List<Cart> orders_c = queryDAO.selectCartByUser(pkey);
@@ -47,10 +44,8 @@
     //리소스 해제 
     orders_c.clear();
     orders_o.clear();
-    boardList_free.clear();
-    boardList_qna.clear();
-    boardList_sec.clear();
-    boardList_star.clear();
+    boards.clear();
+
 %>
 <html>
     <head>
@@ -121,19 +116,19 @@
         </div>
         <div class="summaryContainer">
           <div class="item">
-            <div class="number"><%= tupleCount_qna %></div>
+            <div class="number"><%= counts[1] %></div>
             <div>상품문의</div>
           </div>
           <div class="item">
-            <div class="number"><%= tupleCount_star %></div>
+            <div class="number"><%= counts[3] %></div>
             <div>상품후기</div>
           </div>
           <div class="item">
-            <div class="number"><%= tupleCount_sec %></div>
+            <div class="number"><%= counts[2] %></div>
             <div>비밀글</div>
           </div>
           <div class="item">
-            <div class="number"><%= tupleCount_star * 100 %></div>
+            <div class="number"><%= counts[3] * 100 %></div>
             <div>적립금(point)</div>
           </div>
         </div>
@@ -254,16 +249,6 @@
           <th>Email</th>
           <th>Country</th>
         </tr>
-        <%-- Loop through the boardList and display the data --%>
-        <% for (Board board : boardList_qna) { %>
-          <tr>
-            <td><%= board.getSubject() %></td>
-            <td><%= board.getBoardNumber() %></td>
-            <td><%= board.getReply_() %></td>
-            <td><%= board.getType() %></td>
-          </tr>
-        <% } %>
-        <% boardList_qna.clear(); %>
       </table>
 
     <div class="copyright">

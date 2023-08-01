@@ -5,11 +5,14 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.SQLException"%>
-
 <%
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
+%>
+<%
+	String id = (String)session.getAttribute("user_id");
+	String name = (String)session.getAttribute("user_name");
 %>
 <!--
 	Binary by TEMPLATED
@@ -78,7 +81,7 @@
 
                                     out.print("<tr>");
                                     out.print("<td><center>" + count + "</center></td>");
-                                    out.print("<td><a href='" + link + "'>" + rs.getString("subject") + "</a></td>");
+                                    out.print("<td><a href='" + link + "'><span style='color: black;'>" + rs.getString("subject") + "</span></a></td>");
                                     out.print("<td>" + rs.getString("id") + "</td>");
                                     out.print("<td>" + rs.getDate("time") + "</td>");
                                     out.print("</tr>");

@@ -11,6 +11,10 @@
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 %>
+<%
+	String id = (String)session.getAttribute("user_id");
+	String name = (String)session.getAttribute("user_name");
+%>
 <!--
 	Binary by TEMPLATED
 	templated.co @templatedco
@@ -103,7 +107,7 @@
 			} else if (content == null || content.trim().isEmpty()) {
 				out.println("<script>alert('내용을 입력하세요')</script>");
 			} else {
-				sql = "insert into board (board_number, subject, content, type, time) values (?, ?, ?, 'A', ?)";
+				sql = "insert into board (board_number, subject, content, type, time, id) values (?, ?, ?, 'A', ?, ?)";
 				pstmt = conn.prepareStatement(sql);
 	
 				java.util.Date currentDate = new java.util.Date();
@@ -113,6 +117,7 @@
 				pstmt.setString(2, subject);
 				pstmt.setString(3, content);
 				pstmt.setTimestamp(4, date);
+				pstmt.setString(5, id);
 				pstmt.executeUpdate();
 
 				out.println("<script>alert('게시글 등록 성공')</script>");

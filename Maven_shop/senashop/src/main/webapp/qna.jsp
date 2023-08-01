@@ -60,11 +60,11 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>작성자</th>
-						<th>작성일</th>
-						<th>조회수</th>
+                        <th><span style='color: black;'>번호</span></th>
+                        <th><span style='color: black;'>제목</span></th>
+                        <th><span style='color: black;'>작성자</span></th>
+						<th><span style='color: black;'>작성일</span></th>
+						<th><span style='color: black;'>조회수</span></th>
                     </tr>
                     </thead>
                     <%
@@ -77,11 +77,11 @@
 
 						while(rs.next()){ //조회되는 로우(행) 반복.
 							out.print("<tr>");
-							out.print("<td>" + rs.getInt("board_number") + "</td>"); //DB에서 sabun 컬럼에 해당하는 레코드 값을 불러옴
-							out.print("<td><a href=\"qna_whatch.jsp?qnanumber="+rs.getInt("board_number")+"\">" + rs.getString("subject") +"</a></td>");
-							out.print("<td>" + rs.getString("ID") + "</td>");
-							out.print("<td>" + rs.getDate("time") + "</td>");
-							out.print("<td>" + rs.getInt("cnt") + "</td>");
+							out.print("<td><span style='color: black;'>" + rs.getInt("board_number") + "</span></td>"); //DB에서 sabun 컬럼에 해당하는 레코드 값을 불러옴
+							out.print("<td><a href=\"qna_whatch.jsp?qnanumber="+rs.getInt("board_number")+"\"><span style='color: black;'>" + rs.getString("subject") +"</span></a></td>");
+							out.print("<td><span style='color: black;'>" + rs.getString("ID") + "</span></td>");
+							out.print("<td><span style='color: black;'>" + rs.getDate("time") + "</span></td>");
+							out.print("<td><span style='color: black;'>" + rs.getInt("cnt") + "</span></td>");
 							out.print("</tr>");
 							}
 								rs.close();

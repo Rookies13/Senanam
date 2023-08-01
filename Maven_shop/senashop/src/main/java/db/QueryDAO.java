@@ -37,6 +37,7 @@ public class QueryDAO {
     private static final String SELECT_CART_BY_USER = "SELECT * FROM ORDERS where id = ?";
 
     private static final String SELECT_BOARD_BY_ID_AND_TYPE = "SELECT * FROM board WHERE id = ? AND type = ?";
+    private static final String SELECT_BOARD_BY_ID = "SELECT * FROM board WHERE id = ?";
     private static final String SELECT_SPEC_USERS = "SELECT * FROM USER where id = ?;";
 
     private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE id=?";
@@ -169,6 +170,36 @@ public class QueryDAO {
             printSQLException(e);
         }
         return board;
+    }
+
+    public Map<String, List<Board>> selectAllBoardByUser(String pkey) {
+        Map<String, List<Board>> boardLists = new HashMap<>();
+
+        try (Connection connection = DatabaseConnectionPool.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BOARD_BY_ID);) {
+            preparedStatement.setString(1, pkey);
+
+            System.out.println(preparedStatement);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                String boardType = rs.getString("TYPE");
+                List<Board> boardList = boardLists.get(boardType);
+                if (boardList == null) {
+                    boardList = new ArrayList<>();
+                    boardLists.put(boardType, boardList);
+                }
+                boardList.add(new Board(rs.getString("SUBJECT"), rs.getString("CONTENT"), rs.getString("REPLY"),
+                        rs.getString("REPLY_OK"), rs.getString("TYPE"), rs.getString("ID"), rs.getDate("TIME", null),
+                        rs.getInt("CNT"), rs.getInt("pw")));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return boardLists;
     }
 
     // 수정
