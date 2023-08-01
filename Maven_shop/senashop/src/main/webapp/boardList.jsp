@@ -59,17 +59,23 @@
                             try{
                                 Class.forName("oracle.jdbc.driver.OracleDriver"); //driver
                                 conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "c##test", "wnsdnr6990");
-                                String sql = "select * from board"; //DB를 조회할 select문
+                                String sql = "select * from board order by qseq"; //DB를 조회할 select문
                                 pstmt = conn.prepareStatement(sql); //sql문으로 conn
                                 rs = pstmt.executeQuery(); //pstmt 실행 후 결과를 rs에 할당
                                 
-                                while(rs.next()){ //조회되는 로우(행) 반복
+                                int count = 1;
+                                while(rs.next()){
+                                    int boardNumber = rs.getInt("qseq");
+                                    String link = "boardView.jsp?qseq=" + boardNumber;
+
                                     out.print("<tr>");
-                                    out.print("<td><center>" + rs.getString("qseq") + "</center></td>");
-                                    out.print("<td>" + rs.getString("subject") + "</td>");
+                                    out.print("<td><center>" + count + "</center></td>");
+                                    out.print("<td><a href='" + link + "'>" + rs.getString("subject") + "</a></td>");
                                     out.print("<td>" + rs.getString("id") + "</td>");
                                     out.print("<td>" + rs.getDate("indate") + "</td>");
                                     out.print("</tr>");
+
+                                    count++;
                                 }
                                 
                                 rs.close();
@@ -99,7 +105,7 @@
                     Made with team 세나남</a>
                 </div>
             </footer>
-		
+
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>

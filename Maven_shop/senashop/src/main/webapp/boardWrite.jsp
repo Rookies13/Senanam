@@ -90,13 +90,14 @@
 
 			sql = "insert into board (qseq, subject, content, type, indate) values (?, ?, ?, '1', ?)";
 			pstmt = conn.prepareStatement(sql); 
-
 			request.setCharacterEncoding("utf-8");
+
 			String subject = request.getParameter("subject");
 			String content = request.getParameter("content");
 
 			java.util.Date currentDate = new java.util.Date();
         	java.sql.Timestamp date = new java.sql.Timestamp(currentDate.getTime());
+			
 
 			pstmt.setInt(1, count);
 			pstmt.setString(2, subject);

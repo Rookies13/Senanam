@@ -25,6 +25,28 @@
 	</head>
 	<body>
 
+        <script>
+            function deletePost(qseq) {
+                if (confirm('정말로 삭제하시겠습니까?')) {
+                    // 삭제 처리를 위한 form 생성
+                    var form = document.createElement("form");
+                    form.method = "post";
+                    form.action = "deletePost.jsp";
+                    
+                    // qseq를 전달하기 위한 input hidden 추가
+                    var input = document.createElement("input");
+                    input.type = "hidden";
+                    input.name = "qseq";
+                    input.value = qseq;
+                    form.appendChild(input);
+        
+                    // form을 바로 body에 추가하고 전송
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            }
+        </script>
+
 		<!-- Header -->
 			<header id="header">
 				<a href="index.html" class="logo"><strong>세 나</strong> shop</a>
@@ -59,7 +81,7 @@
                         rs = pstmt.executeQuery();
 
                         rs.next();
-                        %>
+                    %>
                         <div class="table-wrapper">
                             <table class="alt">
                                 <tr>
@@ -81,8 +103,8 @@
                         int boardNumber = rs.getInt("qseq");
                         String link = "boardEdit.jsp?qseq=" + boardNumber;
                         %>
-                        <input type='button' onclick='location.href="<%=link%>"' value='수정'>
-                        <input type="button" onclick="location.href=''" value="삭제"/>
+                        <input type="button" onclick="location.href='<%=link%>'" value="수정">
+                        <input type="button" onclick="deletePost('<%=qseq%>')" value="삭제">
                         <%
                         rs.close();
                         pstmt.close();

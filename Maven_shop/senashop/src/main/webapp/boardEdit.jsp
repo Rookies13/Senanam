@@ -46,17 +46,33 @@
 
             <section id="main">
                 <div class="inner">
-                    <h3>게시판 글쓰기</h3>
+                    <h3>게시판 글 수정하기</h3>
+					<%
+					request.setCharacterEncoding("utf-8");
+					String qseqParam = request.getParameter("qseq");
+                    int qseq = Integer.parseInt(qseqParam);
+
+					try{
+                        Class.forName("oracle.jdbc.driver.OracleDriver"); //driver
+                        conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "c##test", "wnsdnr6990");
+                        
+                        String sql = "SELECT * FROM board WHERE qseq = " + qseq;
+                        pstmt = conn.prepareStatement(sql); 
+                        rs = pstmt.executeQuery();
+
+                        rs.next();
+
+					%>
                     <form method="post" action="">
                         <div class="row uniform 50%">
                             <div class="6u$ 12u$(xsmall)">
-                                <input type="text" name="subject" id="subject" placeholder="제목" value="">
+                                <input type="text" name="subject" id="subject" placeholder="제목" value="<%= rs.getString("subject") %>">
                             </div>
 							<div class="6u$ 12u$(xsamll)">
 								첨부파일 : <input type="file">
 							</div>
                             <div class="12u$">
-                                <textarea name="content" id="content" placeholder="내용" rows="6" style="resize: none;" value=""></textarea>
+                                <textarea name="content" id="content" placeholder="내용" rows="6" style="resize: none;"><%= rs.getString("content") %></textarea>
                             </div>
                             
                             <div class="4u$ 12u$(xsmall)">
@@ -65,6 +81,56 @@
                             
                         </div>
                     </form>
+					<%
+					if (request.getMethod().equals("POST")) {
+						try{
+							
+							sql = "UPDATE board SET subject = ?, content = ? WHERE qseq = ?";
+											
+							pstmt = conn.prepareStatement(sql); 
+				
+							String subject = request.getParameter("subject");
+							String content = request.getParameter("content");
+				
+							java.util.Date currentDate = new java.util.Date();
+							java.sql.Timestamp date = new java.sql.Timestamp(currentDate.getTime());
+							
+							
+							pstmt.setString(1, subject);
+							pstmt.setString(2, content);
+							pstmt.setInt(3, qseq);
+							pstmt.executeUpdate();
+							
+							rs.close();
+							pstmt.close();
+							conn.close();
+				
+							out.println("<script>alert('게시글 수정 성공')</script>");
+							out.println("<script>window.location.assign('boardList.jsp')</script>");
+				
+						}catch(Exception e){
+							out.println("<script>alert('게시글 수정 실패')</script>");
+							e.printStackTrace();
+				
+						}finally{
+							try{
+								if(rs!=null) rs.close();
+								if(pstmt!=null) pstmt.close();
+								if(conn!=null) conn.close();
+							}catch(Exception e){
+								e.printStackTrace();
+							}
+						}
+					}
+					%>
+
+
+					<%
+					
+					}catch(Exception e){
+						e.printStackTrace();
+					}
+					%>
                 </div>
             </section>
 
