@@ -72,10 +72,9 @@
     if (request.getMethod().equals("POST")) {
 		try{
 			Class.forName("oracle.jdbc.driver.OracleDriver"); //driver
-			conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "c##test", "wnsdnr6990");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin", "12345678");
 			
-			//DB에 들어갈 index
-			String sql = "SELECT MAX(qseq) FROM board";
+			String sql = "SELECT MAX(board_number) FROM board";
 			int count = 1;
 			try {
 				pstmt = conn.prepareStatement(sql);
@@ -88,29 +87,30 @@
 				e.printStackTrace();
 			}
 
-			sql = "insert into board (qseq, subject, content, type, indate) values (?, ?, ?, '1', ?)";
-			pstmt = conn.prepareStatement(sql); 
 			request.setCharacterEncoding("utf-8");
-
 			String subject = request.getParameter("subject");
 			String content = request.getParameter("content");
 
-			java.util.Date currentDate = new java.util.Date();
-        	java.sql.Timestamp date = new java.sql.Timestamp(currentDate.getTime());
-			
+			if (subject == null || subject.trim().isEmpty()) {
+				out.println("<script>alert('제목을 입력하세요')</script>");
+			} else if (content == null || content.trim().isEmpty()) {
+				out.println("<script>alert('내용을 입력하세요')</script>");
+			} else {
+				sql = "insert into board (board_number, subject, content, type, time) values (?, ?, ?, 'A', ?)";
+				pstmt = conn.prepareStatement(sql);
+	
+				java.util.Date currentDate = new java.util.Date();
+				java.sql.Timestamp date = new java.sql.Timestamp(currentDate.getTime());
+	
+				pstmt.setInt(1, count);
+				pstmt.setString(2, subject);
+				pstmt.setString(3, content);
+				pstmt.setTimestamp(4, date);
+				pstmt.executeUpdate();
 
-			pstmt.setInt(1, count);
-			pstmt.setString(2, subject);
-			pstmt.setString(3, content);
-			pstmt.setTimestamp(4, date);
-			pstmt.executeUpdate();
-			
-			rs.close();
-			pstmt.close();
-			conn.close();
-
-			out.println("<script>alert('게시글 등록 성공')</script>");
-        	out.println("<script>window.location.assign('boardList.jsp')</script>");
+				out.println("<script>alert('게시글 등록 성공')</script>");
+				out.println("<script>window.location.assign('boardList.jsp')</script>");
+			}
 
 		}catch(Exception e){
 			out.println("<script>alert('게시글 등록 실패')</script>");

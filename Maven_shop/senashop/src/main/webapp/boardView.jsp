@@ -26,18 +26,18 @@
 	<body>
 
         <script>
-            function deletePost(qseq) {
+            function deletePost(board_number) {
                 if (confirm('정말로 삭제하시겠습니까?')) {
                     // 삭제 처리를 위한 form 생성
                     var form = document.createElement("form");
                     form.method = "post";
                     form.action = "deletePost.jsp";
                     
-                    // qseq를 전달하기 위한 input hidden 추가
+                    // board_number 전달하기 위한 input hidden 추가
                     var input = document.createElement("input");
                     input.type = "hidden";
-                    input.name = "qseq";
-                    input.value = qseq;
+                    input.name = "board_number";
+                    input.value = board_number;
                     form.appendChild(input);
         
                     // form을 바로 body에 추가하고 전송
@@ -70,13 +70,13 @@
                 <div class="inner">
                     <h3>게시판</h3>
                     <%
-                    String qseqParam = request.getParameter("qseq");
-                    int qseq = Integer.parseInt(qseqParam);
+                    String boardNumberParam = request.getParameter("board_number");
+                    int board_number = Integer.parseInt(boardNumberParam);
                     try{
                         Class.forName("oracle.jdbc.driver.OracleDriver"); //driver
-                        conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "c##test", "wnsdnr6990");
+                        conn = DriverManager.getConnection("jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin", "12345678");
                         
-                        String sql = "SELECT * FROM board WHERE qseq = " + qseq;
+                        String sql = "SELECT * FROM board WHERE board_number = " + board_number;
                         pstmt = conn.prepareStatement(sql); 
                         rs = pstmt.executeQuery();
 
@@ -92,7 +92,7 @@
                                     <td>글쓴이</td>
                                     <td><%=rs.getString("id") %></td>
                                     <td width="20%">글쓴시각</td>
-                                    <td><%=rs.getDate("indate") %></td>
+                                    <td><%=rs.getDate("time") %></td>
                                 </tr>
                                 
                             </table>
@@ -100,11 +100,11 @@
                         <pre><code><%=rs.getString("content") %></code> </pre>
 
                         <%
-                        int boardNumber = rs.getInt("qseq");
-                        String link = "boardEdit.jsp?qseq=" + boardNumber;
+                        int boardNumber = rs.getInt("board_number");
+                        String link = "boardEdit.jsp?board_number=" + boardNumber;
                         %>
                         <input type="button" onclick="location.href='<%=link%>'" value="수정">
-                        <input type="button" onclick="deletePost('<%=qseq%>')" value="삭제">
+                        <input type="button" onclick="deletePost('<%=board_number%>')" value="삭제">
                         <%
                         rs.close();
                         pstmt.close();

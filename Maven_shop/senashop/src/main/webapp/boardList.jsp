@@ -58,21 +58,21 @@
                             <%
                             try{
                                 Class.forName("oracle.jdbc.driver.OracleDriver"); //driver
-                                conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "c##test", "wnsdnr6990");
-                                String sql = "select * from board order by qseq"; //DB를 조회할 select문
+                                conn = DriverManager.getConnection("jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin", "12345678");
+                                String sql = "select * from board where type='B' order by board_number desc"; //DB를 조회할 select문
                                 pstmt = conn.prepareStatement(sql); //sql문으로 conn
                                 rs = pstmt.executeQuery(); //pstmt 실행 후 결과를 rs에 할당
                                 
                                 int count = 1;
                                 while(rs.next()){
-                                    int boardNumber = rs.getInt("qseq");
-                                    String link = "boardView.jsp?qseq=" + boardNumber;
+                                    int boardNumber = rs.getInt("board_number");
+                                    String link = "boardView.jsp?board_number=" + boardNumber;
 
                                     out.print("<tr>");
                                     out.print("<td><center>" + count + "</center></td>");
                                     out.print("<td><a href='" + link + "'>" + rs.getString("subject") + "</a></td>");
                                     out.print("<td>" + rs.getString("id") + "</td>");
-                                    out.print("<td>" + rs.getDate("indate") + "</td>");
+                                    out.print("<td>" + rs.getDate("time") + "</td>");
                                     out.print("</tr>");
 
                                     count++;

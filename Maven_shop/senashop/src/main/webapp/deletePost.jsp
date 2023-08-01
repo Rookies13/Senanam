@@ -4,16 +4,16 @@
 <%@page import="java.sql.Connection"%>
 
 <%
-    String qseqParam = request.getParameter("qseq");
-    int qseq = Integer.parseInt(qseqParam);
+    String boardNumberParam = request.getParameter("board_number");
+    int board_number = Integer.parseInt(boardNumberParam);
 
     try {
         Class.forName("oracle.jdbc.driver.OracleDriver"); //driver
-        Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "c##test", "wnsdnr6990");
+        Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin", "12345678");
         
-        String deleteSql = "DELETE FROM board WHERE qseq = ?";
+        String deleteSql = "DELETE FROM board WHERE board_number = ?";
         PreparedStatement pstmt = conn.prepareStatement(deleteSql);
-        pstmt.setInt(1, qseq);
+        pstmt.setInt(1, board_number);
         pstmt.executeUpdate();
         pstmt.close();
         conn.close();

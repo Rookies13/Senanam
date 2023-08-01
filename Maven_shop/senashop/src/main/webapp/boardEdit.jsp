@@ -49,14 +49,14 @@
                     <h3>게시판 글 수정하기</h3>
 					<%
 					request.setCharacterEncoding("utf-8");
-					String qseqParam = request.getParameter("qseq");
-                    int qseq = Integer.parseInt(qseqParam);
+					String boardNumberParam = request.getParameter("board_number");
+                    int board_number = Integer.parseInt(boardNumberParam);
 
 					try{
                         Class.forName("oracle.jdbc.driver.OracleDriver"); //driver
-                        conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "c##test", "wnsdnr6990");
+                        conn = DriverManager.getConnection("jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin", "12345678");
                         
-                        String sql = "SELECT * FROM board WHERE qseq = " + qseq;
+                        String sql = "SELECT * FROM board WHERE board_number = " + board_number;
                         pstmt = conn.prepareStatement(sql); 
                         rs = pstmt.executeQuery();
 
@@ -85,20 +85,16 @@
 					if (request.getMethod().equals("POST")) {
 						try{
 							
-							sql = "UPDATE board SET subject = ?, content = ? WHERE qseq = ?";
+							sql = "UPDATE board SET subject = ?, content = ? WHERE board_number = ?";
 											
 							pstmt = conn.prepareStatement(sql); 
 				
 							String subject = request.getParameter("subject");
 							String content = request.getParameter("content");
 				
-							java.util.Date currentDate = new java.util.Date();
-							java.sql.Timestamp date = new java.sql.Timestamp(currentDate.getTime());
-							
-							
 							pstmt.setString(1, subject);
 							pstmt.setString(2, content);
-							pstmt.setInt(3, qseq);
+							pstmt.setInt(3, board_number);
 							pstmt.executeUpdate();
 							
 							rs.close();
