@@ -36,8 +36,15 @@
 			<ul class="links">
 				<li><a href="index.jsp">Home</a></li>
 				<li><a href="mypage.jsp">마이페이지</a></li>
+<<<<<<< HEAD
 				<li><a href="elements.html">Elements</a></li>
                 <li><a href="LoginServlet">Elements</a></li>
+=======
+				<li><a href="">상품검색</a></li>
+				<li><a href="">장바구니</a></li>
+				<li><a href="">문의게시판</a></li>
+				<li><a href="qna.jsp">Q&A</a></li>
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
 			</ul>
 		</nav>
 		<!-- Header -->
@@ -56,7 +63,11 @@
                             <input type="password" name="pw" placeholder="비밀번호">
                         </div>
                         <div class="join_user">
+<<<<<<< HEAD
                             <a href="회원가입페이지" sytle="color:white">회원가입 페이지</a>
+=======
+                            <a href="terms.jsp" sytle="color:white">회원가입 페이지</a>
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
                         </div>
                         <div class="submit">
                             <button type="submit" value="submit">로그인</button>

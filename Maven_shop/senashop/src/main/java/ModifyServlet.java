@@ -3,7 +3,10 @@ import java.io.PrintWriter;
 import java.rmi.ServerException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+<<<<<<< HEAD
 import java.sql.Connection;
+=======
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
 
 import db.QueryDAO;
 import db.model.Members;
@@ -15,7 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ModifyServlet extends HttpServlet {
+<<<<<<< HEAD
     static String id;
+=======
+    private String id;
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
     private String name;
     private String mobile;
     private String email;
@@ -28,7 +35,10 @@ public class ModifyServlet extends HttpServlet {
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServerException, IOException, ServletException {
+<<<<<<< HEAD
         id = request.getParameter("id");
+=======
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
         name = request.getParameter("name");
         mobile = request.getParameter("mobile");
         email = request.getParameter("email");
@@ -48,7 +58,11 @@ public class ModifyServlet extends HttpServlet {
         out.println("<h2>회원 정보 수정</h2>");
 
         out.println("<form action= 'ModifyServlet' method='post'>");
+<<<<<<< HEAD
         out.println("아이디: <input type='text' name='name' value='" + id + "' readonly><br>");
+=======
+        out.println("<label for=\"username\">ID:</label>");
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
 
         out.println("이름:<input type='text' name='name' value='" + name + "'><br>");
 
@@ -74,7 +88,11 @@ public class ModifyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+<<<<<<< HEAD
         // String id = request.getParameter("id");
+=======
+        String id = (String)request.getAttribute("id");
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
         String updatedName = request.getParameter("name");
         String updatedMobile = request.getParameter("mobile");
         String updatedEmail = request.getParameter("email");

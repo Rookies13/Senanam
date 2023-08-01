@@ -1,5 +1,8 @@
 package db;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -16,14 +19,18 @@ import java.util.Map;
 import db.model.Board;
 import db.model.Members;
 import db.model.Orders;
+<<<<<<< HEAD
 import db.model.Cart;
 
+=======
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
 //0730-이순빈-쿼리 실행 환경 구성
 public class QueryDAO {
     private static final String INSERT_USERS_SQL = "INSERT INTO MEMBER (ID, PASSWD, NAME, MOBILE, EMAIL, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMS_AGREE, CREATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_USER_BY_ID = "SELECT * FROM MEMBER WHERE id = ?";
     private static final String SELECT_ALL_USERS = "SELECT * FROM MEMBER";
     private static final String SELECT_ALL_BOARD = "SELECT * FROM BOARD";
+<<<<<<< HEAD
 
     // CART PRODUCT
     private static final String SELECT_CART_PRODUCT_BY_USER = "SELECT * FROM CART_PRODUCT where id = ?";
@@ -36,6 +43,9 @@ public class QueryDAO {
 
     private static final String SELECT_CART_BY_USER = "SELECT * FROM ORDERS where id = ?";
 
+=======
+    private static final String SELECT_ORDER_BY_USER = "SELECT * FROM ORDERS where id = ? AND cart_or_order_history = ?";
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
     private static final String SELECT_BOARD_BY_ID_AND_TYPE = "SELECT * FROM board WHERE id = ? AND type = ?";
     private static final String SELECT_SPEC_USERS = "SELECT * FROM USER where id = ?;";
 
@@ -74,7 +84,11 @@ public class QueryDAO {
                 String address2 = rs.getString("ADDRESS2");
                 String zipcode = rs.getString("ZIPCODE");
                 String userLevel = rs.getString("USER_LEVEL");
+<<<<<<< HEAD
                 String termAgree = rs.getString("TERMCHECK");
+=======
+                String termAgree = rs.getString("TERMS_AGREE");
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
                 Timestamp createDate = rs.getTimestamp("CREATED_AT");
                 member.add(new Members(id, name, mobile, email, zipcode, address1, address2, userLevel, termAgree,
                         createDate));
@@ -85,12 +99,23 @@ public class QueryDAO {
         return member;
     }
 
+<<<<<<< HEAD
     public List<Orders> selectOrderByUser(String id) {
         List<Orders> orders = new ArrayList<>();
 
         try (Connection connection = DatabaseConnectionPool.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ORDER_TABLE_BY_USER);) {
             preparedStatement.setString(1, id);
+=======
+
+    public List<Orders> selectOrderByUser(String id, String type) {
+        List<Orders> orders = new ArrayList<>();
+
+        try (Connection connection = DatabaseConnectionPool.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ORDER_BY_USER);) {
+            preparedStatement.setString(1, id);
+            preparedStatement.setString(2, type);
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
             System.out.println(preparedStatement);
 
             ResultSet rs = preparedStatement.executeQuery();
@@ -98,6 +123,7 @@ public class QueryDAO {
             while (rs.next()) {
                 int orderNum = rs.getInt("ORDER_NUMBER");
                 int totP = rs.getInt("TOTAL_PRICE");
+<<<<<<< HEAD
                 // String cOrO = rs.getString("CART_OR_ORDER_HISTORY");
                 String address = rs.getString("ADDRESS");
                 String zipC = rs.getString("ZIPCODE");
@@ -130,6 +156,13 @@ public class QueryDAO {
 
                 orders.add(new Cart(cartNumber, productNumber, productCnt, productPrice, id));
                 // orders.add(new Orders(orderNum, id, totP, cOrO, address, zipC));
+=======
+                String cOrO = rs.getString("CART_OR_ORDER_HISTORY");
+                String address = rs.getString("ADDRESS");
+                String zipC = rs.getString("ZIPCODE");
+
+                orders.add(new Orders(orderNum, id, totP, cOrO, address, zipC));
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
 
             }
         } catch (SQLException e) {
@@ -139,8 +172,11 @@ public class QueryDAO {
     }
 
     public List<Board> selectBoardByUser(String id, String type) {
+<<<<<<< HEAD
         // type = A:자유, B:문의, C:비밀글, D후기
 
+=======
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
         List<Board> board = new ArrayList<>();
 
         try (Connection connection = DatabaseConnectionPool.getConnection();
@@ -159,9 +195,15 @@ public class QueryDAO {
                 String rep_y = rs.getString("REPLY_OK");
 
                 Date time = rs.getDate("TIME");
+<<<<<<< HEAD
                 int cnt = rs.getInt("CNT");
                 int pw = rs.getInt("PW");
                 // String typ = rs.getString("type");
+=======
+                int cnt = rs.getInt("COUNT");
+                int pw = rs.getInt("PW");
+                // String name = rs.getString("name");
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
                 board.add(new Board(boardNum, sunb, cont, rep, rep_y, type, id, time, cnt, pw));
 
             }

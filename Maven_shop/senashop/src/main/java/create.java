@@ -16,8 +16,11 @@ import db.SelectDAO;
 import db.model.Board;
 import db.model.Members;
 import db.model.Orders;
+<<<<<<< HEAD
 import db.model.Cart;
 
+=======
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
 //연습장
 public class create extends HttpServlet {
     @Override
@@ -28,6 +31,7 @@ public class create extends HttpServlet {
         SelectDAO selectDAO = new SelectDAO();
         QueryDAO queryDAO = new QueryDAO();
         selectDAO.fetchAllData(getServletName(), getServletInfo());
+<<<<<<< HEAD
 
         String pkey = "t";
         // List<Map<String, Object>> infoData = queryDAO.fetchAllData(table1, pkey);
@@ -91,4 +95,45 @@ public class create extends HttpServlet {
          * }
          */
     }
+=======
+        
+        String pkey = "t";
+        
+
+    // Call the DAO method to fetch the data
+    String table = "MEMBER";
+    String column = "id";
+    //List<Map<String, Object>> infoData = queryDAO.fetchAllData(table, pkey);
+    List<Map<String, Object>> infoData = selectDAO.fetchAllData(table, column);
+    Map<String, Object> firstRow = infoData.get(0);
+
+List<Board> boardList = queryDAO.selectBoardByUser(pkey, "h");
+    queryDAO.selectBoardByUser("test", "h");
+    boardList.get(0);
+    List<Board> boardList_h = queryDAO.selectBoardByUser(pkey, "h");
+    // queryDAO.selectUser("test");
+    //final Member user = queryDAO.selectUser(column);
+    //Members user = queryDAO.selectUser(column);
+    //queryDAO.selectUser(column);
+    List<Orders> orders_c = queryDAO.selectOrderByUser(pkey, "Cart");
+    orders_c.size();
+    orders_c.clear();
+    List<Members> member = queryDAO.selectUser(column);
+    for (Members m : member) {
+        m.getUserLv();
+        member.clear();
+    }
+    //Members membea = (Members) request.getAttribute("member");
+    //List<Members> mea = (List<Members>) request.getAttribute("member");
+
+
+    int tupleCount_h = boardList_h.size();
+    System.out.println(tupleCount_h);
+    /*
+     * public static void main(String[] args) {
+     * System.out.println("Hello World");
+     * }
+     */
+    }
+>>>>>>> 02bbca1ef47f009cae8c734cc88c561cc0a18489
 }
