@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--0727-이순빈-AWS 연결-->
+<Context>
+    <Resource name="jdbc/aws" auth="Container" type="javax.sql.DataSource"
+        maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+        username="admin" password="12345678"
+        driverClassName="oracle.jdbc.OracleDriver"
+        url="jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl" />
+</Context>
