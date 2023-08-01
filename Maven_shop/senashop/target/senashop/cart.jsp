@@ -116,37 +116,29 @@
         <input type="submit" value="선택한 항목 삭제">
     </form>
 
-    <form action="orderProcess.jsp" method="post">
-        <!-- PRODUCT_NUM, PRODUCT_COUNT, PRODUCT_PRICE를 전송하기 위한 숨은 필드(hidden input) 추가 -->
-        <input type="hidden" name="PRODUCT_NUM" id="PRODUCT_NUM" value="">
-        <input type="hidden" name="PRODUCT_COUNT" id="PRODUCT_COUNT" value="">
-        <input type="hidden" name="PRODUCT_PRICE" id="PRODUCT_PRICE" value="">
+    <form action="result.jsp" method="get">
+        <!-- CART_NUM을 전송하기 위한 숨은 필드(hidden input) 추가 -->
+        <input type="hidden" name="CART_NUM" id="CART_NUM" value="">
         <input type="button" value="구매하기" onclick="purchaseItems()">
     </form>
-
+    
     <!-- 구매 및 삭제 처리를 위한 JavaScript 코드 -->
     <script>
         function purchaseItems() {
             var checkboxes = document.getElementsByName("selectedItems");
-            var selectedProductNum = [];
-            var selectedProductCount = [];
-            var selectedProductPrice = [];
+            var selectedCartNum = [];
     
             for (var i = 0; i < checkboxes.length; i++) {
                 if (checkboxes[i].checked) {
                     var row = checkboxes[i].parentNode.parentNode;
-                    selectedProductNum.push(row.cells[2].innerText);
-                    selectedProductCount.push(row.cells[3].innerText);
-                    selectedProductPrice.push(row.cells[4].innerText);
+                    selectedCartNum.push(row.cells[0].innerText); // 첫 번째 열의 CART_NUM 값을 가져옴
                 }
             }
     
-            // PRODUCT_NUM, PRODUCT_COUNT, PRODUCT_PRICE의 값을 설정합니다.
-            document.getElementById("PRODUCT_NUM").value = selectedProductNum.join(",");
-            document.getElementById("PRODUCT_COUNT").value = selectedProductCount.join(",");
-            document.getElementById("PRODUCT_PRICE").value = selectedProductPrice.join(",");
+            // CART_NUM의 값을 설정합니다.
+            document.getElementById("CART_NUM").value = selectedCartNum.join(",");
     
-            // 선택한 항목들의 값을 가지고 orderProcess.jsp로 폼을 전송합니다.
+            // 선택한 항목들의 값을 가지고 result.jsp로 폼을 전송합니다.
             document.forms[1].submit();
         }
     </script>
