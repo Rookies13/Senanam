@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/register")
 public class joinServlet extends HttpServlet {
     // Oracle DB 연결 정보 하드코딩 추후 변경 가능
-    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe";
+    private static final String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe?useUnicode=true&characterEncoding=UTF-8";
     private static final String DB_USERNAME = "YOUR_ID";
     private static final String DB_PASSWORD = "YOUR_PW";
 
@@ -25,6 +26,12 @@ public class joinServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
+
+        Properties props = new Properties();
+        props.setProperty("user", DB_USERNAME);
+        props.setProperty("password", DB_PASSWORD);
+        props.setProperty("useUnicode", "true");
+        props.setProperty("characterEncoding", "UTF-8");
 
         // 사용자가 입력한 회원 정보 받기
         String ID = request.getParameter("username");
@@ -78,7 +85,7 @@ public class joinServlet extends HttpServlet {
         Statement stmt = null;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            conn = DriverManager.getConnection(DB_URL, props);
             stmt = conn.createStatement();
 
             String sql = "INSERT INTO member (ID, PASSWD, NAME, EMAIL, MOBILE, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMCHECK, CREATED_AT) "
@@ -120,11 +127,16 @@ public class joinServlet extends HttpServlet {
     // ID 중복 확인 메서드
     private boolean isIdExists(String ID) {
         Connection conn = null;
+        Properties props = new Properties();
+        props.setProperty("user", DB_USERNAME);
+        props.setProperty("password", DB_PASSWORD);
+        props.setProperty("useUnicode", "true");
+        props.setProperty("characterEncoding", "UTF-8");
         Statement stmt = null;
         ResultSet rs = null;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            conn = DriverManager.getConnection(DB_URL, props);
             stmt = conn.createStatement();
             String sql = "SELECT COUNT(*) FROM member WHERE ID = '" + ID + "'";
             rs = stmt.executeQuery(sql);
@@ -152,11 +164,16 @@ public class joinServlet extends HttpServlet {
     // 이름 중복 확인 메서드
     private boolean isNameExists(String NAME) {
         Connection conn = null;
+        Properties props = new Properties();
+        props.setProperty("user", DB_USERNAME);
+        props.setProperty("password", DB_PASSWORD);
+        props.setProperty("useUnicode", "true");
+        props.setProperty("characterEncoding", "UTF-8");
         Statement stmt = null;
         ResultSet rs = null;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
-            conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            conn = DriverManager.getConnection(DB_URL, props);
             stmt = conn.createStatement();
             String sql = "SELECT COUNT(*) FROM member WHERE NAME = '" + NAME + "'";
             rs = stmt.executeQuery(sql);
