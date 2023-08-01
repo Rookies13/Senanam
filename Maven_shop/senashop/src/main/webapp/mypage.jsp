@@ -28,10 +28,14 @@
     List<Members> member = queryDAO.selectUser(pkey);
 
     //게시글 조회 
-    List<Board> boardList_h = queryDAO.selectBoardByUser(pkey, "h");
-    List<Board> boardList_q = queryDAO.selectBoardByUser(pkey, "q");
-    int tupleCount_h = boardList_h.size();
-    int tupleCount_q = boardList_q.size();
+    List<Board> boardList_free = queryDAO.selectBoardByUser(pkey, "A");
+    List<Board> boardList_qna = queryDAO.selectBoardByUser(pkey, "B");
+    List<Board> boardList_sec = queryDAO.selectBoardByUser(pkey, "C");
+    List<Board> boardList_star = queryDAO.selectBoardByUser(pkey, "D");
+    int tupleCount_free = boardList_free.size();
+    int tupleCount_qna = boardList_qna.size();
+    int tupleCount_sec = boardList_sec.size();
+    int tupleCount_star = boardList_star.size();
 
     //주문 조회
     List<Orders> orders_c = queryDAO.selectOrderByUser(pkey, "Cart");
@@ -42,6 +46,10 @@
     //리소스 해제 
     orders_c.clear();
     orders_o.clear();
+    boardList_free.clear();
+    boardList_qna.clear();
+    boardList_sec.clear();
+    boardList_star.clear();
 %>
 <html>
     <head>
@@ -110,15 +118,19 @@
         </div>
         <div class="summaryContainer">
           <div class="item">
-            <div class="number"><%= tupleCount_q %></div>
+            <div class="number"><%= tupleCount_qna %></div>
             <div>상품문의</div>
           </div>
           <div class="item">
-            <div class="number"><%= tupleCount_h %></div>
+            <div class="number"><%= tupleCount_star %></div>
             <div>상품후기</div>
           </div>
           <div class="item">
-            <div class="number">0</div>
+            <div class="number"><%= tupleCount_sec %></div>
+            <div>비밀글</div>
+          </div>
+          <div class="item">
+            <div class="number"><%= tupleCount_star * 100 %></div>
             <div>적립금(point)</div>
           </div>
         </div>
@@ -240,7 +252,7 @@
           <th>Country</th>
         </tr>
         <%-- Loop through the boardList and display the data --%>
-        <% for (Board board : boardList_q) { %>
+        <% for (Board board : boardList_qna) { %>
           <tr>
             <td><%= board.getSubject() %></td>
             <td><%= board.getBoardNumber() %></td>
@@ -248,7 +260,7 @@
             <td><%= board.getType() %></td>
           </tr>
         <% } %>
-        <% boardList_q.clear(); %>
+        <% boardList_qna.clear(); %>
       </table>
 
     <div class="copyright">

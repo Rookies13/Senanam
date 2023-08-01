@@ -5,5 +5,5 @@
         maxTotal="100" maxIdle="30" maxWaitMillis="10000"
         username="admin" password="12345678"
         driverClassName="oracle.jdbc.OracleDriver"
-        url="jdbc:oracle:thin:@aws.ce0twkaphola.ap-northeast-2.rds.amazonaws.com:1521:orcl" />
+        url="jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl" />
 </Context>

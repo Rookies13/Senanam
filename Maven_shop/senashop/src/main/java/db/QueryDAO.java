@@ -1,4 +1,5 @@
 package db;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -15,6 +16,7 @@ import java.util.Map;
 import db.model.Board;
 import db.model.Members;
 import db.model.Orders;
+
 //0730-이순빈-쿼리 실행 환경 구성
 public class QueryDAO {
     private static final String INSERT_USERS_SQL = "INSERT INTO MEMBER (ID, PASSWD, NAME, MOBILE, EMAIL, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMS_AGREE, CREATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -60,7 +62,7 @@ public class QueryDAO {
                 String address2 = rs.getString("ADDRESS2");
                 String zipcode = rs.getString("ZIPCODE");
                 String userLevel = rs.getString("USER_LEVEL");
-                String termAgree = rs.getString("TERMS_AGREE");
+                String termAgree = rs.getString("TERMCHECK");
                 Timestamp createDate = rs.getTimestamp("CREATED_AT");
                 member.add(new Members(id, name, mobile, email, zipcode, address1, address2, userLevel, termAgree,
                         createDate));
@@ -70,7 +72,6 @@ public class QueryDAO {
         }
         return member;
     }
-
 
     public List<Orders> selectOrderByUser(String id, String type) {
         List<Orders> orders = new ArrayList<>();
@@ -100,6 +101,8 @@ public class QueryDAO {
     }
 
     public List<Board> selectBoardByUser(String id, String type) {
+        // type = A:자유, B:문의, C:비밀글, D후기
+
         List<Board> board = new ArrayList<>();
 
         try (Connection connection = DatabaseConnectionPool.getConnection();
@@ -118,9 +121,9 @@ public class QueryDAO {
                 String rep_y = rs.getString("REPLY_OK");
 
                 Date time = rs.getDate("TIME");
-                int cnt = rs.getInt("COUNT");
+                int cnt = rs.getInt("CNT");
                 int pw = rs.getInt("PW");
-                // String name = rs.getString("name");
+                // String typ = rs.getString("type");
                 board.add(new Board(boardNum, sunb, cont, rep, rep_y, type, id, time, cnt, pw));
 
             }

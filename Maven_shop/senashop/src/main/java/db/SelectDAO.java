@@ -1,4 +1,5 @@
 package db;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+
 //0729-이순빈-취약한 Statement 쿼리 조회 환경 구성 미사용 중
 public class SelectDAO {
     public List<Map<String, Object>> fetchAllData(String table, String id) {
@@ -36,6 +38,7 @@ public class SelectDAO {
         }
         return resultData;
     }
+
     public List<Map<String, Object>> fetchInData(String table, String id, String type) {
         List<Map<String, Object>> resultData = new ArrayList<>();
         try (Connection conn = DatabaseConnectionPool.getConnection()) {
@@ -61,6 +64,5 @@ public class SelectDAO {
         }
         return resultData;
     }
-
 
 }
