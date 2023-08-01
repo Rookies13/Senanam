@@ -25,6 +25,8 @@ public class joinServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
 
         Properties props = new Properties();
@@ -87,14 +89,13 @@ public class joinServlet extends HttpServlet {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DriverManager.getConnection(DB_URL, props);
             stmt = conn.createStatement();
-
             String sql = "INSERT INTO member (ID, PASSWD, NAME, EMAIL, MOBILE, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMCHECK, CREATED_AT) "
                     + "VALUES ('" + ID + "', '" + PASSWD + "', '" + NAME + "', '" + EMAIL + "', '" + MOBILE + "', '"
                     + ZIPCODE
                     + "', '" + ADDRESS1 + "', '" + ADDRESS2 + "', '" + USER_LEVEL + "', '" + TERMCHECK + "', '"
                     + CREATED_AT + "')";
-            stmt.executeUpdate(sql);
 
+            stmt.executeUpdate(sql);
             out.println("<script>");
             out.println("alert('회원 가입이 완료되었습니다!');");
             out.println("window.location.href='index.jsp';");
