@@ -84,14 +84,16 @@
 		</header>
 
 	<!-- Nav -->
-		<nav id="menu">
-			<ul class="links">
-				<li><a href="index.jsp">Home</a></li>
-				<li><a href="mypage.jsp">마이페이지</a></li>
-				<li><a href="elements.html">Elements</a></li>
-                <li><a href="LoginServlet">Elements</a></li>
-			</ul>
-		</nav>
+    <nav id="menu">
+      <ul class="links">
+        <li><a href="index.jsp">Home</a></li>
+        <li><a href="mypage.jsp">마이페이지</a></li>
+        <li><a href="">상품검색</a></li>
+        <li><a href="">장바구니</a></li>
+        <li><a href="boardList.jsp">문의게시판</a></li>
+        <li><a href="qna.jsp">Q&A</a></li>
+      </ul>
+    </nav>
 
     <div class="wrap">
         <div class="greenContainer">

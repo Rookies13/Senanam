@@ -43,7 +43,7 @@ String name = (String)session.getAttribute("user_name");
             <li><a href="mypage.jsp">마이페이지</a></li>
             <li><a href="">상품검색</a></li>
             <li><a href="">장바구니</a></li>
-            <li><a href="">문의게시판</a></li>
+            <li><a href="boardList.jsp">문의게시판</a></li>
             <li><a href="qna.jsp">Q&A</a></li>
         </ul>
     </nav>

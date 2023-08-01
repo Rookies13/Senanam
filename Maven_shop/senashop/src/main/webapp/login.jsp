@@ -32,16 +32,16 @@
 		</header>
 
 	<!-- Nav -->
-		<nav id="menu">
-			<ul class="links">
-				<li><a href="index.jsp">Home</a></li>
-				<li><a href="mypage.jsp">마이페이지</a></li>
-				<li><a href="">상품검색</a></li>
-				<li><a href="">장바구니</a></li>
-				<li><a href="">문의게시판</a></li>
-				<li><a href="qna.jsp">Q&A</a></li>
-			</ul>
-		</nav>
+	<nav id="menu">
+		<ul class="links">
+			<li><a href="index.jsp">Home</a></li>
+			<li><a href="mypage.jsp">마이페이지</a></li>
+			<li><a href="">상품검색</a></li>
+			<li><a href="">장바구니</a></li>
+			<li><a href="boardList.jsp">문의게시판</a></li>
+			<li><a href="qna.jsp">Q&A</a></li>
+		</ul>
+	</nav>
 		<!-- Header -->
 		<section id="main">
 
@@ -58,7 +58,7 @@
                             <input type="password" name="pw" placeholder="비밀번호">
                         </div>
                         <div class="join_user">
-                            <a href="terms.jsp" sytle="color:white">회원가입 페이지</a>
+                            <a href="회원가입페이지" sytle="color:white">회원가입 페이지</a>
                         </div>
                         <div class="submit">
                             <button type="submit" value="submit">로그인</button>
