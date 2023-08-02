@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.sql.Connection,java.sql.DriverManager,java.sql.PreparedStatement" %>
+<%@ page import="java.io.IOException" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +9,11 @@
     <title>쇼핑몰 관리자 페이지 - 댓글 작성</title>
 </head>
 <body>
+    <% request.setCharacterEncoding("utf-8"); %>
     <h1>쇼핑몰 관리자 페이지 - 댓글 작성</h1>
-
+    
     <%-- 댓글 작성 폼 시작 --%>
-    <form action="admin_add_comment.jsp" method="post">
+    <form action="admin_add_comment.jsp" method="post" accept-charset="UTF-8">
         <input type="hidden" name="BOARD_NUMBER" value="<%= request.getParameter("BOARD_NUMBER") %>">
         <label for="REPLY">댓글:</label>
         <textarea id="REPLY" name="REPLY" rows="4" cols="50" required></textarea><br>
@@ -20,14 +22,13 @@
     <%-- 댓글 작성 폼 끝 --%>
 
     <%-- 댓글 추가 처리 시작 --%>
-    <%@ page import="java.io.IOException" %>
     <%
     // 댓글 추가 처리
     if (request.getMethod().equals("POST")) {
         // 데이터베이스 연결 정보 설정
-        String dbURL = "jdbc:oracle:thin:@//localhost:1521/xe";
-        String dbUser = "c##root";
-        String dbPassword = "1234";
+        String dbURL = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521/orcl";
+        String dbUser = "admin";
+        String dbPassword = "12345678";
 
         Connection conn = null;
         PreparedStatement pstmt = null;
@@ -40,6 +41,7 @@
             conn = DriverManager.getConnection(dbURL, dbUser, dbPassword);
 
             // 전달받은 댓글 정보 가져오기
+            //response.setCharacterEncoding("UTF-8");
             int boardNumber = Integer.parseInt(request.getParameter("BOARD_NUMBER"));
             String reply = request.getParameter("REPLY");
 
@@ -52,6 +54,8 @@
 
             if (rowsAffected > 0) {
                 // 댓글 추가 성공 메시지 출력
+                out.println("dfsdf");
+                out.println("<p>" + reply + "</p>");
                 out.println("<p style=\"color: green;\">댓글이 성공적으로 추가되었습니다.</p>");
             } else {
                 // 댓글 추가 실패 메시지 출력

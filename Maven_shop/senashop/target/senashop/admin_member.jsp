@@ -12,14 +12,14 @@
 
     <%-- 회원 추가 처리 시작 --%>
     <% if (request.getMethod().equals("POST") && request.getParameter("action").equals("add")) {
-        String username = request.getParameter("username");
+        String id = request.getParameter("id");
         String email = request.getParameter("email");
-        int mem_level = Integer.parseInt(request.getParameter("mem_level"));
+        int user_level = Integer.parseInt(request.getParameter("user_level"));
 
         // 데이터베이스 연결 정보 설정
-        String dbURL = "jdbc:oracle:thin:@//localhost:1521/xe";
-        String dbUser = "c##root";
-        String dbPassword = "1234";
+        String dbURL = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521/orcl";
+        String dbUser = "admin";
+        String dbPassword = "12345678";
 
         Connection conn = null;
         Statement stmt = null;
@@ -33,7 +33,7 @@
 
             // SQL 쿼리 실행 (회원 추가)
             stmt = conn.createStatement();
-            String sqlQuery = "INSERT INTO reg_members (username, email, mem_level) VALUES ('" + username + "', '" + email + "', " + mem_level + ")";
+            String sqlQuery = "INSERT INTO member (id, email, user_level) VALUES ('" + id + "', '" + email + "', " + user_level + ")";
             stmt.executeUpdate(sqlQuery);
 
             // 회원 추가 성공 메시지 출력
@@ -52,9 +52,9 @@
     <%-- 회원 목록 조회 시작 --%>
     <%
     // 데이터베이스 연결 정보 설정
-        String dbURL = "jdbc:oracle:thin:@//localhost:1521/xe";
-        String dbUser = "c##root";
-        String dbPassword = "1234";
+        String dbURL = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521/orcl";
+        String dbUser = "admin";
+        String dbPassword = "12345678";
 
     Connection conn = null;
     Statement stmt = null;
@@ -69,7 +69,7 @@
 
         // SQL 쿼리 실행 (회원 목록 조회)
         stmt = conn.createStatement();
-        String sqlQuery = "SELECT * FROM reg_members";
+        String sqlQuery = "SELECT * FROM member";
         rs = stmt.executeQuery(sqlQuery);
 
         // 회원 목록 테이블 출력
@@ -77,17 +77,17 @@
     <h2>회원 목록</h2>
     <table border="1">
         <tr>
-            <th>사용자 이름</th>
+            <th>사용자 ID</th>
             <th>이메일</th>
             <th>권한</th>
             <th>수정</th>
         </tr>
         <% while (rs.next()) { %>
         <tr>
-            <td><%= rs.getString("username") %></td>
+            <td><%= rs.getString("id") %></td>
             <td><%= rs.getString("email") %></td>
-            <td><%= rs.getInt("mem_level") %></td>
-            <td><a href="#" onclick="editMember('<%= rs.getString("username") %>', '<%= rs.getString("email") %>', <%= rs.getInt("mem_level") %>)">수정</a></td>
+            <td><%= rs.getInt("user_level") %></td>
+            <td><a href="#" onclick="editMember('<%= rs.getString("id") %>', '<%= rs.getString("email") %>', <%= rs.getInt("user_level") %>)">수정</a></td>
         </tr>
         <% } %>
     </table>
@@ -107,17 +107,17 @@
     <h2>회원 정보 수정</h2>
     <form action="" method="post" id="editForm" style="display: none;">
         <input type="hidden" name="action" value="edit">
-        <input type="hidden" name="username" id="editUsername">
+        <input type="hidden" name="id" id="editid">
         <label for="editEmail">이메일:</label>
         <input type="email" id="editEmail" name="email" required><br>
         <label for="editMemLevel">권한(사용자: 0, 관리자: 1):</label>
-        <input type="number" id="editMemLevel" name="mem_level" required><br>
+        <input type="number" id="editMemLevel" name="user_level" required><br>
         <input type="submit" value="수정">
     </form>
 
     <script>
-        function editMember(username, email, memLevel) {
-            document.getElementById("editUsername").value = username;
+        function editMember(id, email, memLevel) {
+            document.getElementById("editid").value = id;
             document.getElementById("editEmail").value = email;
             document.getElementById("editMemLevel").value = memLevel;
             document.getElementById("editForm").style.display = "block";
@@ -134,14 +134,14 @@
 
     <%-- 회원 정보 수정 처리 시작 --%>
     <% if (request.getMethod().equals("POST") && request.getParameter("action").equals("edit")) {
-        String username = request.getParameter("username");
+        String id = request.getParameter("id");
         String email = request.getParameter("email");
-        int mem_level = Integer.parseInt(request.getParameter("mem_level"));
+        int user_level = Integer.parseInt(request.getParameter("user_level"));
 
         // 데이터베이스 연결 정보 설정
-        dbURL = "jdbc:oracle:thin:@//localhost:1521/xe";
-        dbUser = "c##root";
-        dbPassword = "1234";
+        dbURL = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521/orcl";
+        dbUser = "admin";
+        dbPassword = "12345678";
 
         conn = null;
         stmt = null;
@@ -155,7 +155,7 @@
 
             // SQL 쿼리 실행 (회원 정보 수정)
             stmt = conn.createStatement();
-            String sqlQuery = "UPDATE reg_members SET email = '" + email + "', mem_level = " + mem_level + " WHERE username = '" + username + "'";
+            String sqlQuery = "UPDATE member SET email = '" + email + "', user_level = " + user_level + " WHERE id = '" + id + "'";
             stmt.executeUpdate(sqlQuery);
 
             // 회원 정보 수정 성공 메시지 출력
@@ -175,12 +175,12 @@
     <h2>회원 추가</h2>
     <form action="" method="post">
         <input type="hidden" name="action" value="add">
-        <label for="username">사용자 이름:</label>
-        <input type="text" id="username" name="username" required><br>
+        <label for="id">사용자 이름:</label>
+        <input type="text" id="id" name="id" required><br>
         <label for="email">이메일:</label>
         <input type="email" id="email" name="email" required><br>
-        <label for="mem_level">권한(사용자: 0, 관리자: 1):</label>
-        <input type="number" id="mem_level" name="mem_level" required><br>
+        <label for="user_level">권한(사용자: 0, 관리자: 1):</label>
+        <input type="number" id="user_level" name="user_level" required><br>
         <input type="submit" value="추가">
     </form>
     <%-- 회원 추가 폼 끝 --%>

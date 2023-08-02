@@ -12,21 +12,12 @@
 
     <%-- 문의 게시글 조회 및 댓글 작성 시작 --%>
     <section>
-        <%!
-        // HTML 특수 문자를 이스케이프하는 헬퍼 함수
-        public String escapeHTML(String str) {
-            if (str == null) {
-                return "";
-            }
-            return str.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace("\"", "&quot;");
-        }
-        %>
-
+        
         <%
         // 데이터베이스 연결 정보 설정
-        String dbURL = "jdbc:oracle:thin:@//localhost:1521/xe";
-        String dbUser = "c##root";
-        String dbPassword = "1234";
+        String dbURL = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521/orcl";
+        String dbUser = "admin";
+        String dbPassword = "12345678";
 
         Connection conn = null;
         Statement stmt = null;
@@ -39,9 +30,9 @@
             // 데이터베이스 연결
             conn = DriverManager.getConnection(dbURL, dbUser, dbPassword);
 
-            // SQL 쿼리 실행 (문의 게시글 조회 - type이 2인 경우)
+            // SQL 쿼리 실행 (문의 게시글 조회 - type이 'B'인 경우)
             stmt = conn.createStatement();
-            String sqlQuery = "SELECT BOARD_NUMBER, SUBJECT, REPLY FROM board WHERE TYPE = 2";
+            String sqlQuery = "SELECT BOARD_NUMBER, SUBJECT, CONTENT, REPLY FROM board WHERE TYPE = 'B'";
             rs = stmt.executeQuery(sqlQuery);
 
             // 문의 게시글 테이블 출력
@@ -50,16 +41,16 @@
                 <tr>
                     <th>게시글 번호</th>
                     <th>제목</th>
-                    <th>댓글</th>
+                    <th>글 내용</th>
                     <th>댓글 작성</th>
                 </tr>
                 <% while (rs.next()) { %>
                 <tr>
                     <td><%= rs.getInt("BOARD_NUMBER") %></td>
-                    <td><%= escapeHTML(rs.getString("SUBJECT")) %></td>
-                    <td><%= escapeHTML(rs.getString("REPLY")) %></td>
+                    <td><%= rs.getString("SUBJECT") %></td>
+                    <td><%= rs.getString("CONTENT") %></td>
                     <td>
-                        <% if (rs.getString("REPLY") == null || rs.getString("REPLY").isEmpty()) { %>
+                        <% if (rs.getString("REPLY") == null || rs.getString("REPLY") == "" || rs.getString("REPLY").trim().equals(" ")) { %>
                             <a href="admin_add_comment.jsp?BOARD_NUMBER=<%= rs.getInt("BOARD_NUMBER") %>">댓글 작성</a>
                         <% } else { %>
                             이미 작성된 댓글
