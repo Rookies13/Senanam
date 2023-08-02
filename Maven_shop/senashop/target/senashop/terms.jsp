@@ -96,7 +96,7 @@
             <br>
 
             <label>
-                <input type="checkbox" name="privacy_agree" value="true" style="appearance: checkbox; -webkit-appearance: checkbox; -moz-appearance: checkbox; margin-right: 5px; background-color: black; border: 1px solid black; opacity: 0; width: 16px; height: 16px;">
+                <input type="checkbox" name="terms_agree" value="true" style="appearance: checkbox; -webkit-appearance: checkbox; -moz-appearance: checkbox; margin-right: 5px; background-color: black; border: 1px solid black; width: 16px; height: 16px;">
                 동의합니다
             </label>
         </div>
