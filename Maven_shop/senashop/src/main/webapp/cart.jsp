@@ -8,6 +8,13 @@
 -->
 <html>
 	<head>
+        <script>
+            if(!<%=
+            session.getAttribute("user_id")%>) {
+              alert("로그인 후 이용해주세요.");
+              location.href="login.jsp";
+            }
+          </script>
 		<title>세나샵</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -76,13 +83,16 @@
 			</header>
 
 		<!-- Nav -->
-			<nav id="menu">
-				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="generic.html">Generic</a></li>
-					<li><a href="elements.html">Elements</a></li>
-				</ul>
-			</nav>
+        <nav id="menu">
+			<ul class="links">
+				<li><a href="index.jsp">Home</a></li>
+				<li><a href="mypage.jsp">마이페이지</a></li>
+				<li><a href="productsearch.jsp">상품검색</a></li>
+				<li><a href="cart.jsp">장바구니</a></li>
+				<li><a href="boardList.jsp">문의게시판</a></li>
+				<li><a href="qna.jsp">Q&A</a></li>
+			</ul>
+		</nav>
 <!--기능구현-->
     <h1>장바구니</h1>
     <p>사용자 이름: <%= userId %></p>

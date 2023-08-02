@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%
+	String id = (String)session.getAttribute("user_id");
+	String name = (String)session.getAttribute("user_name");
+    %>
 <!DOCTYPE HTML>
 <!--
     Binary by TEMPLATED
@@ -16,19 +20,28 @@
 
     <!-- Header -->
     <header id="header">
-        <a href="index.html" class="logo"><strong>세 나</strong> shop</a>
+        <a href="index.jsp" class="logo"><strong>세 나</strong> shop</a>
         <nav>
+            <% if(id != null) {%>
+            <!--<a href="logout.jsp"> <%= id%> 로그아웃</a>-->
+            <a href="LogoutServlet"> <%= id%> 로그아웃</a>
+            <% } else { %>
+            <a href="login.jsp">로그인</a>
+            <% } %>
             <a href="#menu">Menu</a>
         </nav>
     </header>
 
-    <!-- Nav -->
+<!-- Nav -->
     <nav id="menu">
-        <ul class="links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="generic.html">Generic</a></li>
-            <li><a href="elements.html">Elements</a></li>
-        </ul>
+    <ul class="links">
+        <li><a href="index.jsp">Home</a></li>
+        <li><a href="mypage.jsp">마이페이지</a></li>
+        <li><a href="productsearch.jsp">상품검색</a></li>
+        <li><a href="cart.jsp">장바구니</a></li>
+        <li><a href="boardList.jsp">문의게시판</a></li>
+        <li><a href="qna.jsp">Q&A</a></li>
+    </ul>
     </nav>
 
     <!-- 기능구현 -->
@@ -76,7 +89,6 @@
                                 if (orderNumberParam != null && !orderNumberParam.isEmpty()) {
                                     // 주문번호 파라미터가 있을 경우 해당 주문번호로 검색
                                     odn = orderNumberParam;
-                                    out.print(odn);
                                     sqlQuery = "SELECT * FROM ORDER_PRODUCT WHERE ORDER_NUMBER = ?";
                                     pstmt = conn.prepareStatement(sqlQuery);
                                     pstmt.setString(1, orderNumberParam);

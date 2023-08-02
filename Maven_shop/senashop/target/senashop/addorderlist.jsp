@@ -49,7 +49,7 @@ try {
         out.println("<script>");
         out.println("var totalPrice = '" + totalPrice + "';");
         out.println("alert(totalPrice + '원 결제 완료');");
-        out.println("location.href='index.html';"); // index.jsp로 리다이렉트
+        out.println("location.href='index.jsp';"); // index.jsp로 리다이렉트
         out.println("</script>");
     } else {
         out.println("Failed to insert data.");

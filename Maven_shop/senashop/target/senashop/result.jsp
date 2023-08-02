@@ -13,19 +13,22 @@
     <title>Search Result</title>
 </head>
 <body>
+    <h2>검색 결과:</h2>
     <%-- 입력받은 CART_NUM들을 ","로 분리하여 리스트로 저장 --%>
     <%
     String cartNums = request.getParameter("CART_NUMBER");
+    if (cartNums == ""){
+        response.sendRedirect("cart.jsp");
+    }
+    
+    else{
+
     String[] cartNumArray = cartNums.split(",");
     List<String> cartNumList = new ArrayList<>();
     for (String cartNum : cartNumArray) {
         cartNumList.add(cartNum.trim());
     }
-    %>
 
-    <%-- 데이터베이스 연동하여 검색 결과를 ORDER_PRODUCT 테이블에 삽입 --%>
-    <h2>검색 결과:</h2>
-    <%
     String jdbcUrl="jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl";
     String dbUser = "admin";
     String dbPassword = "12345678";
@@ -85,6 +88,7 @@
         try { if (connection != null) connection.close(); } catch (Exception e) { }
     }
     response.sendRedirect("order.jsp?order_num=" + uniqueId);
+}
     %>
     
 </body>
