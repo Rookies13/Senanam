@@ -88,7 +88,7 @@
                         Class.forName("oracle.jdbc.driver.OracleDriver"); //driver
                         conn = DriverManager.getConnection("jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin", "12345678");
                         
-                        String sql = "SELECT * FROM board WHERE board_number = " + board_number;
+                        String sql = "select * from board, attachment where board.board_number=attachment.board_number(+) and board.board_number = " + board_number;
                         pstmt = conn.prepareStatement(sql); 
                         rs = pstmt.executeQuery();
 
@@ -107,6 +107,15 @@
                                     <td><%=rs.getDate("time") %></td>
                                 </tr>
                                 
+                                <%
+                                String temp_name = rs.getString("name");
+                                if( temp_name != null){
+                                    out.print("<tr><td width=\"20%\">파일</td>");
+                                    out.print("<td colspan=\"3\" onClick=\"location.href=\"\"\" style=\"cursor:pointer;\">");
+                                    out.print(temp_name);
+                                }
+                                %>
+                                </td></tr>
                             </table>
                         </div>
                         <pre><code><%=rs.getString("content") %></code> </pre>
@@ -122,7 +131,8 @@
                         <input type="button" onclick="location.href='<%=link%>'" value="수정">
                         
                         <input type="button" onclick="deletePost('<%=board_number%>')" value="삭제">
-                        <%}
+                        <%
+                        }
                         rs.close();
                         pstmt.close();
                         conn.close();
