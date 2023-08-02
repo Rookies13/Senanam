@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/css/main.css" />
-    <title>쇼핑몰 관리자 페이지 - 회원 관리</title>
+    <title>SENASHOP 관리자 페이지 - 회원 관리</title>
 </head>
 <body>
-    <h1>쇼핑몰 관리자 페이지 - 회원 관리</h1>
+    <h1>SENASHOP 관리자 페이지 - 회원 관리</h1>
 
     <%-- 회원 추가 처리 시작 --%>
     <% if (request.getMethod().equals("POST") && request.getParameter("action").equals("add")) {

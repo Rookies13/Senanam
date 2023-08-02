@@ -6,11 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/css/main.css" />
-    <title>쇼핑몰 관리자 페이지 - 댓글 작성</title>
+    <title>SENASHOP 관리자 페이지 - 댓글 작성</title>
 </head>
 <body>
     <% request.setCharacterEncoding("utf-8"); %>
-    <h1>쇼핑몰 관리자 페이지 - 댓글 작성</h1>
+    <h1>SENASHOP 관리자 페이지 - 댓글 작성</h1>
     
     <%-- 댓글 작성 폼 시작 --%>
     <form action="admin_add_comment.jsp" method="post" accept-charset="UTF-8">

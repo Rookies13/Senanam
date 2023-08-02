@@ -42,7 +42,7 @@
                     <th>게시글 번호</th>
                     <th>제목</th>
                     <th>글 내용</th>
-                    <th>댓글 작성</th>
+                    <th>댓글 작성 여부</th>
                 </tr>
                 <% while (rs.next()) { %>
                 <tr>
