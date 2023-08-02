@@ -54,8 +54,6 @@
 
             if (rowsAffected > 0) {
                 // 댓글 추가 성공 메시지 출력
-                out.println("dfsdf");
-                out.println("<p>" + reply + "</p>");
                 out.println("<p style=\"color: green;\">댓글이 성공적으로 추가되었습니다.</p>");
             } else {
                 // 댓글 추가 실패 메시지 출력
