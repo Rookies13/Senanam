@@ -13,9 +13,9 @@
     <%
     if (request.getMethod().equals("POST")) {
         // 데이터베이스 연결 정보 설정
-        String dbURL = "jdbc:oracle:thin:@//localhost:1521/xe";
-        String dbUser = "c##root";
-        String dbPassword = "1234";
+        String dbURL = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521/orcl";
+        String dbUser = "admin";
+        String dbPassword = "12345678";
 
         Connection conn = null;
         PreparedStatement pstmt = null;

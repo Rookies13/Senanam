@@ -24,9 +24,9 @@
 
         <%
         // 데이터베이스 연결 정보 설정
-        String dbURL = "jdbc:oracle:thin:@//localhost:1521/xe";
-        String dbUser = "c##root";
-        String dbPassword = "1234";
+        String dbURL = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521/orcl";
+        String dbUser = "admin";
+        String dbPassword = "12345678";
 
         Connection conn = null;
         Statement stmt = null;
@@ -39,9 +39,9 @@
             // 데이터베이스 연결
             conn = DriverManager.getConnection(dbURL, dbUser, dbPassword);
 
-            // SQL 쿼리 실행 (문의 게시글 조회 - type이 2인 경우)
+            // SQL 쿼리 실행 (문의 게시글 조회 - type이 'B'인 경우)
             stmt = conn.createStatement();
-            String sqlQuery = "SELECT BOARD_NUMBER, SUBJECT, REPLY FROM board WHERE TYPE = 2";
+            String sqlQuery = "SELECT BOARD_NUMBER, SUBJECT, REPLY FROM board WHERE TYPE = 'B'";
             rs = stmt.executeQuery(sqlQuery);
 
             // 문의 게시글 테이블 출력

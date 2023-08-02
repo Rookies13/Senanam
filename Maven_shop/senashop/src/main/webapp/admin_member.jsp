@@ -17,9 +17,9 @@
         int mem_level = Integer.parseInt(request.getParameter("mem_level"));
 
         // 데이터베이스 연결 정보 설정
-        String dbURL = "jdbc:oracle:thin:@//localhost:1521/xe";
-        String dbUser = "c##root";
-        String dbPassword = "1234";
+        String dbURL = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521/orcl";
+        String dbUser = "admin";
+        String dbPassword = "12345678";
 
         Connection conn = null;
         Statement stmt = null;
@@ -52,9 +52,9 @@
     <%-- 회원 목록 조회 시작 --%>
     <%
     // 데이터베이스 연결 정보 설정
-        String dbURL = "jdbc:oracle:thin:@//localhost:1521/xe";
-        String dbUser = "c##root";
-        String dbPassword = "1234";
+        String dbURL = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521/orcl";
+        String dbUser = "admin";
+        String dbPassword = "12345678";
 
     Connection conn = null;
     Statement stmt = null;
@@ -139,9 +139,9 @@
         int mem_level = Integer.parseInt(request.getParameter("mem_level"));
 
         // 데이터베이스 연결 정보 설정
-        dbURL = "jdbc:oracle:thin:@//localhost:1521/xe";
-        dbUser = "c##root";
-        dbPassword = "1234";
+        dbURL = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521/orcl";
+        dbUser = "admin";
+        dbPassword = "12345678";
 
         conn = null;
         stmt = null;
