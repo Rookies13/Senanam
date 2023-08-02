@@ -205,9 +205,11 @@ public class QueryDAO {
     // 수정
     public boolean updateUser(Members user) {
         boolean rowUpdated = false;
+        // String id = (string) session.getAttribute("user_id");
         try (Connection connection = DatabaseConnectionPool.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USERS_SQL);) {
-
+            // "UPDATE MEMBER SET name= ?, mobile= ?, email= ?, zipcode= ?, address1= ?,
+            // address2= ? WHERE id= ?"
             preparedStatement.setString(1, user.getNm());
             preparedStatement.setString(2, user.getMb());
             preparedStatement.setString(3, user.getEm());

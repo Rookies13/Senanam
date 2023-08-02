@@ -11,6 +11,10 @@
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 %>
+<%
+	String id = (String)session.getAttribute("user_id");
+	String name = (String)session.getAttribute("user_name");
+%>
 <!--
 	Binary by TEMPLATED
 	templated.co @templatedco
@@ -48,23 +52,31 @@
         </script>
 
 		<!-- Header -->
-			<header id="header">
-				<a href="index.html" class="logo"><strong>세 나</strong> shop</a>
-				<nav>
-					<a href="#menu">Menu</a>
-				</nav>
-
-			</header>
-
-		<!-- Nav -->
-			<nav id="menu">
-				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="generic.html">Generic</a></li>
-					<li><a href="elements.html">Elements</a></li>
-					<li><a href="boardList.jsp">게시판</a></li>
-				</ul>
+        <header id="header">
+			<a href="index.jsp" class="logo"><strong>세 나</strong> shop</a>
+			<nav>
+				<% if(id != null) {%>
+				<!--<a href="logout.jsp"> <%= id%> 로그아웃</a>-->
+                <a href="LogoutServlet"> <%= id%> 로그아웃</a>
+				<% } else { %>
+				<a href="login.jsp">로그인</a>
+				<% } %>
+				<a href="#menu">Menu</a>
 			</nav>
+
+		</header>
+
+	<!-- Nav -->
+		<nav id="menu">
+			<ul class="links">
+				<li><a href="index.jsp">Home</a></li>
+				<li><a href="mypage.jsp">마이페이지</a></li>
+				<li><a href="">상품검색</a></li>
+				<li><a href="">장바구니</a></li>
+				<li><a href="boardList.jsp">문의게시판</a></li>
+				<li><a href="qna.jsp">Q&A</a></li>
+			</ul>
+		</nav>
 
             <section id="main">
                 <div class="inner">
@@ -102,10 +114,15 @@
                         <%
                         int boardNumber = rs.getInt("board_number");
                         String link = "boardEdit.jsp?board_number=" + boardNumber;
+                        sql = "SELECT * FROM board WHERE id = '" + id +"'";
+                        pstmt = conn.prepareStatement(sql); 
+                        rs = pstmt.executeQuery();
+                        if(rs.next()){
                         %>
                         <input type="button" onclick="location.href='<%=link%>'" value="수정">
+                        
                         <input type="button" onclick="deletePost('<%=board_number%>')" value="삭제">
-                        <%
+                        <%}
                         rs.close();
                         pstmt.close();
                         conn.close();

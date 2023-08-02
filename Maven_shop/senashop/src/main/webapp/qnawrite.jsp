@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="assets/css/main.css" />
 </head>
-<body style="background-color: rgb(74, 74, 88);">
+<body style="background-color: rgb(255, 255, 255);">
     <header id="header">
         <a href="index.jsp" class="logo"><strong>세 나</strong> shop</a>
         <nav>

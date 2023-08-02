@@ -58,7 +58,7 @@
                             <input type="password" name="pw" placeholder="비밀번호">
                         </div>
                         <div class="join_user">
-                            <a href="회원가입페이지" sytle="color:white">회원가입 페이지</a>
+                            <a href="terms.jsp" sytle="color:white">회원가입 페이지</a>
                         </div>
                         <div class="submit">
                             <button type="submit" value="submit">로그인</button>

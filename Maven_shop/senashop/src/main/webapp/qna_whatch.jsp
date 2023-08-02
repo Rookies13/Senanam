@@ -22,7 +22,7 @@ String name = (String)session.getAttribute("user_name");
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="assets/css/main.css" />
 </head>
-<body style="background-color: rgb(74, 74, 88);">
+<body style="background-color: rgb(255, 255, 255);">
     <header id="header">
         <a href="index.jsp" class="logo"><strong>세 나</strong> shop</a>
         <nav>
@@ -103,7 +103,7 @@ String name = (String)session.getAttribute("user_name");
             // Update the count_a value in the board table
             int currentCount = rsBoard.getInt("cnt");
             int newCount = currentCount + 1;
-            String updateCountSQL = "UPDATE board SET count_a = ? WHERE board_number = ?";
+            String updateCountSQL = "UPDATE board SET cnt = ? WHERE board_number = ?";
             pstmtBoard = conn.prepareStatement(updateCountSQL);
             pstmtBoard.setInt(1, newCount);
             pstmtBoard.setInt(2, qnanumber);

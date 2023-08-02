@@ -22,6 +22,13 @@
 -->
 <html>
 	<head>
+		<script>
+			if(!<%=
+			session.getAttribute("user_id")%>) {
+			  alert("로그인 후 이용해주세요.");
+			  location.href="login.jsp";
+			}
+		  </script>
 		<title>세나샵</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />

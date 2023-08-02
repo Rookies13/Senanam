@@ -26,7 +26,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
-	<body style="background-color: rgb(74, 74, 88);">
+	<body style="background-color: rgb(255, 255, 255);">
 		<header id="header">
 			<a href="index.jsp" class="logo"><strong>세 나</strong> shop</a>
 			<nav>
@@ -71,7 +71,7 @@
 					try{
 						Class.forName("oracle.jdbc.driver.OracleDriver"); //driver
 						conn = DriverManager.getConnection("jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin", "12345678"); //username, password는 개인 Oracle 계정의 것으로 하면 됨
-						String sql = "select * from board where type='B' order by board_number desc"; //DB를 조회할 select문
+						String sql = "select * from board where type='B'and id = '" + id +"' order by board_number desc"; //DB를 조회할 select문
 						pstmt = conn.prepareStatement(sql); //sql문으로 conn
 						rs = pstmt.executeQuery(); //pstmt 실행 후 결과를 rs에 할당
 

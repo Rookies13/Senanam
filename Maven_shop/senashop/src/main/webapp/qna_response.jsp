@@ -13,7 +13,7 @@
     String subject = request.getParameter("subject");
     String content = request.getParameter("content");
 
-     if (subject == null || subject.trim().isEmpty() || content == null || content.trim().isEmpty()) {
+     if (subject == null || subject.trim().isEmpty() || content == null || content.trim().isEmpty() || id==null  )   {
         // Display an alert using JavaScript
         response.setContentType("text/html");
         out.println("<script type=\"text/javascript\">");
