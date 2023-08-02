@@ -45,7 +45,7 @@ public class joinServlet extends HttpServlet {
         String ZIPCODE = request.getParameter("zipcode");
         String ADDRESS1 = request.getParameter("address1");
         String ADDRESS2 = request.getParameter("address2");
-        String USER_LEVEL = request.getParameter("user_level");
+        int USER_LEVEL = Integer.parseInt(request.getParameter("user_level"));
         String TERMCHECK = request.getParameter("termCheck");
         Timestamp CREATED_AT = new Timestamp(new Date().getTime());
 

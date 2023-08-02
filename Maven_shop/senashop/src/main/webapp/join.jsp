@@ -40,7 +40,7 @@
 
         <input type="submit" value="가입하기">
 
-        <input type="hidden" id="user_level" name="user_level" value="Regular"><br>
+        <input type="hidden" id="user_level" name="user_level" value="0"><br>
 
         <input type="hidden" id="termCheck" name="termCheck" value="<%= session.getAttribute("termCheck") != null ? session.getAttribute("termCheck") : "N" %>"><br>
     </form>
