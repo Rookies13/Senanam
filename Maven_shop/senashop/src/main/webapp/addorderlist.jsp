@@ -16,10 +16,10 @@ String address = request.getParameter("address");
 String zipcode = request.getParameter("zipcode");
 
 // 데이터베이스 접속 정보 설정
-String dbUrl = "jdbc:oracle:thin:@localhost:1521:xe"; // 오라클 서버 주소와 포트번호
-String dbUser = "C##junho"; // 오라클 계정 사용자명
-String dbPassword = "1234"; // 오라클 계정 비밀번호
-
+String dbUrl = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl"; // 오라클 서버 주소와 포트번호
+String dbUser = "admin"; // 오라클 계정 사용자명
+String dbPassword = "12345678"; // 오라클 계정 비밀번호
+String userId = (String) session.getAttribute("user_id");
 Connection conn = null;
 PreparedStatement pstmt = null;
 
@@ -31,14 +31,13 @@ try {
     conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
     // INSERT 쿼리 작성
-    String sqlQuery = "INSERT INTO ORDERLIST (ORDER_NUM, ID, TOTAL_PRICE, ADDRESS, ZIPCODE) VALUES (?, ?, ?, ?, ?)";
+    String sqlQuery = "INSERT INTO ORDER_TABLE (ORDER_NUMBER, ID, TOTAL_PRICE, ADDRESS, ZIPCODE) VALUES (?, ?, ?, ?, ?)";
     pstmt = conn.prepareStatement(sqlQuery);
     
     // INSERT 쿼리에 값들을 매핑
-
     out.print(orderNumber);
     pstmt.setString(1, orderNumber);
-    pstmt.setString(2, "testID"); // ID를 "testID"로 지정
+    pstmt.setString(2, userId); // ID를 "testID"로 지정
     pstmt.setInt(3, Integer.parseInt(totalPrice));
     pstmt.setString(4, address);
     pstmt.setInt(5, Integer.parseInt(zipcode));

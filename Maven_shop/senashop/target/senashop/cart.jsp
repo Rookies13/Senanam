@@ -38,9 +38,9 @@
     </style>
     <%
     String driver="oracle.jdbc.driver.OracleDriver";
-    String url="jdbc:oracle:thin:@localhost:1521:xe";
-    String id = "C##junho";
-    String pw = "1234";
+    String url="jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl";
+    String id = "admin";
+    String pw = "12345678";
     
     Connection con = null;
     Statement stmt = null;
@@ -51,11 +51,14 @@
         con = DriverManager.getConnection(url, id, pw);
         stmt = con.createStatement();
 
-        String userId = request.getParameter("USER_ID");
+        //String userId = request.getParameter("USER_ID");
+
+        String userId = (String) session.getAttribute("user_id");
+        
 
         if (userId != null && !userId.isEmpty()) {
             // 사용자 이름이 전달되었을 경우에만 데이터 조회 및 표시
-            String sql = "SELECT * FROM CART WHERE USER_ID = '" + userId + "'";
+            String sql = "SELECT * FROM CART_PRODUCT WHERE ID = '" + userId + "'";
             result = stmt.executeQuery(sql);
 
         
@@ -100,12 +103,12 @@
                 <%
                 while (result.next()) {
                   out.print("<tr>");
-                  out.print("<td>"+result.getString("CART_NUM")+"</td>");
-                  out.print("<td>"+result.getString("USER_ID")+"</td>");
+                  out.print("<td>"+result.getString("CART_NUMBER")+"</td>");
+                  out.print("<td>"+result.getString("ID")+"</td>");
                   out.print("<td>"+result.getString("PRODUCT_NUM")+"</td>");
                   out.print("<td>"+result.getString("PRODUCT_COUNT")+"</td>");
                   out.print("<td>"+result.getString("PRODUCT_PRICE")+"</td>");
-                  out.print("<td><input type=\"checkbox\" name=\"selectedItems\" value=\"" + result.getString("CART_NUM") + "\"></td>");
+                  out.print("<td><input type=\"checkbox\" name=\"selectedItems\" value=\"" + result.getString("CART_NUMBER") + "\"></td>");
                   out.print("</tr>");
                 }
                 %>
@@ -118,7 +121,7 @@
 
     <form action="result.jsp" method="get">
         <!-- CART_NUM을 전송하기 위한 숨은 필드(hidden input) 추가 -->
-        <input type="hidden" name="CART_NUM" id="CART_NUM" value="">
+        <input type="hidden" name="CART_NUMBER" id="CART_NUMBER" value="">
         <input type="button" value="구매하기" onclick="purchaseItems()">
     </form>
     
@@ -136,7 +139,7 @@
             }
     
             // CART_NUM의 값을 설정합니다.
-            document.getElementById("CART_NUM").value = selectedCartNum.join(",");
+            document.getElementById("CART_NUMBER").value = selectedCartNum.join(",");
     
             // 선택한 항목들의 값을 가지고 result.jsp로 폼을 전송합니다.
             document.forms[1].submit();

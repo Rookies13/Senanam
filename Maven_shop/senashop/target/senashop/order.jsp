@@ -52,9 +52,9 @@
                         <%@ page import="java.sql.*" %>
                         <%!
                             // 데이터베이스 접속 정보 설정
-                            String dbUrl = "jdbc:oracle:thin:@localhost:1521:xe"; // 오라클 서버 주소와 포트번호
-                            String dbUser = "C##junho"; // 오라클 계정 사용자명
-                            String dbPassword = "1234"; // 오라클 계정 비밀번호
+                            String dbUrl = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl"; // 오라클 서버 주소와 포트번호
+                            String dbUser = "admin"; // 오라클 계정 사용자명
+                            String dbPassword = "12345678"; // 오라클 계정 비밀번호
                             String odn;
                             int tp;
                         %>
@@ -71,16 +71,18 @@
                                 conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
                                 String orderNumberParam = request.getParameter("order_num");
+                                
                                 String sqlQuery;
                                 if (orderNumberParam != null && !orderNumberParam.isEmpty()) {
                                     // 주문번호 파라미터가 있을 경우 해당 주문번호로 검색
                                     odn = orderNumberParam;
-                                    sqlQuery = "SELECT * FROM order_product WHERE order_num = ?";
+                                    out.print(odn);
+                                    sqlQuery = "SELECT * FROM ORDER_PRODUCT WHERE ORDER_NUMBER = ?";
                                     pstmt = conn.prepareStatement(sqlQuery);
                                     pstmt.setString(1, orderNumberParam);
                                 } else {
                                     // 주문번호 파라미터가 없을 경우 모든 데이터 조회
-                                    sqlQuery = "SELECT * FROM order_product";
+                                    sqlQuery = "SELECT * FROM order_number";
                                     pstmt = conn.prepareStatement(sqlQuery);
                                 }
                                 rs = pstmt.executeQuery();
@@ -89,7 +91,7 @@
                                 // 결과 처리
                                 while (rs.next()) {
                                     out.println("<tr>");
-                                    out.println("<td>" + rs.getString("order_num") + "</td>");
+                                    out.println("<td>" + rs.getString("order_number") + "</td>");
                                     out.println("<td>" + rs.getString("PRODUCT_NUM") + "</td>");
                                     out.println("<td>" + rs.getString("PRODUCT_COUNT") + "</td>");
                                     out.println("<td>" + rs.getString("PRODUCT_PRICE") + "</td>");

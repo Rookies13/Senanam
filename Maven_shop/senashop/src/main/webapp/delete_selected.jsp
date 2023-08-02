@@ -4,9 +4,10 @@
 <%
     // DB 연결 정보
     String driver = "oracle.jdbc.driver.OracleDriver";
-    String url = "jdbc:oracle:thin:@localhost:1521:xe";
-    String id = "C##junho";
-    String pw = "1234";
+    String url="jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl";
+    String id = "admin";
+    String pw = "12345678";
+    
 
     Connection con = null;
     PreparedStatement pstmt = null;
@@ -20,7 +21,7 @@
 
         if (selectedItems != null && selectedItems.length > 0) {
             // 선택된 항목들 삭제 쿼리
-            String deleteQuery = "DELETE FROM CART WHERE CART_NUM IN (";
+            String deleteQuery = "DELETE FROM CART_PRODUCT WHERE CART_NUMBER IN (";
             for (int i = 0; i < selectedItems.length; i++) {
                 deleteQuery += (i == 0 ? "?" : ", ?");
             }
@@ -37,7 +38,7 @@
             int deletedRows = pstmt.executeUpdate();
 
             out.println("<h3>" + deletedRows + "개의 항목이 삭제되었습니다.</h3>");
-            out.print("<script>location.href='test.jsp';</script>");
+            out.print("<script>location.href='productsearch.jsp';</script>");
             
         } else {
             out.println("<h3>삭제할 항목을 선택해주세요.</h3>");

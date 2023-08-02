@@ -16,9 +16,9 @@
         String userId = request.getParameter("userId");
     
         String driver = "oracle.jdbc.driver.OracleDriver";
-        String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String id = "C##junho";
-        String pw = "1234";
+        String url="jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl";
+        String id = "admin";
+        String pw = "12345678";
   
         Connection conn = null;
         Statement stmt = null;
@@ -28,8 +28,8 @@
             conn = DriverManager.getConnection(url, id, pw);
             stmt = conn.createStatement();
             
-            String insertQuery = "INSERT INTO CART " +
-                                 "VALUES(CART_NUM.nextval, '" + productNum + "', '" + productCount + "', '" + productPrice + "', '" + userId + "')";
+            String insertQuery = "INSERT INTO CART_PRODUCT " +
+                                 "VALUES(CART_NUMBER.nextval, '" + productNum + "', '" + productCount + "', '" + productPrice + "', '" + userId + "')";
             
             int rowsInserted = stmt.executeUpdate(insertQuery);
             
@@ -52,6 +52,6 @@
         }
     %>
     
-    <p><a href="index.jsp">Go back to home page</a></p>
+    <p><a href="main.jsp">home으로 돌아가기</a></p>
 </body>
 </html>
