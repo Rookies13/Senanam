@@ -1735,11 +1735,7 @@
 	}
 
 	a {
-<<<<<<< HEAD
-		color: #ffffff;
-=======
 		color: #1abc9c;
->>>>>>> b58e484fed1d389a0c917931628004fc89bc16ca
 	}
 
 	strong, b {
@@ -2071,10 +2067,6 @@
 		display: block;
 		float: left;
 		margin-right: -2em;
-<<<<<<< HEAD
-		opacity: 0;
-=======
->>>>>>> b58e484fed1d389a0c917931628004fc89bc16ca
 		width: 1em;
 		z-index: -1;
 	}
@@ -4562,9 +4554,5 @@
 <<<<<<< HEAD
 		}
 =======
-<<<<<<< HEAD
-		}
-=======
 		}
 >>>>>>> eb748b51bd8da2e1c21e2163e798f7e7a120ff52
->>>>>>> b58e484fed1d389a0c917931628004fc89bc16ca

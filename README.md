@@ -78,4 +78,23 @@ https://goodteacher.tistory.com/614
 ![image](https://github.com/Rookies13/Senanam/assets/140288335/095c32f9-8392-4cce-88e4-73a0c3aa3a8a)
 
 
+## GitGraph -  PUSH COMMIT DELETE DROP 
+1. **main branch checkout**
+     > checkout *main* branch
+     
+     ![image](https://github.com/Rookies13/Senanam/assets/140288335/9937f59d-f64a-42b6-8e3b-fb93dc62aa62)
+
+
+2. **stasging -> comiit**
+      >
+
+![image](https://github.com/Rookies13/Senanam/assets/140288335/4c649456-c23d-49a0-9fc4-4da635604d52)
+
+
+(1) 소스제어 - (날짜, 이름) - 변경사항 적고 커밋.  
+
+3. **create branch**
+    > push branch 
+
+![image](https://github.com/Rookies13/Senanam/assets/140288335/cee195f9-657f-486f-bb3c-b9a4a2f8570b)
 
