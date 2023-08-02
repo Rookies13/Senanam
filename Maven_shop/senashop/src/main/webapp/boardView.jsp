@@ -76,7 +76,7 @@
                         Class.forName("oracle.jdbc.driver.OracleDriver"); //driver
                         conn = DriverManager.getConnection("jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin", "12345678");
                         
-                        String sql = "SELECT * FROM board WHERE board_number = " + board_number;
+                        String sql = "select * from board, attachment where board.board_number=attachment.board_number(+) and board.board_number = " + board_number;
                         pstmt = conn.prepareStatement(sql); 
                         rs = pstmt.executeQuery();
 
@@ -94,7 +94,15 @@
                                     <td width="20%">글쓴시각</td>
                                     <td><%=rs.getDate("time") %></td>
                                 </tr>
-                                
+                                <%
+                                String file_name = rs.getString("name");
+                                if( file_name != null){
+                                    out.print("<tr><td width='20%'>첨부파일</td>");
+                                    String fileDownloadLink = "download.jsp?file_name=" + java.net.URLEncoder.encode(file_name, "UTF-8");
+                                    out.print("<td colspan='3'><a href='" + fileDownloadLink + "'>" + file_name + "</a></td>");
+                                    out.print("</tr>");
+                                }
+                                %>
                             </table>
                         </div>
                         <pre><code><%=rs.getString("content") %></code> </pre>
