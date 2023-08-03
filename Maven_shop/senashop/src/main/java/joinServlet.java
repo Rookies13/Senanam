@@ -45,15 +45,22 @@ public class joinServlet extends HttpServlet {
         String ZIPCODE = request.getParameter("zipcode");
         String ADDRESS1 = request.getParameter("address1");
         String ADDRESS2 = request.getParameter("address2");
-        // int USER_LEVEL = request.getParameter("user_level");
-        // int USER_LEVEL = request.get
+        int USER_LEVEL = Integer.parseInt(request.getParameter("user_level"));
         String TERMCHECK = request.getParameter("termCheck");
         Timestamp CREATED_AT = new Timestamp(new Date().getTime());
+
+        request.setAttribute("username", ID);
+        request.setAttribute("name", NAME);
+        request.setAttribute("email", EMAIL);
+        request.setAttribute("mobile", MOBILE);
+        request.setAttribute("zipcode", ZIPCODE);
+        request.setAttribute("address1", ADDRESS1);
+        request.setAttribute("address2", ADDRESS2);
 
         if (isIdExists(ID)) {
             out.println("<script>");
             out.println("alert('이미 사용 중인 ID입니다. 다른 ID를 입력해주세요.');");
-            out.println("window.location.href='join.jsp';");
+            out.println("window.history.back();");
             out.println("</script>");
             return; // 회원가입 거부
         }
@@ -61,7 +68,7 @@ public class joinServlet extends HttpServlet {
         if (isNameExists(NAME)) {
             out.println("<script>");
             out.println("alert('이미 사용 중인 닉네임입니다. 다른 닉네임을 입력해주세요.');");
-            out.println("window.location.href='join.jsp';");
+            out.println("window.history.back();");
             out.println("</script>");
             return; // 회원가입 거부
         }
@@ -69,7 +76,7 @@ public class joinServlet extends HttpServlet {
         if (!PASSWD.equals(CONFIRM_PASSWD)) {
             out.println("<script>");
             out.println("alert('비밀번호가 일치하지 않습니다. 다시 시도해주세요.');");
-            out.println("window.location.href='join.jsp';");
+            out.println("window.history.back();");
             out.println("</script>");
             return; // 회원가입 거부
         }
@@ -78,7 +85,7 @@ public class joinServlet extends HttpServlet {
         if (!isValidPassword(PASSWD)) {
             out.println("<script>");
             out.println("alert('비밀번호는 최소 8자리 이상이어야 하며, 영문자와 숫자를 포함해야 합니다.');");
-            out.println("window.location.href='join.jsp';");
+            out.println("window.history.back();");
             out.println("</script>");
             return; // 회원가입 거부
         }
@@ -107,7 +114,7 @@ public class joinServlet extends HttpServlet {
             e.printStackTrace();
             out.println("<script>");
             out.println("alert('회원 가입 중 오류가 발생했습니다.');");
-            out.println("window.location.href='join.jsp';");
+            out.println("window.history.back();");
             out.println("</script>");
         } finally {
             try {
