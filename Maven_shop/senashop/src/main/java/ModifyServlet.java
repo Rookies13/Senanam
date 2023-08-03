@@ -80,16 +80,17 @@ public class ModifyServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        // String id = request.getParameter("id");
         String updatedName = request.getParameter("name");
         String updatedMobile = request.getParameter("mobile");
         String updatedEmail = request.getParameter("email");
         String updatedZipCode = request.getParameter("zipcode");
         String updatedAd1 = request.getParameter("address1");
+
+        String termAgree = request.getParameter("TERMCHECK");
         String updatedAd2 = request.getParameter("address2");
 
         Members user = new Members(id, updatedName, updatedMobile, updatedEmail, updatedZipCode, updatedAd1, updatedAd2,
-                "", "", createAt);
+                0, termAgree, createAt);
 
         boolean updated = queryDAO.updateUser(user);
 
@@ -98,11 +99,10 @@ public class ModifyServlet extends HttpServlet {
             request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
-            out.println("<script>");
-            out.println("alert('수정 완료 되었습니다.');");
-            out.println("</script>");
+            out.println("<script>alert('수정 완료!!'); location.href='" + "mypage.jsp" + "';</script>");
+            out.close();
 
-            response.sendRedirect("mypage.jsp");
+            // response.sendRedirect("mypage.jsp");
         } else {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();

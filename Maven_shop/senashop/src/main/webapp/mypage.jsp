@@ -106,7 +106,9 @@
               <input type="hidden" name="mobile" value="<%= m.getMb()%>">
               <input type="hidden" name="email" value="<%= m.getEm()%>">
               <input type="hidden" name="zipcode" value="<%= m.getZc()%>">
+              
               <input type="hidden" name="address1" value="<%= m.getAd1()%>">
+
               <input type="hidden" name="address2" value="<%= m.getAd2()%>">
               <input type="submit" value="회원 정보 수정">
             </form>
@@ -115,19 +117,19 @@
           <% member = null; %>
         </div>
         <div class="summaryContainer">
-          <div class="item">
+          <div class="item" style=" background-color: rgb(255, 255, 255); cursor: pointer;" onclick="location.href='qna.jsp';">
             <div class="number"><%= counts[1] %></div>
             <div>상품문의</div>
           </div>
-          <div class="item">
+          <div class="item" style=" background-color: rgb(255, 255, 255); cursor: pointer;" onclick="location.href='boardList.jsp';">
             <div class="number"><%= counts[3] %></div>
             <div>상품후기</div>
           </div>
-          <div class="item">
+          <div class="item" style=" background-color: rgb(255, 255, 255); cursor: pointer;" onclick="location.href='';">
             <div class="number"><%= counts[2] %></div>
             <div>비밀글</div>
           </div>
-          <div class="item">
+          <div class="item" style=" background-color: rgb(255, 255, 255); cursor: pointer;" onclick="location.href='';">
             <div class="number"><%= counts[3] * 100 %></div>
             <div>적립금(point)</div>
           </div>
@@ -138,30 +140,30 @@
           </div>
           <div class="status">
       
-            <div class="item">
+            <div class="item" style=" background-color: rgb(255, 255, 255); cursor: pointer;" onclick="location.href='cart.jsp';">
               <div>
                 <div class="green number"><%= tupleCount_c %></div>
                 <div class="text">장바구니</div>
               </div>
               <div class="icon"> > </div>
             </div>
-            <div class="item">
+            <div class="item" style=" background-color: rgb(255, 255, 255); ">
               <div>
                 <div class="number"><%= tupleCount_o %></div>
                 <div class="text">결제완료</div>
               </div>
               <div class="icon"> > </div>
             </div>
-            <div class="item">
+            <div class="item" style=" background-color: rgb(255, 255, 255); cursor: pointer;" onclick="location.href='';">
               <div>
-                <div class="green number">0</div> <!--기능 미구현-->
+                <div class="green number">0</div> 
                 <div class="text">배송중</div>
               </div>
               <div class="icon"> > </div>
             </div>
-            <div class="item">
+            <div class="item" style=" background-color: rgb(255, 255, 255); cursor: pointer;" onclick="location.href='http://howways.blogspot.com';">
               <div>
-                <div class="green number">0</div> <!--기능 미구현-->
+                <div class="green number">0</div> 
                 <div class="text">구매확정</div>
               </div>
             </div>
@@ -170,17 +172,17 @@
       
         </div>
         <div class="listContainer">
-          <a href="#" class="item">
+          <a href="order.jsp" class="item">
             <div class="icon">ii</div>
             <div class="text">주문목록<span class="circle"></span></div>
             <div class="right"> > </div>
           </a>
-          <a href="#" class="item">
+          <a href="boardList.jsp" class="item">
             <div class="icon">ii</div>
             <div class="text">상품후기</div>
             <div class="right"> > </div>
           </a>
-          <a href="#" class="item">
+          <a href="qna.jsp" class="item">
             <div class="icon">ii</div>
             <div class="text">상품문의</div>
             <div class="right"> > </div>
@@ -241,15 +243,6 @@
 </body>
 
 <footer id="footer">
-    <h1>Retrieved Data:</h1>
-    <table>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Country</th>
-        </tr>
-      </table>
 
     <div class="copyright">
     Made with team 세나남</a>

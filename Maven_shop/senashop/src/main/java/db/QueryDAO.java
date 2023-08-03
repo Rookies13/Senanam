@@ -74,7 +74,7 @@ public class QueryDAO {
                 String address1 = rs.getString("ADDRESS1");
                 String address2 = rs.getString("ADDRESS2");
                 String zipcode = rs.getString("ZIPCODE");
-                String userLevel = rs.getString("USER_LEVEL");
+                int userLevel = rs.getInt("USER_LEVEL");
                 String termAgree = rs.getString("TERMCHECK");
                 Timestamp createDate = rs.getTimestamp("CREATED_AT");
                 member.add(new Members(id, name, mobile, email, zipcode, address1, address2, userLevel, termAgree,
@@ -95,9 +95,12 @@ public class QueryDAO {
             System.out.println(preparedStatement);
 
             ResultSet rs = preparedStatement.executeQuery();
-
+            // Integer.parseInt(request.getParameter("ORDER_NUMBER"));
+            // rs.getInt("ORDER_NUMBER");
+            // int boardNum = rs.getInt("BOARD_NUMBER");
             while (rs.next()) {
-                int orderNum = rs.getInt("ORDER_NUMBER");
+                long orderNum = rs.getLong("ORDER_NUMBER");
+                // int orderNum = Integer.parseInt(rs.getString(0))
                 int totP = rs.getInt("TOTAL_PRICE");
                 // String cOrO = rs.getString("CART_OR_ORDER_HISTORY");
                 String address = rs.getString("ADDRESS");
@@ -161,7 +164,7 @@ public class QueryDAO {
 
                 Date time = rs.getDate("TIME");
                 int cnt = rs.getInt("CNT");
-                int pw = rs.getInt("PW");
+                String pw = rs.getString("PW");
                 // String typ = rs.getString("type");
                 board.add(new Board(boardNum, sunb, cont, rep, rep_y, type, id, time, cnt, pw));
 
@@ -192,7 +195,7 @@ public class QueryDAO {
                 }
                 boardList.add(new Board(rs.getString("SUBJECT"), rs.getString("CONTENT"), rs.getString("REPLY"),
                         rs.getString("REPLY_OK"), rs.getString("TYPE"), rs.getString("ID"), rs.getDate("TIME", null),
-                        rs.getInt("CNT"), rs.getInt("pw")));
+                        rs.getInt("CNT"), rs.getString("pw")));
             }
 
         } catch (SQLException e) {

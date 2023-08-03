@@ -3,14 +3,14 @@ package db.model;
 import java.sql.Date;
 
 public class Orders {
-    private int orderNumber;
+    private long orderNumber;
     private String id;
     private int totalPrice;
     // private String cartOrOrder;
     private String address;
     private String zipcode;
 
-    public Orders(int orderNumber, String id, int totalPrice, String cartOrOrder, String address, String zipcode) {
+    public Orders(long orderNumber, String id, int totalPrice, String cartOrOrder, String address, String zipcode) {
         super();
         this.orderNumber = orderNumber;
         this.id = id;
@@ -20,11 +20,11 @@ public class Orders {
         this.zipcode = zipcode;
     }
 
-    public int getOrderNumber() {
+    public long getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(int orderNumber) {
+    public void setOrderNumber(long orderNumber) {
         this.orderNumber = orderNumber;
     }
 

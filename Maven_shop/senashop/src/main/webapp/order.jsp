@@ -94,7 +94,7 @@
                                     pstmt.setString(1, orderNumberParam);
                                 } else {
                                     // 주문번호 파라미터가 없을 경우 모든 데이터 조회
-                                    sqlQuery = "SELECT * FROM order_number";
+                                    sqlQuery = "SELECT * FROM ORDER_PRODUCT";
                                     pstmt = conn.prepareStatement(sqlQuery);
                                 }
                                 rs = pstmt.executeQuery();
