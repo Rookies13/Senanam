@@ -63,14 +63,15 @@
                             <thead>
                                 <th width="10%" align="center"><center>번호</center></th>
                                 <th width="50%" align="center"><center>제목</center></th>
-                                <th width="20%" align="center"><center>글쓴이</center></th>
-                                <th width="20%" align="center"><center>시간</center></th>
+                                <th width="15%" align="center"><center>글쓴이</center></th>
+                                <th width="10%" align="center"><center>파일첨부</center></th>
+                                <th width="15%" align="center"><center>시간</center></th>
                             </thead>
                             <%
                             try{
                                 Class.forName("oracle.jdbc.driver.OracleDriver"); //driver
                                 conn = DriverManager.getConnection("jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin", "12345678");
-                                String sql = "select * from board where type='A' order by board_number desc"; //DB를 조회할 select문
+                                String sql = "select * from board, attachment where board.board_number=attachment.board_number(+) and board.type='A' order by board.board_number desc"; //DB를 조회할 select문
                                 pstmt = conn.prepareStatement(sql); //sql문으로 conn
                                 rs = pstmt.executeQuery(); //pstmt 실행 후 결과를 rs에 할당
                                 
@@ -81,8 +82,17 @@
 
                                     out.print("<tr>");
                                     out.print("<td><center>" + count + "</center></td>");
-                                    out.print("<td><a href='" + link + "'><span style='color: black;'>" + rs.getString("subject") + "</span></a></td>");
+                                    out.print("<td><a href='" + link + "'>" + rs.getString("subject") + "</a></td>");
                                     out.print("<td>" + rs.getString("id") + "</td>");
+                                    String file_name = rs.getString("name");
+                                    if(file_name == null){
+                                        out.print("<td>"+ "</td>");
+                                    }
+                                    else
+                                    {
+                                        out.print("<td><center><img src=images/file.png></center></td>");
+                                    }
+
                                     out.print("<td>" + rs.getDate("time") + "</td>");
                                     out.print("</tr>");
 

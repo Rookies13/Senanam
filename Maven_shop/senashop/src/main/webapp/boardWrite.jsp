@@ -5,6 +5,9 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.SQLException"%>
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
+<%@page import="java.util.Enumeration"%>
 
 <%
 	Connection conn = null;
@@ -65,13 +68,13 @@
             <section id="main">
                 <div class="inner">
                     <h3>게시판 글쓰기</h3>
-                    <form method="post" action="">
+                    <form method="post" action="" enctype="multipart/form-data">
                         <div class="row uniform 50%">
                             <div class="6u$ 12u$(xsmall)">
                                 <input type="text" name="subject" id="subject" value placeholder="제목">
                             </div>
 							<div>
-								첨부파일 : <input type="file">
+								첨부파일 : <input type="file" name="file">
 							</div>
                             <div class="12u$">
                                 <textarea name="content" id="content" placeholder="내용" rows="6" style="resize: none;"></textarea>
@@ -105,9 +108,15 @@
 				e.printStackTrace();
 			}
 
+			String directory = getServletContext().getRealPath("/") + "upload";	//파일 업로드 위치 : C:/Program Files/Apache Software Foundation/Tomcat 8.5/webapps/webapp/upload
+
+			int sizeLimit = 100*1024*1024;		//100MB 제한
+	
+			MultipartRequest multi = new MultipartRequest(request, directory, sizeLimit,"UTF-8",new DefaultFileRenamePolicy() );
 			request.setCharacterEncoding("utf-8");
-			String subject = request.getParameter("subject");
-			String content = request.getParameter("content");
+
+			String subject = multi.getParameter("subject");
+			String content = multi.getParameter("content");
 
 			if (subject == null || subject.trim().isEmpty()) {
 				out.println("<script>alert('제목을 입력하세요')</script>");
@@ -119,13 +128,24 @@
 	
 				java.util.Date currentDate = new java.util.Date();
 				java.sql.Timestamp date = new java.sql.Timestamp(currentDate.getTime());
-	
 				pstmt.setInt(1, count);
 				pstmt.setString(2, subject);
 				pstmt.setString(3, content);
 				pstmt.setTimestamp(4, date);
 				pstmt.setString(5, id);
 				pstmt.executeUpdate();
+
+				//첨부파일 업로드
+				Enumeration<?> files = multi.getFileNames();
+
+				if (files.hasMoreElements()) { // 첨부파일이 있다면
+					sql = "insert into attachment (board_number, name) values (?, ?)";
+					String element = (String)files.nextElement(); // file을 반환
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setInt(1, count);
+					pstmt.setString(2, multi.getFilesystemName(element));
+					pstmt.executeUpdate();
+				}
 
 				out.println("<script>alert('게시글 등록 성공')</script>");
 				out.println("<script>window.location.assign('boardList.jsp')</script>");
