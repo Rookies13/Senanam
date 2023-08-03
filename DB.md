@@ -1,91 +1,39 @@
-![image](https://github.com/Rookies13/Senanam/assets/140288335/00e4cd71-0726-473d-8ee0-64da4113f316)
+## AWS RDS oracle
 
-# QUERY 
-*ver 0.1*
-## **Create**
-### Users Table
-CREATE TABLE Users (
-    user_id NUMBER PRIMARY KEY,
-    username VARCHAR2(50) NOT NULL,
-    password VARCHAR2(100) NOT NULL,
-    email VARCHAR2(100) NOT NULL,
-    registration_date DATE NOT NULL
-);
+![image](https://github.com/Rookies13/Senanam/assets/140288335/917bdc0c-dd11-423d-8a65-2e22bf4daaac)
 
-### Products Table
-CREATE TABLE Products (
-    product_id NUMBER PRIMARY KEY,
-    product_name VARCHAR2(100) NOT NULL,
-    price NUMBER NOT NULL,
-    description VARCHAR2(200),
-    category VARCHAR2(50) NOT NULL
-);
 
-### Orders Table
-CREATE TABLE Orders (
-    order_id NUMBER PRIMARY KEY,
-    user_id NUMBER NOT NULL,
-    order_date DATE NOT NULL,
-    total_price NUMBER NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id)
-);
 
-### OrderItems Table
-CREATE TABLE OrderItems (
-    order_item_id NUMBER PRIMARY KEY,
-    order_id NUMBER NOT NULL,
-    product_id NUMBER NOT NULL,
-    quantity NUMBER NOT NULL,
-    subtotal NUMBER NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-    FOREIGN KEY (product_id) REFERENCES Products(product_id)
-);
+# TEST 접속 정보
 
-### Reviews Table
-CREATE TABLE Reviews (
-    review_id NUMBER PRIMARY KEY,
-    user_id NUMBER NOT NULL,
-    product_id NUMBER NOT NULL,
-    rating NUMBER NOT NULL,
-    review_text VARCHAR2(500),
-    review_date DATE NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES Users(user_id),
-    FOREIGN KEY (product_id) REFERENCES Products(product_id)
-);
+![image](https://github.com/Rookies13/Senanam/assets/140288335/44637403-33ea-4d51-a81f-ad6abb6dfe02)
 
-## **Insert Sample Data**
-### Sample Data for Users Table:
-INSERT INTO Users (user_id, username, password, email, registration_date)
-VALUES (1, 'john_doe', 'password123', 'john.doe@example.com', TO_DATE('2023-07-25', 'YYYY-MM-DD'));
 
-INSERT INTO Users (user_id, username, password, email, registration_date)
-VALUES (2, 'jane_smith', 'securepass', 'jane.smith@example.com', TO_DATE('2023-07-25', 'YYYY-MM-DD'));
+엔드포인트 : 
+aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com
 
-### Sample Data for Products Table:
-INSERT INTO Products (product_id, product_name, price, description, category)
-VALUES (101, 'Smartphone', 500, 'High-end smartphone', 'Electronics');
+사용자 : 
+admin / 12345678
 
-INSERT INTO Products (product_id, product_name, price, description, category)
-VALUES (102, 'Laptop', 800, 'Powerful laptop for work and gaming', 'Electronics');
+# 설정
+*Branch* : DB
+*Commit* : 0d00d4ef6c0288df924796ba179bc6ebd85762d6
 
-### Sample Data for Orders Table:
-INSERT INTO Orders (order_id, user_id, order_date, total_price)
-VALUES (1001, 1, TO_DATE('2023-07-25', 'YYYY-MM-DD'), 1200);
+> **webapp - WEB-INF - META-INF - context.xml 수정**
 
-INSERT INTO Orders (order_id, user_id, order_date, total_price)
-VALUES (1002, 2, TO_DATE('2023-07-26', 'YYYY-MM-DD'), 500);
+<Context>
+    <Resource name="jdbc/aws" auth="Container" type="javax.sql.DataSource"
+        maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+        username="admin" password="12345678"
+        driverClassName="oracle.jdbc.OracleDriver"
+        url="jdbc:oracle:thin:@aws.ce0twkaphola.ap-northeast-2.rds.amazonaws.com:1521:orcl" />
+</Context>
 
-### Sample Data for OrderItems Table:
-INSERT INTO OrderItems (order_item_id, order_id, product_id, quantity, subtotal)
-VALUES (2001, 1001, 101, 2, 1000);
-
-INSERT INTO OrderItems (order_item_id, order_id, product_id, quantity, subtotal)
-VALUES (2002, 1002, 102, 1, 800);
-
-### Sample Data for Reviews Table:
-INSERT INTO Reviews (review_id, user_id, product_id, rating, review_text, review_date)
-VALUES (3001, 1, 101, 4, 'Great smartphone!', TO_DATE('2023-07-26', 'YYYY-MM-DD'));
-
-INSERT INTO Reviews (review_id, user_id, product_id, rating, review_text, review_date)
-VALUES (3002, 2, 102, 5, 'Excellent laptop!', TO_DATE('2023-07-27', 'YYYY-MM-DD'));
+> **webapp - WEB-INF - WEB-INF - web.xml 수정**
+  <resource-ref>
+    <description>Oracle Datasource example</description>
+    <res-ref-name>jdbc/aws</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+</resource-ref>
 
