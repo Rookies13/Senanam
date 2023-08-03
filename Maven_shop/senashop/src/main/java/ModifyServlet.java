@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class ModifyServlet extends HttpServlet {
     static String id;
-    private String name_1;
+    private String name;
     private String mobile;
     private String email;
     private String zipcode;
@@ -30,7 +30,7 @@ public class ModifyServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServerException, IOException, ServletException {
         id = request.getParameter("id");
-        name_1 = request.getParameter("name");
+        name = request.getParameter("name");
         mobile = request.getParameter("mobile");
         email = request.getParameter("email");
         zipcode = request.getParameter("zipcode");
@@ -51,9 +51,9 @@ public class ModifyServlet extends HttpServlet {
         out.println("<h2>회원 정보 수정</h2>");
 
         out.println("<form action= 'ModifyServlet' method='post'>");
-        out.println("아이디: <input type='text' name='name' value='" + id + "' readonly><br>");
+        out.println("아이디: <input type='text' name='id' value='" + id + "' readonly><br>");
 
-        out.println("이름:<input type='text' name='name' value='" + name_1 + "'readonly><br>");
+        out.println("이름:<input type='text' name='name' value='" + name + "'><br>");
 
         out.println("전화번호:<input type='text' name='mobile' value='" + mobile + "'><br>");
 
@@ -76,9 +76,12 @@ public class ModifyServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
         // String id = request.getParameter("id");
-        String updatedName = request.getParameter("name_1");
+        String updatedName = request.getParameter("name");
         String updatedMobile = request.getParameter("mobile");
         String updatedEmail = request.getParameter("email");
         String updatedZipCode = request.getParameter("zipcode");
@@ -92,6 +95,8 @@ public class ModifyServlet extends HttpServlet {
 
         if (updated) {
             response.setContentType("text/html; charset=UTF-8");
+            request.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding("UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>");
             out.println("alert('수정 완료 되었습니다.');");
