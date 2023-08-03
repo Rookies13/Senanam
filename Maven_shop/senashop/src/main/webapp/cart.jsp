@@ -75,7 +75,7 @@
 
 		<!-- Header -->
 			<header id="header">
-				<a href="index.html" class="logo"><strong>세 나</strong> shop</a>
+				<a href="index.jsp" class="logo"><strong>세 나</strong> shop</a>
 				<nav>
 					<a href="#menu">Menu</a>
 				</nav>
