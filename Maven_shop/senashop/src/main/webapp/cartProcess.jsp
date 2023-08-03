@@ -52,6 +52,6 @@
         }
     %>
     
-    <p><a href="main.jsp">home으로 돌아가기</a></p>
+    <p><a href="index.jsp">home으로 돌아가기</a></p>
 </body>
 </html>

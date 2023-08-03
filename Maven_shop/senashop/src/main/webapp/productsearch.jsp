@@ -39,11 +39,13 @@
 		<!-- Nav -->
 			<nav id="menu">
 				<ul class="links">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="generic.html">Generic</a></li>
-					<li><a href="elements.html">Elements</a></li>
-					<li><a href="productsearch.jsp">Search</a></li>
-				</ul>
+                    <li><a href="index.jsp">Home</a></li>
+                    <li><a href="mypage.jsp">마이페이지</a></li>
+                    <li><a href="productsearch.jsp">상품검색</a></li>
+                    <li><a href="cart.jsp">장바구니</a></li>
+                    <li><a href="boardList.jsp">문의게시판</a></li>
+                    <li><a href="qna.jsp">Q&A</a></li>
+                  </ul>
 			</nav>
 
 		
@@ -132,7 +134,7 @@
                                     // 파라미터 값을 URL에 추가하여 장바구니 JSP 파일로 리다이렉트
                                     if(userId=="null"){
                                         alert("로그인 하세요!");
-                                        window.location.href = 'main.jsp';
+                                        window.location.href = 'index.jsp';
                                     } else {
                                     window.location.href = 'cartProcess.jsp?productNum=' + productNum + '&productCount=' + productCount + '&productPrice=' + productPrice + '&userId=' + userId;
                                     }
@@ -278,7 +280,7 @@
                             // 파라미터 값을 URL에 추가하여 장바구니 JSP 파일로 리다이렉트
                             if(userId=="null"){
                                 alert("로그인 하세요!");
-                                window.location.href = 'main.jsp';
+                                window.location.href = 'index.jsp';
                             } else {
                             window.location.href = 'cartProcess.jsp?productNum=' + productNum + '&productCount=' + productCount + '&productPrice=' + productPrice + '&userId=' + userId;
                             }
