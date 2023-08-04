@@ -218,10 +218,14 @@
             <div class="text">알림</div>
             <div class="right"> > </div>
           </a>
-          <a href="#" class="item">
+          <a href="delete" class="item">
             <div class="icon">ii</div>
             <div class="text">회원탈퇴</div>
             <div class="right"> > </div>
+            <form action="delete" method="post" style="display:none;">
+              <input type="hidden" name="id" value="<%= (String)session.getAttribute("user_id")%>
+              <input type="submit" value="Submit">
+            </form>
           </a>
         </div>
         <div class="infoContainer">

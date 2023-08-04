@@ -40,7 +40,7 @@ public class QueryDAO {
     private static final String SELECT_BOARD_BY_ID = "SELECT * FROM board WHERE id = ?";
     private static final String SELECT_SPEC_USERS = "SELECT * FROM USER where id = ?;";
 
-    private static final String DELETE_USERS_SQL = "DELETE FROM users WHERE id=?";
+    private static final String DELETE_USERS_SQL = "DELETE FROM MEMBER WHERE id=?";
     private static final String UPDATE_USERS_SQL = "UPDATE MEMBER SET name= ?, mobile= ?, email= ?, zipcode= ?, address1= ?, address2= ? WHERE id= ?";
 
     public QueryDAO() {

@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.rmi.ServerException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -14,8 +15,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet("/register")
+import db.QueryDAO;
+
+@WebServlet({ "/register", "/delete" })
 public class joinServlet extends HttpServlet {
     // Oracle DB 연결 정보 하드코딩 추후 변경 가능
     private static final String DB_URL = "jdbc:oracle:thin:@//aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521/orcl?useUnicode=true&characterEncoding=UTF-8";
@@ -24,108 +28,137 @@ public class joinServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html; charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
+        String servletPath = request.getServletPath();
+        if (servletPath.equals("/register")) {
+            response.setContentType("text/html; charset=UTF-8");
+            request.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();
 
-        Properties props = new Properties();
-        props.setProperty("user", DB_USERNAME);
-        props.setProperty("password", DB_PASSWORD);
-        props.setProperty("useUnicode", "true");
-        props.setProperty("characterEncoding", "UTF-8");
+            Properties props = new Properties();
+            props.setProperty("user", DB_USERNAME);
+            props.setProperty("password", DB_PASSWORD);
+            props.setProperty("useUnicode", "true");
+            props.setProperty("characterEncoding", "UTF-8");
 
-        // 사용자가 입력한 회원 정보 받기
-        String ID = request.getParameter("username");
-        String NAME = request.getParameter("name");
-        String PASSWD = request.getParameter("password");
-        String CONFIRM_PASSWD = request.getParameter("confirmPassword");
-        String EMAIL = request.getParameter("email");
-        String MOBILE = request.getParameter("mobile");
-        String ZIPCODE = request.getParameter("zipcode");
-        String ADDRESS1 = request.getParameter("address1");
-        String ADDRESS2 = request.getParameter("address2");
-        int USER_LEVEL = Integer.parseInt(request.getParameter("user_level"));
-        String TERMCHECK = request.getParameter("termCheck");
-        Timestamp CREATED_AT = new Timestamp(new Date().getTime());
+            // 사용자가 입력한 회원 정보 받기
+            String ID = request.getParameter("username");
+            String NAME = request.getParameter("name");
+            String PASSWD = request.getParameter("password");
+            String CONFIRM_PASSWD = request.getParameter("confirmPassword");
+            String EMAIL = request.getParameter("email");
+            String MOBILE = request.getParameter("mobile");
+            String ZIPCODE = request.getParameter("zipcode");
+            String ADDRESS1 = request.getParameter("address1");
+            String ADDRESS2 = request.getParameter("address2");
+            int USER_LEVEL = Integer.parseInt(request.getParameter("user_level"));
+            String TERMCHECK = request.getParameter("termCheck");
+            Timestamp CREATED_AT = new Timestamp(new Date().getTime());
 
-        request.setAttribute("username", ID);
-        request.setAttribute("name", NAME);
-        request.setAttribute("email", EMAIL);
-        request.setAttribute("mobile", MOBILE);
-        request.setAttribute("zipcode", ZIPCODE);
-        request.setAttribute("address1", ADDRESS1);
-        request.setAttribute("address2", ADDRESS2);
+            request.setAttribute("username", ID);
+            request.setAttribute("name", NAME);
+            request.setAttribute("email", EMAIL);
+            request.setAttribute("mobile", MOBILE);
+            request.setAttribute("zipcode", ZIPCODE);
+            request.setAttribute("address1", ADDRESS1);
+            request.setAttribute("address2", ADDRESS2);
 
-        if (isIdExists(ID)) {
-            out.println("<script>");
-            out.println("alert('이미 사용 중인 ID입니다. 다른 ID를 입력해주세요.');");
-            out.println("window.history.back();");
-            out.println("</script>");
-            return; // 회원가입 거부
-        }
+            if (isIdExists(ID)) {
+                out.println("<script>");
+                out.println("alert('이미 사용 중인 ID입니다. 다른 ID를 입력해주세요.');");
+                out.println("window.history.back();");
+                out.println("</script>");
+                return; // 회원가입 거부
+            }
 
-        if (isNameExists(NAME)) {
-            out.println("<script>");
-            out.println("alert('이미 사용 중인 닉네임입니다. 다른 닉네임을 입력해주세요.');");
-            out.println("window.history.back();");
-            out.println("</script>");
-            return; // 회원가입 거부
-        }
+            if (isNameExists(NAME)) {
+                out.println("<script>");
+                out.println("alert('이미 사용 중인 닉네임입니다. 다른 닉네임을 입력해주세요.');");
+                out.println("window.history.back();");
+                out.println("</script>");
+                return; // 회원가입 거부
+            }
 
-        if (!PASSWD.equals(CONFIRM_PASSWD)) {
-            out.println("<script>");
-            out.println("alert('비밀번호가 일치하지 않습니다. 다시 시도해주세요.');");
-            out.println("window.history.back();");
-            out.println("</script>");
-            return; // 회원가입 거부
-        }
+            if (!PASSWD.equals(CONFIRM_PASSWD)) {
+                out.println("<script>");
+                out.println("alert('비밀번호가 일치하지 않습니다. 다시 시도해주세요.');");
+                out.println("window.history.back();");
+                out.println("</script>");
+                return; // 회원가입 거부
+            }
 
-        // 비밀번호 유효성 검사 (최소 8자리 이상, 영문자와 숫자 조합)
-        if (!isValidPassword(PASSWD)) {
-            out.println("<script>");
-            out.println("alert('비밀번호는 최소 8자리 이상이어야 하며, 영문자와 숫자를 포함해야 합니다.');");
-            out.println("window.history.back();");
-            out.println("</script>");
-            return; // 회원가입 거부
-        }
+            // 비밀번호 유효성 검사 (최소 8자리 이상, 영문자와 숫자 조합)
+            if (!isValidPassword(PASSWD)) {
+                out.println("<script>");
+                out.println("alert('비밀번호는 최소 8자리 이상이어야 하며, 영문자와 숫자를 포함해야 합니다.');");
+                out.println("window.history.back();");
+                out.println("</script>");
+                return; // 회원가입 거부
+            }
 
-        // DB 연결 및 회원 정보 삽입
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            conn = DriverManager.getConnection(DB_URL, props);
-            stmt = conn.createStatement();
-
-            String sql = "INSERT INTO member (ID, PASSWD, NAME, EMAIL, MOBILE, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMCHECK, CREATED_AT) "
-                    + "VALUES ('" + ID + "', '" + PASSWD + "', '" + NAME + "', '" + EMAIL + "', '" + MOBILE + "', '"
-                    + ZIPCODE
-                    + "', '" + ADDRESS1 + "', '" + ADDRESS2 + "', '" + USER_LEVEL + "', '" + TERMCHECK + "', '"
-                    + CREATED_AT + "')";
-            stmt.executeUpdate(sql);
-
-            out.println("<script>");
-            out.println("alert('회원 가입이 완료되었습니다!');");
-            out.println("window.location.href='index.jsp';");
-            out.println("</script>");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            out.println("<script>");
-            out.println("alert('회원 가입 중 오류가 발생했습니다.');");
-            out.println("window.history.back();");
-            out.println("</script>");
-        } finally {
+            // DB 연결 및 회원 정보 삽입
+            Connection conn = null;
+            Statement stmt = null;
             try {
-                if (stmt != null)
-                    stmt.close();
-                if (conn != null)
-                    conn.close();
+                Class.forName("oracle.jdbc.driver.OracleDriver");
+                conn = DriverManager.getConnection(DB_URL, props);
+                stmt = conn.createStatement();
+
+                String sql = "INSERT INTO member (ID, PASSWD, NAME, EMAIL, MOBILE, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMCHECK, CREATED_AT) "
+                        + "VALUES ('" + ID + "', '" + PASSWD + "', '" + NAME + "', '" + EMAIL + "', '" + MOBILE + "', '"
+                        + ZIPCODE
+                        + "', '" + ADDRESS1 + "', '" + ADDRESS2 + "', '" + USER_LEVEL + "', '" + TERMCHECK + "', '"
+                        + CREATED_AT + "')";
+                stmt.executeUpdate(sql);
+
+                out.println("<script>");
+                out.println("alert('회원 가입이 완료되었습니다!');");
+                out.println("window.location.href='index.jsp';");
+                out.println("</script>");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                out.println("<script>");
+                out.println("alert('회원 가입 중 오류가 발생했습니다.');");
+                out.println("window.history.back();");
+                out.println("</script>");
+            } finally {
+                try {
+                    if (stmt != null)
+                        stmt.close();
+                    if (conn != null)
+                        conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        } else if (servletPath.equals("/delete")) {
+            QueryDAO queryDAO = new QueryDAO();
+            String id = request.getParameter("id");
+            try {
+                queryDAO.deleteUser(id);
             } catch (SQLException e) {
+                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
+
+    }
+
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServerException, IOException, ServletException {
+        QueryDAO queryDAO = new QueryDAO();
+        HttpSession session = request.getSession();
+        String id = (String) session.getAttribute("user_id");
+        // String id = request.getParameter("id");
+        try {
+            queryDAO.deleteUser(id);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 
     private boolean isValidPassword(String password) {
