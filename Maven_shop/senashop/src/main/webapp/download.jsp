@@ -54,6 +54,7 @@
 			String bucketName = "senanam";
             String fileName = request.getParameter("file_name");
 			try {
+				fileName = URLDecoder.devode(fileName, "UTF-8");
 				// AWS 자격증명 생성
 				BasicAWSCredentials awsCreds = new BasicAWSCredentials(awsAccessKey, awsSecretKey);
 		
