@@ -90,11 +90,11 @@
             </section>
 
 	<%
+	String filename=null;
     if (request.getMethod().equals("POST")) {
 		try{
 			Class.forName("oracle.jdbc.driver.OracleDriver"); //driver
 			conn = DriverManager.getConnection("jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin", "12345678");
-			
 			String sql = "SELECT MAX(board_number) FROM board";
 			int count = 1;
 			try {
@@ -141,14 +141,17 @@
 				if (files.hasMoreElements()) { // 첨부파일이 있다면
 					sql = "insert into attachment (board_number, name) values (?, ?)";
 					String element = (String)files.nextElement(); // file을 반환
+					filename=multi.getFilesystemName(element);
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setInt(1, count);
-					pstmt.setString(2, multi.getFilesystemName(element));
+					pstmt.setString(2, filename);
 					pstmt.executeUpdate();
 				}
 
 				out.println("<script>alert('게시글 등록 성공')</script>");
-				out.println("<script>window.location.assign('boardList.jsp')</script>");
+				if (filename != null) {
+					response.sendRedirect("s3upload?filename=" + filename);
+				}
 			}
 
 		}catch(Exception e){

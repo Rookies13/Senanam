@@ -5,6 +5,12 @@
 <%@ page import="java.io.IOException"%>
 <%@ page import="java.io.OutputStream"%>
 <%@ page import="java.net.URLDecoder"%>
+<%@page import="com.amazonaws.auth.AWSStaticCredentialsProvider"%>
+<%@page import="com.amazonaws.auth.BasicAWSCredentials"%>
+<%@page import="com.amazonaws.services.s3.AmazonS3"%>
+<%@page import="com.amazonaws.services.s3.AmazonS3ClientBuilder"%>
+<%@page import="com.amazonaws.services.s3.model.S3Object"%>
+<%@page import="com.amazonaws.services.s3.model.S3ObjectInputStream"%>
 <!--
 	Binary by TEMPLATED
 	templated.co @templatedco
@@ -40,34 +46,44 @@
 
             <%
             // 다운로드할 파일의 경로
-            String file_name = request.getParameter("file_name");
-            String downloadFilePath = getServletContext().getRealPath("/") + "upload/" + URLDecoder.decode(file_name, "UTF-8");
+			String awsAccessKey = "";
+			String awsSecretKey = ""; 
+			String clientRegion = "ap-northeast-2";
 
-            File downloadFile = new File(downloadFilePath);
-            FileInputStream inStream = new FileInputStream(downloadFile);
-
-            // 다운로드할 파일의 MIME 타입 설정
-            response.setContentType("application/octet-stream");
-            response.setContentLength((int) downloadFile.length());
-
-            // 파일 다운로드 대화 상자에 표시되는 파일명 설정 (한글 파일명을 위해 UTF-8로 인코딩)
-            String headerKey = "Content-Disposition";
-            String headerValue = "attachment; filename=\"" + new String(file_name.getBytes("UTF-8"), "ISO-8859-1") + "\"";
-            response.setHeader(headerKey, headerValue);
-
-            // 파일 스트림을 읽어서 클라이언트로 전송
-            OutputStream outStream = response.getOutputStream();
-            byte[] buffer = new byte[4096];
-            int bytesRead = -1;
-
-            while ((bytesRead = inStream.read(buffer)) != -1) {
-                outStream.write(buffer, 0, bytesRead);
-            }
-
-            inStream.close();
-            outStream.close();
-            %>
-        
+			// S3 버킷과 파일명
+			String bucketName = "senanam";
+            String fileName = request.getParameter("file_name");
+			try {
+				// AWS 자격증명 생성
+				BasicAWSCredentials awsCreds = new BasicAWSCredentials(awsAccessKey, awsSecretKey);
+		
+				// AmazonS3 클라이언트 생성
+				AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+						.withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+						.withRegion(clientRegion)
+						.build();
+		
+				// S3 버킷에서 파일 다운로드
+				S3Object s3Object = s3Client.getObject(bucketName, fileName);
+				S3ObjectInputStream inputStream = s3Object.getObjectContent();
+		
+				// 파일 다운로드를 위한 헤더 설정
+				response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+				response.setContentType("application/octet-stream");
+		
+				// 파일 스트림을 읽어서 브라우저로 출력
+				byte[] buffer = new byte[4096];
+				int bytesRead;
+				while ((bytesRead = inputStream.read(buffer)) != -1) {
+					response.getOutputStream().write(buffer, 0, bytesRead);
+				}
+				inputStream.close();
+			} catch (IOException e) {
+				out.println("파일 다운로드 중 오류가 발생했습니다.");
+				e.printStackTrace();
+			}
+				%>
+			
 
 		<!-- Footer -->
 			<footer id="footer">
