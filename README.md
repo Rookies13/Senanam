@@ -11,30 +11,39 @@ Welcome to the VS Code Java world. Here is a guideline to help you get started t
 
 ## Folder Structure
 
-![image](https://github.com/Rookies13/Senanam/assets/140288335/f343552d-85f7-49e6-9bb9-06e0872f90ad)
+![image](https://github.com/Rookies13/Senanam/assets/140288335/e16fef2b-0d61-46dd-9441-4ffb7e86376f)
+
 
 
 ## Dependency Management
 1. **JDK : ZULU-17**
      https://www.azul.com/downloads/?package=jdk#zulu
-   ![image](https://github.com/Rookies13/Senanam/assets/140288335/65728b13-509f-4600-8076-01e97317052c)
+
+   ![image](https://github.com/Rookies13/Senanam/assets/140288335/54af6e77-4ede-4bdd-9044-5c57b663a79d)
 
 
-2. **Tomcat : tomcat 8.5.91 (32/64-bit Windwows service Installer)**
+
+3. **Tomcat : tomcat 8.5.91 (32/64-bit Windwows service Installer)**
       https://tomcat.apache.org/download-80.cgi
-![image](https://github.com/Rookies13/Senanam/assets/140288335/5cd29ba7-f936-494b-a897-e652ce8a93d1)
+
+   ![image](https://github.com/Rookies13/Senanam/assets/140288335/1bb65589-1390-4513-9e8c-da25d92bfbf5)
 
 
-3. **build system : apache-maven-3.9.3-bin.zip**
+
+5. **build system : apache-maven-3.9.3-bin.zip**
      https://maven.apache.org/download.cgi
-  ![image](https://github.com/Rookies13/Senanam/assets/140288335/8769b277-b1bd-4456-9428-7bd520c8353a)
 
+  ![image](https://github.com/Rookies13/Senanam/assets/140288335/7ccf314f-f6c3-4a53-b635-7e842a5b8dc7)
+
+   
 > Path
-  ![image](https://github.com/Rookies13/Senanam/assets/140288335/1180f5a5-dd59-40a5-a180-891566b5f4a8)
 
+  ![image](https://github.com/Rookies13/Senanam/assets/140288335/3215324c-7e83-412d-ad58-278f1ff146e6)
 
 
 > If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+
+  ![image](https://github.com/Rookies13/Senanam/assets/140288335/edbf7cc2-55cf-4d46-9158-ea917790ec7c)
 
   >"rsp-ui.rsp.java.home": "C:\\Program Files\\Zulu\\zulu-17",
 
@@ -65,8 +74,7 @@ Visual Studio Code를 실행하고, 왼쪽 사이드바에서 "Extensions" 아�
 Visual Studio Code를 실행한 후, 확장 기능(Extensions) 메뉴에서 "Java Extension Pack"을 검색하여 설치합니다. 이 확장 기능은 Java 개발에 필요한 기능들을 제공합니다.
 
 (5) Community Server Connector 설치 : 
-참고 : 
-https://goodteacher.tistory.com/614
+참고 : https://goodteacher.tistory.com/614
 
 (6) maven project manager (microsoft) 설치
 
