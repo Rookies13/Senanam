@@ -18,8 +18,8 @@ public class AwsS3 {
 
     // Amazon-s3-sdk
     private AmazonS3 s3Client;
-    final private String accessKey = "AKIAXQAF5U3UDVZ6VKFQ"; // 액세스키
-    final private String secretkey = "mN7tnlZD1JjZsHK5N7YX7Yeqt0AjanxKN0nSYpZQ"; //
+    final private String accessKey = ""; // 액세스키
+    final private String secretkey = ""; //
 
     private Regions clientRegion = Regions.AP_NORTHEAST_2; // 한국
     private String bucket = "senanam"; // 버킷 명
