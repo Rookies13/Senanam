@@ -46,8 +46,8 @@
 
             <%
             // 다운로드할 파일의 경로
-			String awsAccessKey = "AKIAXQAF5U3UDVZ6VKFQ";
-			String awsSecretKey = "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"; 
+			String awsAccessKey = "";
+			String awsSecretKey = ""; 
 			String clientRegion = "ap-northeast-2";
 
 			// S3 버킷과 파일명
