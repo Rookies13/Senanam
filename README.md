@@ -35,7 +35,9 @@ Welcome to the VS Code Java world. Here is a guideline to help you get started t
 
   ![image](https://github.com/Rookies13/Senanam/assets/140288335/7ccf314f-f6c3-4a53-b635-7e842a5b8dc7)
 
-   
+  ![image](https://github.com/Rookies13/Senanam/assets/140288335/6b7bd394-029c-47a2-b6a8-8c1c2d4192c8)
+
+
 > Path
 
   ![image](https://github.com/Rookies13/Senanam/assets/140288335/3215324c-7e83-412d-ad58-278f1ff146e6)
