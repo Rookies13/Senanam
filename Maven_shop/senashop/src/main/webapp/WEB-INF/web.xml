@@ -44,5 +44,13 @@
       <servlet-name>ModifyServlet</servlet-name>
       <url-pattern>/ModifyServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+      <servlet-name>s3upload</servlet-name>
+      <servlet-class>s3upload</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>s3upload</servlet-name>
+      <url-pattern>/s3upload</url-pattern>
+  </servlet-mapping>
   
 </web-app>
