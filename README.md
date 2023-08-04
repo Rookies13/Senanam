@@ -94,21 +94,24 @@ Visual Studio Code를 실행한 후, 확장 기능(Extensions) 메뉴에서 "Jav
 ## GitGraph -  PUSH COMMIT DELETE DROP 
 1. **main branch checkout**
      > checkout *main* branch
-     
-     ![image](https://github.com/Rookies13/Senanam/assets/140288335/9937f59d-f64a-42b6-8e3b-fb93dc62aa62)
+
+     ![image](https://github.com/Rookies13/Senanam/assets/140288335/e92a92f2-9a3b-4afe-9e4a-5e8cc0aa58ef)
+
 
 
 2. **stasging -> comiit**
       >
-
-![image](https://github.com/Rookies13/Senanam/assets/140288335/4c649456-c23d-49a0-9fc4-4da635604d52)
+   ![image](https://github.com/Rookies13/Senanam/assets/140288335/f0e9a530-9cae-422c-b43e-d33c2deffcf8)
 
 
 (1) 소스제어 - (날짜, 이름) - 변경사항 적고 커밋.  
 
 3. **create branch**
-    > push branch 
+    
+> create branch
+![image](https://github.com/Rookies13/Senanam/assets/140288335/ff5ebebd-78a6-4d41-83e9-362e08c1fbb2)
 
+> push branch 
 ![image](https://github.com/Rookies13/Senanam/assets/140288335/cee195f9-657f-486f-bb3c-b9a4a2f8570b)
 
 ### DB 
