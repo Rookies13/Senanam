@@ -35,10 +35,8 @@ Welcome to the VS Code Java world. Here is a guideline to help you get started t
 
   ![image](https://github.com/Rookies13/Senanam/assets/140288335/7ccf314f-f6c3-4a53-b635-7e842a5b8dc7)
 
-  ![image](https://github.com/Rookies13/Senanam/assets/140288335/6b7bd394-029c-47a2-b6a8-8c1c2d4192c8)
 
-
-> Path
+> JAVA Path
 
   ![image](https://github.com/Rookies13/Senanam/assets/140288335/3215324c-7e83-412d-ad58-278f1ff146e6)
 
@@ -83,9 +81,14 @@ Visual Studio Code를 실행한 후, 확장 기능(Extensions) 메뉴에서 "Jav
 (7) java project manager (microsoft) 설치 
 
 
-## Debugging
+## BUILD & Debugging
 
-![image](https://github.com/Rookies13/Senanam/assets/140288335/095c32f9-8392-4cce-88e4-73a0c3aa3a8a)
+> BUILD
+![image](https://github.com/Rookies13/Senanam/assets/140288335/de74d766-8800-4b57-8109-f0f1025a7e16)
+
+> Debugging
+![image](https://github.com/Rookies13/Senanam/assets/140288335/432f0e5d-8f5d-4f7d-a294-a905627df6eb)
+
 
 
 ## GitGraph -  PUSH COMMIT DELETE DROP 
@@ -109,10 +112,10 @@ Visual Studio Code를 실행한 후, 확장 기능(Extensions) 메뉴에서 "Jav
 ![image](https://github.com/Rookies13/Senanam/assets/140288335/cee195f9-657f-486f-bb3c-b9a4a2f8570b)
 
 ### DB 
- > info  **AWS RDS oracle**
+ > info
+  **AWS RDS oracle 19C**
 
 ## ERD 
 
-![image](https://github.com/Rookies13/Senanam/assets/140288335/96ccfe4e-cb3c-4bad-b533-b956ef630e87)
-
+![image](https://github.com/Rookies13/Senanam/assets/140288335/0d734bcf-089c-4eef-bda5-d5ab0edd373f)
 
