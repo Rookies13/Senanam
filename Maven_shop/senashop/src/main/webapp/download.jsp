@@ -47,7 +47,7 @@
             <%
             // 다운로드할 파일의 경로
 			String awsAccessKey = "";
-			String awsSecretKey = ""; 
+			String awsSecretKey = "/"; 
 			String clientRegion = "ap-northeast-2";
 
 			// S3 버킷과 파일명

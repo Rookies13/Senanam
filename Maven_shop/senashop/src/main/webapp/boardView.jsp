@@ -110,7 +110,7 @@
                                 String file_name = rs.getString("name");
                                 if( file_name != null){
                                     out.print("<tr><td width='20%'>첨부파일</td>");
-                                    String fileDownloadLink = "download.jsp?file_name=" + java.net.URLEncoder.encode(file_name, "UTF-8");
+                                    String fileDownloadLink = "https://senanam.s3.ap-northeast-2.amazonaws.com/" + java.net.URLEncoder.encode(file_name, "UTF-8");
                                     out.print("<td colspan='3'><a href='" + fileDownloadLink + "'>" + file_name + "</a></td>");
                                     out.print("</tr>");
                                 }
@@ -122,10 +122,12 @@
                         <%
                         int boardNumber = rs.getInt("board_number");
                         String link = "boardEdit.jsp?board_number=" + boardNumber;
+                        if (rs.getString("id").equals(id)){
                         %>
                         <input type="button" onclick="location.href='<%=link%>'" value="수정">
                         <input type="button" onclick="deletePost('<%=board_number%>')" value="삭제">
                         <%
+                        }
                         rs.close();
                         pstmt.close();
                         conn.close();

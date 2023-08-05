@@ -84,7 +84,7 @@
                     Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 
                     // SQL 쿼리 실행
-                    String sql = "SELECT * FROM PRODUCT WHERE PRODUCT_NAME LIKE '%" + searchKeyword + "%'";
+                    String sql = "SELECT * FROM PRODUCT WHERE PRODUCT_NAME LIKE '%" + searchKeyword + "%' order by 1";
                     Statement stmt = conn.createStatement();
                     //stmt.setString(1, "%" + searchKeyword + "%");
                     ResultSet rs = stmt.executeQuery(sql);
@@ -92,7 +92,7 @@
                     // 검색 결과를 리스트로 만듦
                     while (rs.next()) {
                         String productName = rs.getString("PRODUCT_NAME");
-                        String productIamges = rs.getString("PRODUCT_IMAGES");
+                        String productIamges = "https://senanam.s3.ap-northeast-2.amazonaws.com/"+rs.getString("PRODUCT_IMAGES");
                         String productText = rs.getString("PRODUCT_TEXT");
                         int productPrice = rs.getInt("PRODUCT_PRICE");
                         int productNumber = rs.getInt("PRODUCT_NUM");
@@ -214,7 +214,7 @@
             Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 
             // SQL 쿼리 실행
-            String sql = "SELECT * FROM PRODUCT";
+            String sql = "SELECT * FROM PRODUCT ORDER BY 1";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -223,7 +223,7 @@
                 String productName = rs.getString("PRODUCT_NAME");
                 int price = rs.getInt("PRODUCT_PRICE");
                 String description = rs.getString("PRODUCT_TEXT");
-                String image = rs.getString("PRODUCT_IMAGES");
+                String image ="https://senanam.s3.ap-northeast-2.amazonaws.com/"+ rs.getString("PRODUCT_IMAGES");
                 int productNumber = rs.getInt("PRODUCT_NUM");
 
                 Product product = new Product(productName, price, description, image, productNumber);

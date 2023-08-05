@@ -10,6 +10,9 @@
 <%
 	String id = (String)session.getAttribute("user_id");
 	String name = (String)session.getAttribute("user_name");
+	Integer userLevel = (Integer) session.getAttribute("user_level");
+    
+    int level = (userLevel != null) ? userLevel : 0;
 %>
 <html>
 	<head>
@@ -41,6 +44,7 @@
 				<li><a href="cart.jsp">장바구니</a></li>
 				<li><a href="boardList.jsp">문의게시판</a></li>
 				<li><a href="qna.jsp">Q&A</a></li>
+				<% if (level >= 1) {%><li><a href="admin.jsp"> 관리자페이지</a></li> <%}%>
 			</ul>
 		</nav>
 		<!-- Header -->

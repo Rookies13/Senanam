@@ -31,11 +31,13 @@ public class LoginServlet extends HttpServlet {
 
             if (rs.next()) { // 로그인 성공(인증의 수단 session)
                 id = rs.getString("ID");
-                String name = rs.getString("PASSWD");
+                String name = rs.getString("NAME");
+                int level = rs.getInt("USER_LEVEL");
 
                 HttpSession session = request.getSession();
                 session.setAttribute("user_id", id);
                 session.setAttribute("user_name", name);
+                session.setAttribute("user_level", level);
 
                 response.sendRedirect("index.jsp"); // 페이지 이동
 

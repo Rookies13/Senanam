@@ -11,8 +11,13 @@
         Class.forName("oracle.jdbc.driver.OracleDriver"); //driver
         Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin", "12345678");
         
-        String deleteSql = "DELETE FROM board WHERE board_number = ?";
+        String deleteSql = "DELETE FROM attachment WHERE board_number = ?";
         PreparedStatement pstmt = conn.prepareStatement(deleteSql);
+        pstmt.setInt(1, board_number);
+        pstmt.executeUpdate();
+
+        deleteSql = "DELETE FROM board WHERE board_number = ?";
+        pstmt = conn.prepareStatement(deleteSql);
         pstmt.setInt(1, board_number);
         pstmt.executeUpdate();
         pstmt.close();
