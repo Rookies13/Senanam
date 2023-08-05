@@ -11,30 +11,39 @@ Welcome to the VS Code Java world. Here is a guideline to help you get started t
 
 ## Folder Structure
 
-![image](https://github.com/Rookies13/Senanam/assets/140288335/f343552d-85f7-49e6-9bb9-06e0872f90ad)
+![image](https://github.com/Rookies13/Senanam/assets/140288335/e16fef2b-0d61-46dd-9441-4ffb7e86376f)
+
 
 
 ## Dependency Management
 1. **JDK : ZULU-17**
      https://www.azul.com/downloads/?package=jdk#zulu
-   ![image](https://github.com/Rookies13/Senanam/assets/140288335/65728b13-509f-4600-8076-01e97317052c)
+
+   ![image](https://github.com/Rookies13/Senanam/assets/140288335/54af6e77-4ede-4bdd-9044-5c57b663a79d)
 
 
-2. **Tomcat : tomcat 8.5.91 (32/64-bit Windwows service Installer)**
+
+3. **Tomcat : tomcat 8.5.91 (32/64-bit Windwows service Installer)**
       https://tomcat.apache.org/download-80.cgi
-![image](https://github.com/Rookies13/Senanam/assets/140288335/5cd29ba7-f936-494b-a897-e652ce8a93d1)
+
+   ![image](https://github.com/Rookies13/Senanam/assets/140288335/1bb65589-1390-4513-9e8c-da25d92bfbf5)
 
 
-3. **build system : apache-maven-3.9.3-bin.zip**
+
+5. **build system : apache-maven-3.9.3-bin.zip**
      https://maven.apache.org/download.cgi
-  ![image](https://github.com/Rookies13/Senanam/assets/140288335/8769b277-b1bd-4456-9428-7bd520c8353a)
 
-> Path
-  ![image](https://github.com/Rookies13/Senanam/assets/140288335/1180f5a5-dd59-40a5-a180-891566b5f4a8)
+  ![image](https://github.com/Rookies13/Senanam/assets/140288335/7ccf314f-f6c3-4a53-b635-7e842a5b8dc7)
 
+
+> JAVA Path
+
+  ![image](https://github.com/Rookies13/Senanam/assets/140288335/3215324c-7e83-412d-ad58-278f1ff146e6)
 
 
 > If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+
+  ![image](https://github.com/Rookies13/Senanam/assets/140288335/edbf7cc2-55cf-4d46-9158-ea917790ec7c)
 
   >"rsp-ui.rsp.java.home": "C:\\Program Files\\Zulu\\zulu-17",
 
@@ -65,44 +74,51 @@ Visual Studio Code를 실행하고, 왼쪽 사이드바에서 "Extensions" 아�
 Visual Studio Code를 실행한 후, 확장 기능(Extensions) 메뉴에서 "Java Extension Pack"을 검색하여 설치합니다. 이 확장 기능은 Java 개발에 필요한 기능들을 제공합니다.
 
 (5) Community Server Connector 설치 : 
-참고 : 
-https://goodteacher.tistory.com/614
+참고 : https://goodteacher.tistory.com/614
 
 (6) maven project manager (microsoft) 설치
 
 (7) java project manager (microsoft) 설치 
 
 
-## Debugging
+## BUILD & Debugging
 
-![image](https://github.com/Rookies13/Senanam/assets/140288335/095c32f9-8392-4cce-88e4-73a0c3aa3a8a)
+> BUILD
+![image](https://github.com/Rookies13/Senanam/assets/140288335/de74d766-8800-4b57-8109-f0f1025a7e16)
+
+> Debugging
+![image](https://github.com/Rookies13/Senanam/assets/140288335/432f0e5d-8f5d-4f7d-a294-a905627df6eb)
+
 
 
 ## GitGraph -  PUSH COMMIT DELETE DROP 
 1. **main branch checkout**
      > checkout *main* branch
-     
-     ![image](https://github.com/Rookies13/Senanam/assets/140288335/9937f59d-f64a-42b6-8e3b-fb93dc62aa62)
+
+     ![image](https://github.com/Rookies13/Senanam/assets/140288335/e92a92f2-9a3b-4afe-9e4a-5e8cc0aa58ef)
+
 
 
 2. **stasging -> comiit**
       >
-
-![image](https://github.com/Rookies13/Senanam/assets/140288335/4c649456-c23d-49a0-9fc4-4da635604d52)
+   ![image](https://github.com/Rookies13/Senanam/assets/140288335/f0e9a530-9cae-422c-b43e-d33c2deffcf8)
 
 
 (1) 소스제어 - (날짜, 이름) - 변경사항 적고 커밋.  
 
 3. **create branch**
-    > push branch 
+    
+> create branch
+![image](https://github.com/Rookies13/Senanam/assets/140288335/ff5ebebd-78a6-4d41-83e9-362e08c1fbb2)
 
+> push branch 
 ![image](https://github.com/Rookies13/Senanam/assets/140288335/cee195f9-657f-486f-bb3c-b9a4a2f8570b)
 
 ### DB 
- > info  **AWS RDS oracle**
+ > info
+  **AWS RDS oracle 19C**
 
 ## ERD 
 
-![image](https://github.com/Rookies13/Senanam/assets/140288335/96ccfe4e-cb3c-4bad-b533-b956ef630e87)
-
+![image](https://github.com/Rookies13/Senanam/assets/140288335/0d734bcf-089c-4eef-bda5-d5ab0edd373f)
 
