@@ -37,14 +37,6 @@ public class joinServlet extends HttpServlet {
         String TERMCHECK = request.getParameter("termCheck");
         Timestamp CREATED_AT = new Timestamp(new Date().getTime());
 
-        request.setAttribute("username", ID);
-        request.setAttribute("name", NAME);
-        request.setAttribute("email", EMAIL);
-        request.setAttribute("mobile", MOBILE);
-        request.setAttribute("zipcode", ZIPCODE);
-        request.setAttribute("address1", ADDRESS1);
-        request.setAttribute("address2", ADDRESS2);
-
         if (isIdExists(ID)) {
             out.println("<script>");
             out.println("alert('이미 사용 중인 ID입니다. 다른 ID를 입력해주세요.');");
@@ -103,7 +95,7 @@ public class joinServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             out.println("<script>");
-            out.println("alert('회원 가입 중 오류가 발생했습니다.');");
+            out.println("alert('회원 가입 중 오류가 발생했습니다.\\n에러 메시지: " + e.getMessage() + "');");
             out.println("window.history.back();");
             out.println("</script>");
         } finally {
