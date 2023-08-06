@@ -75,7 +75,6 @@ public class joinServlet extends HttpServlet {
         Connection conn = null;
         Statement stmt = null;
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DatabaseConnectionPool.getConnection();
             stmt = conn.createStatement();
 
@@ -121,7 +120,6 @@ public class joinServlet extends HttpServlet {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DatabaseConnectionPool.getConnection();
             stmt = conn.createStatement();
             String sql = "SELECT COUNT(*) FROM member WHERE ID = '" + ID + "'";
@@ -153,7 +151,6 @@ public class joinServlet extends HttpServlet {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DatabaseConnectionPool.getConnection();
             stmt = conn.createStatement();
             String sql = "SELECT COUNT(*) FROM member WHERE NAME = '" + NAME + "'";
