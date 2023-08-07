@@ -30,6 +30,20 @@ try {
     // 데이터베이스에 접속
     conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
+    //멤버포인트검색
+    pstmt = conn.prepareStatement("SELECT POINT FROM ADMIN.MEMBER WHERE ID = ?");
+    pstmt.setString(1, userId);
+    ResultSet rs = pstmt.executeQuery();
+
+    int memberPoint = 0;
+    if (rs.next()) {
+      memberPoint = rs.getInt("POINT");
+    }
+
+    if (memberPoint>Integer.parseInt(totalPrice))
+    {
+
+    
     // INSERT 쿼리 작성
     String sqlQuery = "INSERT INTO ORDER_TABLE (ORDER_NUMBER, ID, TOTAL_PRICE, ADDRESS, ZIPCODE) VALUES (?, ?, ?, ?, ?)";
     pstmt = conn.prepareStatement(sqlQuery);
@@ -44,6 +58,14 @@ try {
     // INSERT 쿼리 실행
     int rowsAffected = pstmt.executeUpdate();
 
+    int updatedPoint = memberPoint - Integer.parseInt(totalPrice);
+    pstmt = conn.prepareStatement("UPDATE ADMIN.MEMBER SET POINT = ? WHERE ID = ?");
+    pstmt.setInt(1, updatedPoint);
+    pstmt.setString(2, userId);
+    pstmt.executeUpdate();
+
+
+
     if (rowsAffected > 0) {
         // INSERT 성공 후 "결제 완료" 알림을 띄웁니다.
         out.println("<script>");
@@ -54,7 +76,14 @@ try {
     } else {
         out.println("Failed to insert data.");
     }
-
+}
+else
+{
+    out.println("<script>");
+    out.println("alert('포인트가 부족합니다.');");
+    out.println("location.href='cart.jsp';"); // index.jsp로 리다이렉트
+    out.println("</script>");
+}
 } catch (Exception e) {
     out.print("error");
     e.printStackTrace();
@@ -67,6 +96,7 @@ try {
         e.printStackTrace();
     }
 }
+
 %>
 
 </body>

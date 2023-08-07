@@ -199,7 +199,7 @@
           </a>
         </div>
         <div class="listContainer">
-          <a href="#" class="item">
+          <a href="wallet.jsp" class="item">
             <div class="icon">ii</div>
             <div class="text">
               <span>내지갑</span>
