@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/css/main.css" />
-    <title>쇼핑몰 관리자 페이지 - 문의 게시글 조회</title>
+    <title>SENASHOP 관리자 페이지 - 문의 게시글 조회</title>
 </head>
 <body>
-    <h1>쇼핑몰 관리자 페이지 - 문의 게시글 조회</h1>
+    <h1>SENASHOP 관리자 페이지 - 문의 게시글 조회</h1>
 
     <%-- 문의 게시글 조회 및 댓글 작성 시작 --%>
     <section>
