@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/term")
 public class termServlet extends HttpServlet {
@@ -18,9 +19,11 @@ public class termServlet extends HttpServlet {
         boolean privacyAgree = "true".equals(request.getParameter("privacy_agree"));
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
 
         if (termsAgree && privacyAgree) {
             // Both checkboxes are checked, proceed to join.jsp
+            session.setAttribute("termCheck", "Y");
             response.sendRedirect("join.jsp");
         } else {
             // One or both checkboxes are not checked, redirect back to the form

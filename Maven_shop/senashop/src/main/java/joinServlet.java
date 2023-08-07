@@ -1,10 +1,12 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +14,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import db.DatabaseConnectionPool;
+import db.QueryDAO;
+import db.model.Members;
 
 @WebServlet("/register")
 public class joinServlet extends HttpServlet {
+    QueryDAO queryDAO = new QueryDAO();
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
@@ -35,8 +40,7 @@ public class joinServlet extends HttpServlet {
         String ADDRESS2 = request.getParameter("address2");
         int USER_LEVEL = Integer.parseInt(request.getParameter("user_level"));
         String TERMCHECK = request.getParameter("termCheck");
-        // Timestamp CREATED_AT = new Timestamp(new Date().getTime());
-        Timestamp CREATED_AT = new Timestamp(System.currentTimeMillis());
+        Timestamp CREATED_AT = new Timestamp(new Date().getTime());
 
         if (isIdExists(ID)) {
             out.println("<script>");
@@ -72,38 +76,21 @@ public class joinServlet extends HttpServlet {
         }
 
         // DB 연결 및 회원 정보 삽입
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            conn = DatabaseConnectionPool.getConnection();
-            stmt = conn.createStatement();
-            String sql = "INSERT INTO member (ID, PASSWD, NAME, EMAIL, MOBILE, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMCHECK, CREATED_AT) "
-                    + "VALUES ('" + ID + "', '" + PASSWD + "', '" + NAME + "', '" + EMAIL + "', '" + MOBILE + "', '"
-                    + ZIPCODE
-                    + "', '" + ADDRESS1 + "', '" + ADDRESS2 + "', '" + USER_LEVEL + "', '" + TERMCHECK + "', '"
-                    + CREATED_AT + "')";
-            stmt.executeUpdate(sql);
-
+        Members user = new Members(ID, PASSWD, NAME, MOBILE, EMAIL, ZIPCODE, ADDRESS1, ADDRESS2,
+                USER_LEVEL, TERMCHECK, CREATED_AT);
+        boolean inserted = queryDAO.insertUser(user);
+        if (inserted) {
             out.println("<script>");
             out.println("alert('회원 가입이 완료되었습니다!');");
             out.println("window.location.href='index.jsp';");
             out.println("</script>");
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            out.close();
+        } else {
             out.println("<script>");
-            out.println("alert('회원 가입 중 오류가 발생했습니다.\\n에러 메시지: " + e.getMessage() + "');");
+            out.println("alert('회원 가입 중 오류가 발생했습니다.');");
             out.println("window.history.back();");
             out.println("</script>");
-        } finally {
-            try {
-                if (stmt != null)
-                    stmt.close();
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            out.close();
         }
     }
 
@@ -119,7 +106,10 @@ public class joinServlet extends HttpServlet {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            conn = DatabaseConnectionPool.getConnection();
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            conn = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin",
+                    "12345678");
             stmt = conn.createStatement();
             String sql = "SELECT COUNT(*) FROM member WHERE ID = '" + ID + "'";
             rs = stmt.executeQuery(sql);
@@ -150,7 +140,10 @@ public class joinServlet extends HttpServlet {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            conn = DatabaseConnectionPool.getConnection();
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            conn = DriverManager.getConnection(
+                    "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin",
+                    "12345678");
             stmt = conn.createStatement();
             String sql = "SELECT COUNT(*) FROM member WHERE NAME = '" + NAME + "'";
             rs = stmt.executeQuery(sql);
