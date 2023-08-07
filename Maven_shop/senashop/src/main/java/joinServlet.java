@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.DatabaseConnectionPool;
 import db.QueryDAO;
 import db.model.Members;
 
@@ -106,10 +106,7 @@ public class joinServlet extends HttpServlet {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            conn = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin",
-                    "12345678");
+            conn = DatabaseConnectionPool.getConnection();
             stmt = conn.createStatement();
             String sql = "SELECT COUNT(*) FROM member WHERE ID = '" + ID + "'";
             rs = stmt.executeQuery(sql);
@@ -140,10 +137,7 @@ public class joinServlet extends HttpServlet {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            conn = DriverManager.getConnection(
-                    "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin",
-                    "12345678");
+            conn = DatabaseConnectionPool.getConnection();
             stmt = conn.createStatement();
             String sql = "SELECT COUNT(*) FROM member WHERE NAME = '" + NAME + "'";
             rs = stmt.executeQuery(sql);
