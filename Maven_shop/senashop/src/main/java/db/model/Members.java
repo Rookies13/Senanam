@@ -16,6 +16,21 @@ public class Members {
     private Timestamp createAt;
     private int point;
 
+    public Members(String id, String pw, String nm, String mb, String em, String zc, String ad1, String ad2,
+            int userLv, String termAgree, Timestamp createAt) {
+        this.id = id;
+        this.pw = pw;
+        this.nm = nm;
+        this.mb = mb;
+        this.em = em;
+        this.zc = zc;
+        this.ad1 = ad1;
+        this.ad2 = ad2;
+        this.userLv = userLv;
+        this.termAgree = termAgree;
+        this.createAt = createAt;
+    }
+
     public Members(String id, String nm, String mb, String em, String zc, String ad1, String ad2,
             int userLv, String termAgree, Timestamp createAt, int point) {
         this.id = id;
@@ -51,6 +66,14 @@ public class Members {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getPw() {
+        return pw;
+    }
+
+    public void setPw(String pw) {
+        this.pw = pw;
     }
 
     public String getNm() {

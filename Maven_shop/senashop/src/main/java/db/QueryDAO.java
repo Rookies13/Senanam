@@ -4,9 +4,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,13 +12,13 @@ import java.util.List;
 import java.util.Map;
 
 import db.model.Board;
+import db.model.Cart;
 import db.model.Members;
 import db.model.Orders;
-import db.model.Cart;
 
 //0730-이순빈-쿼리 실행 환경 구성
 public class QueryDAO {
-    private static final String INSERT_USERS_SQL = "INSERT INTO MEMBER (ID, PASSWD, NAME, MOBILE, EMAIL, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMS_AGREE, CREATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_USERS_SQL = "INSERT INTO MEMBER (ID, PASSWD, NAME, MOBILE, EMAIL, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMCHECK, CREATED_AT) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_USER_BY_ID = "SELECT * FROM MEMBER WHERE id = ?";
     private static final String SELECT_ALL_USERS = "SELECT * FROM MEMBER";
     private static final String SELECT_ALL_BOARD = "SELECT * FROM BOARD";
@@ -47,9 +45,11 @@ public class QueryDAO {
     }
 
     // 가입 쿼리
-    public void insertUser(Members user) throws SQLException {
+    public boolean insertUser(Members user) {
+        boolean rowInserted = false;
         try (Connection connection = DatabaseConnectionPool.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
+<<<<<<< HEAD
 
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -57,7 +57,24 @@ public class QueryDAO {
 
             }
 
+=======
+            preparedStatement.setString(1, user.getId());
+            preparedStatement.setString(2, user.getPw());
+            preparedStatement.setString(3, user.getNm());
+            preparedStatement.setString(4, user.getMb());
+            preparedStatement.setString(5, user.getEm());
+            preparedStatement.setString(6, user.getZc());
+            preparedStatement.setString(7, user.getAd1());
+            preparedStatement.setString(8, user.getAd2());
+            preparedStatement.setInt(9, user.getUserLv());
+            preparedStatement.setString(10, user.getTermAgree());
+            preparedStatement.setTimestamp(11, user.getCreateAt());
+            rowInserted = preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            printSQLException(e);
+>>>>>>> 422f069f57092a9e0534ca1ade39f9c0dc9d9e52
         }
+        return rowInserted;
     }
 
     // 조회 쿼리 try catch resource

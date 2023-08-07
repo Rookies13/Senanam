@@ -52,5 +52,13 @@
       <servlet-name>s3upload</servlet-name>
       <url-pattern>/s3upload</url-pattern>
   </servlet-mapping>
+ <servlet>
+    <servlet-name>joinServlet</servlet-name>
+    <servlet-class>joinServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>joinServlet</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
   
 </web-app>
