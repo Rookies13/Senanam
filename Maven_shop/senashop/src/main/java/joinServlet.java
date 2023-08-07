@@ -5,17 +5,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.util.Date;
 
 import javax.servlet.ServletException;
-// import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import db.DatabaseConnectionPool;
 
-// @WebServlet("/register")
+@WebServlet("/register")
 public class joinServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -36,7 +35,8 @@ public class joinServlet extends HttpServlet {
         String ADDRESS2 = request.getParameter("address2");
         int USER_LEVEL = Integer.parseInt(request.getParameter("user_level"));
         String TERMCHECK = request.getParameter("termCheck");
-        Timestamp CREATED_AT = new Timestamp(new Date().getTime());
+        // Timestamp CREATED_AT = new Timestamp(new Date().getTime());
+        Timestamp CREATED_AT = new Timestamp(System.currentTimeMillis());
 
         if (isIdExists(ID)) {
             out.println("<script>");
@@ -77,7 +77,6 @@ public class joinServlet extends HttpServlet {
         try {
             conn = DatabaseConnectionPool.getConnection();
             stmt = conn.createStatement();
-
             String sql = "INSERT INTO member (ID, PASSWD, NAME, EMAIL, MOBILE, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMCHECK, CREATED_AT) "
                     + "VALUES ('" + ID + "', '" + PASSWD + "', '" + NAME + "', '" + EMAIL + "', '" + MOBILE + "', '"
                     + ZIPCODE
