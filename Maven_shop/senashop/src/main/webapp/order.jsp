@@ -16,6 +16,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="assets/css/main.css" />
 </head>
+<script>
+    if(!<%=
+    session.getAttribute("user_id")%>) {
+      alert("로그인 후 이용해주세요.");
+      location.href="login.jsp";
+    }
+  </script>
 <body>
 
     <!-- Header -->
@@ -93,9 +100,10 @@
                                     pstmt = conn.prepareStatement(sqlQuery);
                                     pstmt.setString(1, orderNumberParam);
                                 } else {
-                                    // 주문번호 파라미터가 없을 경우 모든 데이터 조회
-                                    sqlQuery = "SELECT * FROM ORDER_PRODUCT";
-                                    pstmt = conn.prepareStatement(sqlQuery);
+                                        out.println("<script>");
+                                        out.println("alert('상품 선택 오류\n다시 선택하세요');");
+                                        out.println("location.href='cart.jsp';"); // cart.jsp로 리다이렉트
+                                        out.println("</script>");
                                 }
                                 rs = pstmt.executeQuery();
 
@@ -137,16 +145,13 @@
                 </table>
             </div>
 
-
-
-
             <h3>배송지</h3>
             <form action="addorderlist.jsp" method="get">
                 
             <input type="hidden" name="total_price" value="<%=tp%>">
             <input type="hidden" name="order_number" value="<%=odn%>">
-                우편번호<input type="text" name="zipcode"><br/>
-                배달지<input type="text" name="address"><br/>
+                우편번호<input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="zipcode" required><br/>
+                배달지<input type="text" name="address" required><br/>
                 <div align="right">
                     <input type="submit" value="결제">
                 </div>
