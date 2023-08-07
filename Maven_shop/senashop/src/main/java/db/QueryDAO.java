@@ -51,6 +51,12 @@ public class QueryDAO {
         try (Connection connection = DatabaseConnectionPool.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
 
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+
+            }
+
         }
     }
 
@@ -77,8 +83,9 @@ public class QueryDAO {
                 int userLevel = rs.getInt("USER_LEVEL");
                 String termAgree = rs.getString("TERMCHECK");
                 Timestamp createDate = rs.getTimestamp("CREATED_AT");
+                int point = rs.getInt("POINT");
                 member.add(new Members(id, name, mobile, email, zipcode, address1, address2, userLevel, termAgree,
-                        createDate));
+                        createDate, point));
             }
         } catch (SQLException e) {
             printSQLException(e);

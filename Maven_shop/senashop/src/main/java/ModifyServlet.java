@@ -91,7 +91,7 @@ public class ModifyServlet extends HttpServlet {
         String updatedAd2 = request.getParameter("address2");
 
         Members user = new Members(id, updatedName, updatedMobile, updatedEmail, updatedZipCode, updatedAd1, updatedAd2,
-                0, termAgree, createAt);
+                0, termAgree, createAt, 0);
 
         boolean updated = queryDAO.updateUser(user);
 

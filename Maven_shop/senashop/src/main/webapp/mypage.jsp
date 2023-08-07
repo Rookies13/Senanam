@@ -114,9 +114,9 @@
             </form>
           </div>
           <% } %>
-          <% member = null; %>
         </div>
         <div class="summaryContainer">
+          <% for (Members m : member) { %>
           <div class="item" style=" background-color: rgb(255, 255, 255); cursor: pointer;" onclick="location.href='qna.jsp';">
             <div class="number"><%= counts[1] %></div>
             <div>상품문의</div>
@@ -130,10 +130,12 @@
             <div>비밀글</div>
           </div>
           <div class="item" style=" background-color: rgb(255, 255, 255); cursor: pointer;" onclick="location.href='';">
-            <div class="number"><%= counts[3] * 100 %></div>
+            <div class="number"><%=m.getPoint() %></div>
             <div>적립금(point)</div>
           </div>
         </div>
+        <% } %>
+        <% member = null; %>
         <div class="shippingStatusContainer">
           <div class="title">
             주문/배송조회
