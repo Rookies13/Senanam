@@ -135,6 +135,8 @@
                                     if(userId=="null"){
                                         alert("로그인 하세요!");
                                         window.location.href = 'index.jsp';
+                                    } else if (productCount == "") {
+                                        alert("개수를 선택하세요!");
                                     } else {
                                     window.location.href = 'cartProcess.jsp?productNum=' + productNum + '&productCount=' + productCount + '&productPrice=' + productPrice + '&userId=' + userId;
                                     }
@@ -281,6 +283,8 @@
                             if(userId=="null"){
                                 alert("로그인 하세요!");
                                 window.location.href = 'index.jsp';
+                            } else if(productCount=="") {
+                                alert("개수를 선택하세요!");
                             } else {
                             window.location.href = 'cartProcess.jsp?productNum=' + productNum + '&productCount=' + productCount + '&productPrice=' + productPrice + '&userId=' + userId;
                             }
