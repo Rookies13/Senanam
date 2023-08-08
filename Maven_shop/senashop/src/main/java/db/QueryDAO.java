@@ -49,15 +49,6 @@ public class QueryDAO {
         boolean rowInserted = false;
         try (Connection connection = DatabaseConnectionPool.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(INSERT_USERS_SQL)) {
-<<<<<<< HEAD
-
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-
-            }
-
-=======
             preparedStatement.setString(1, user.getId());
             preparedStatement.setString(2, user.getPw());
             preparedStatement.setString(3, user.getNm());
@@ -72,11 +63,9 @@ public class QueryDAO {
             rowInserted = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             printSQLException(e);
->>>>>>> 422f069f57092a9e0534ca1ade39f9c0dc9d9e52
         }
         return rowInserted;
     }
-
     // 조회 쿼리 try catch resource
 
     public List<Members> selectUser(String id) {

@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,12 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< HEAD
-import db.DatabaseConnectionPool;
-
-@WebServlet("/register")
-public class joinServlet extends HttpServlet {
-=======
 import db.QueryDAO;
 import db.model.Members;
 
@@ -26,7 +21,6 @@ import db.model.Members;
 public class joinServlet extends HttpServlet {
     QueryDAO queryDAO = new QueryDAO();
 
->>>>>>> 422f069f57092a9e0534ca1ade39f9c0dc9d9e52
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html; charset=UTF-8");
@@ -63,40 +57,6 @@ public class joinServlet extends HttpServlet {
             out.println("</script>");
             return; // 회원가입 거부
         }
-<<<<<<< HEAD
-
-        if (!PASSWD.equals(CONFIRM_PASSWD)) {
-            out.println("<script>");
-            out.println("alert('비밀번호가 일치하지 않습니다. 다시 시도해주세요.');");
-            out.println("window.history.back();");
-            out.println("</script>");
-            return; // 회원가입 거부
-        }
-
-        // 비밀번호 유효성 검사 (최소 8자리 이상, 영문자와 숫자 조합)
-        if (!isValidPassword(PASSWD)) {
-            out.println("<script>");
-            out.println("alert('비밀번호는 최소 8자리 이상이어야 하며, 영문자와 숫자를 포함해야 합니다.');");
-            out.println("window.history.back();");
-            out.println("</script>");
-            return; // 회원가입 거부
-        }
-
-        // DB 연결 및 회원 정보 삽입
-        Connection conn = null;
-        Statement stmt = null;
-        try {
-            conn = DatabaseConnectionPool.getConnection();
-            stmt = conn.createStatement();
-
-            String sql = "INSERT INTO member (ID, PASSWD, NAME, EMAIL, MOBILE, ZIPCODE, ADDRESS1, ADDRESS2, USER_LEVEL, TERMCHECK, CREATED_AT) "
-                    + "VALUES ('" + ID + "', '" + PASSWD + "', '" + NAME + "', '" + EMAIL + "', '" + MOBILE + "', '"
-                    + ZIPCODE
-                    + "', '" + ADDRESS1 + "', '" + ADDRESS2 + "', '" + USER_LEVEL + "', '" + TERMCHECK + "', '"
-                    + CREATED_AT + "')";
-            stmt.executeUpdate(sql);
-
-=======
 
         if (!PASSWD.equals(CONFIRM_PASSWD)) {
             out.println("<script>");
@@ -120,29 +80,10 @@ public class joinServlet extends HttpServlet {
                 USER_LEVEL, TERMCHECK, CREATED_AT);
         boolean inserted = queryDAO.insertUser(user);
         if (inserted) {
->>>>>>> 422f069f57092a9e0534ca1ade39f9c0dc9d9e52
             out.println("<script>");
             out.println("alert('회원 가입이 완료되었습니다!');");
             out.println("window.location.href='index.jsp';");
             out.println("</script>");
-<<<<<<< HEAD
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            out.println("<script>");
-            out.println("alert('회원 가입 중 오류가 발생했습니다.\\n에러 메시지: " + e.getMessage() + "');");
-            out.println("window.history.back();");
-            out.println("</script>");
-        } finally {
-            try {
-                if (stmt != null)
-                    stmt.close();
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-=======
             out.close();
         } else {
             out.println("<script>");
@@ -150,7 +91,6 @@ public class joinServlet extends HttpServlet {
             out.println("window.history.back();");
             out.println("</script>");
             out.close();
->>>>>>> 422f069f57092a9e0534ca1ade39f9c0dc9d9e52
         }
     }
 
@@ -166,14 +106,10 @@ public class joinServlet extends HttpServlet {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-<<<<<<< HEAD
-            conn = DatabaseConnectionPool.getConnection();
-=======
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DriverManager.getConnection(
                     "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin",
                     "12345678");
->>>>>>> 422f069f57092a9e0534ca1ade39f9c0dc9d9e52
             stmt = conn.createStatement();
             String sql = "SELECT COUNT(*) FROM member WHERE ID = '" + ID + "'";
             rs = stmt.executeQuery(sql);
@@ -204,14 +140,10 @@ public class joinServlet extends HttpServlet {
         Statement stmt = null;
         ResultSet rs = null;
         try {
-<<<<<<< HEAD
-            conn = DatabaseConnectionPool.getConnection();
-=======
             Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DriverManager.getConnection(
                     "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl", "admin",
                     "12345678");
->>>>>>> 422f069f57092a9e0534ca1ade39f9c0dc9d9e52
             stmt = conn.createStatement();
             String sql = "SELECT COUNT(*) FROM member WHERE NAME = '" + NAME + "'";
             rs = stmt.executeQuery(sql);
