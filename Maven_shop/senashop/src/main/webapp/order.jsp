@@ -150,7 +150,7 @@
                 
             <input type="hidden" name="total_price" value="<%=tp%>">
             <input type="hidden" name="order_number" value="<%=odn%>">
-                우편번호<input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="zipcode" required><br/>
+                우편번호<input type="text" maxlength="5" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="zipcode" required><br/>
                 배달지<input type="text" name="address" required><br/>
                 <div align="right">
                     <input type="submit" value="결제">
