@@ -42,6 +42,9 @@
             background-color: #007bff;
             border-color: #007bff;
         }
+        h1 {
+            text-align: center;
+        }
     </style>
     <%
     String driver="oracle.jdbc.driver.OracleDriver";
@@ -61,7 +64,7 @@
         //String userId = request.getParameter("USER_ID");
 
         String userId = (String) session.getAttribute("user_id");
-        
+        String name = (String) session.getAttribute("user_name");
 
         if (userId != null && !userId.isEmpty()) {
             // 사용자 이름이 전달되었을 경우에만 데이터 조회 및 표시
@@ -77,8 +80,14 @@
 			<header id="header">
 				<a href="index.jsp" class="logo"><strong>세 나</strong> shop</a>
 				<nav>
-					<a href="#menu">Menu</a>
-				</nav>
+                    <% if(id != null) {%>
+                    <!--<a href="logout.jsp"> <%= id%> 로그아웃</a>-->
+                    <a href="LogoutServlet"> <%= userId%> 로그아웃</a>
+                    <% } else { %>
+                    <a href="login.jsp">로그인</a>
+                    <% } %>
+                    <a href="#menu">Menu</a>
+                </nav>
 
 			</header>
 
@@ -95,7 +104,6 @@
 		</nav>
 <!--기능구현-->
     <h1>장바구니</h1>
-    <p>사용자 이름: <%= userId %></p>
 <div style="padding: 60px";>
     <form action="delete_selected.jsp" method="post">
         <table border="1" style="table-layout: fixed; width: 100%;">
@@ -146,6 +154,11 @@
                     var row = checkboxes[i].parentNode.parentNode;
                     selectedCartNum.push(row.cells[0].innerText); // 첫 번째 열의 CART_NUM 값을 가져옴
                 }
+            }
+    
+            if (selectedCartNum.length === 0) {
+                alert("구매할 항목을 선택해주세요.");
+                return;
             }
     
             // CART_NUM의 값을 설정합니다.

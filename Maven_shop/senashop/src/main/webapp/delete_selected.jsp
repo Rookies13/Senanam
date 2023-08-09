@@ -37,11 +37,15 @@
             // 쿼리 실행
             int deletedRows = pstmt.executeUpdate();
 
-            out.println("<h3>" + deletedRows + "개의 항목이 삭제되었습니다.</h3>");
+            
             out.print("<script>location.href='cart.jsp';</script>");
             
         } else {
-            out.println("<h3>삭제할 항목을 선택해주세요.</h3>");
+            out.println("<script language='javascript'>");
+            out.println("alert('삭제할 항목을 선택해주세요')");
+            out.println("</script>");
+            out.print("<script>location.href='cart.jsp';</script>");
+            //out.println("<h3>삭제할 항목을 선택해주세요.</h3>");
         }
     } catch (Exception e) {
         e.printStackTrace();

@@ -31,7 +31,7 @@
         <input type="text" id="mobile" name="mobile" pattern="[0-9]{3}-[0-9]{3,4}-[0-9]{4}" placeholder="연락받으실 수 있는 전화번호를 입력해주세요 (예:000-0000-0000)" value="<%= request.getParameter("mobile") != null ? request.getParameter("mobile") : "" %>" required><br>
 
         <label for="zipcode">우편번호:</label>
-        <input type="text" id="zipcode" name="zipcode" placeholder="우편번호를 입력해주세요" value="<%= request.getParameter("zipcode") != null ? request.getParameter("zipcode") : "" %>" required><br>
+        <input type="text" id="zipcode" name="zipcode" pattern="[0-9]{5}" placeholder="우편번호(다섯자리 숫자)를 입력해주세요" value="<%= request.getParameter("zipcode") != null ? request.getParameter("zipcode") : "" %>" required><br>
 
         <label for="address1">기본주소:</label>
         <input type="text" id="address1" name="address1" placeholder="시/구/동 또는 도로명을 입력해주세요 (예:대구시 달서구 진천로 77 계룡리슈빌 아파트)" value="<%= request.getParameter("address1") != null ? request.getParameter("address1") : "" %>" required><br>
