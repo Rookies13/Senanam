@@ -40,6 +40,14 @@
     List<Orders> orders_o = queryDAO.selectOrderByUser(pkey);
     int tupleCount_c = orders_c.size();
     int tupleCount_o = orders_o.size();
+
+    int orderCount = 0;
+    for (Orders order : orders_o) {
+      if (order.getOrderCheck() == 1) {
+        orderCount++;
+    }
+}
+
     
     //리소스 해제 
     orders_c.clear();
@@ -158,7 +166,7 @@
             </div>
             <div class="item" style=" background-color: rgb(255, 255, 255); cursor: pointer;" onclick="location.href='';">
               <div>
-                <div class="green number">0</div> 
+                <div class="green number"><%= orderCount % ></div> 
                 <div class="text">배송중</div>
               </div>
               <div class="icon"> > </div>
@@ -174,14 +182,14 @@
       
         </div>
         <div class="listContainer">
-          <a href="order.jsp" class="item">
+          <a href="productsearch.jsp" class="item">
             <div class="icon">ii</div>
-            <div class="text">주문목록<span class="circle"></span></div>
+            <div class="text">새 상품<span class="circle"></span></div>
             <div class="right"> > </div>
           </a>
           <a href="boardList.jsp" class="item">
             <div class="icon">ii</div>
-            <div class="text">상품후기</div>
+            <div class="text">내가 쓴 글</div>
             <div class="right"> > </div>
           </a>
           <a href="qna.jsp" class="item">
@@ -200,6 +208,7 @@
             <div class="right"> > </div>
           </a>
         </div>
+        <% for (Members m : member) { %>
         <div class="listContainer">
           <a href="wallet.jsp" class="item">
             <div class="icon">ii</div>
@@ -211,7 +220,7 @@
               </span>
             </div>
             <div class="right">
-              <span class="blct">0</span> <!--기능 미구현-->
+              <span class="blct"><%= m.getPoint() %></span> 
               >
             </div>
           </a>
@@ -230,6 +239,7 @@
             </form>
           </a>
         </div>
+        <% } %>
         <div class="infoContainer">
           <a href="#" class="item">
             <div>icon</div>

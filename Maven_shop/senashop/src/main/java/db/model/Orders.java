@@ -6,16 +6,16 @@ public class Orders {
     private long orderNumber;
     private String id;
     private int totalPrice;
-    // private String cartOrOrder;
+    private int orderCheck;
     private String address;
     private String zipcode;
 
-    public Orders(long orderNumber, String id, int totalPrice, String cartOrOrder, String address, String zipcode) {
+    public Orders(long orderNumber, String id, int totalPrice, int orderCheck, String address, String zipcode) {
         super();
         this.orderNumber = orderNumber;
         this.id = id;
         this.totalPrice = totalPrice;
-        // this.cartOrOrder = cartOrOrder;
+        this.orderCheck = orderCheck;
         this.address = address;
         this.zipcode = zipcode;
     }
@@ -34,6 +34,14 @@ public class Orders {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public int getOrderCheck() {
+        return orderCheck;
+    }
+
+    public void setOrderCheck(int orderCheck) {
+        this.orderCheck = orderCheck;
     }
 
     public int getTotalPrice() {

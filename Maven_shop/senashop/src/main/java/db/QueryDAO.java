@@ -115,10 +115,10 @@ public class QueryDAO {
                 long orderNum = rs.getLong("ORDER_NUMBER");
                 // int orderNum = Integer.parseInt(rs.getString(0))
                 int totP = rs.getInt("TOTAL_PRICE");
-                // String cOrO = rs.getString("CART_OR_ORDER_HISTORY");
+                int orderCheck = rs.getInt("ORDER_CHECK");
                 String address = rs.getString("ADDRESS");
                 String zipC = rs.getString("ZIPCODE");
-                orders.add(new Orders(orderNum, id, totP, id, address, zipC));
+                orders.add(new Orders(orderNum, id, totP, orderCheck, address, zipC));
                 // orders.add(new Orders(orderNum, id, totP, address, zipC));
                 // orders.add(new
             }

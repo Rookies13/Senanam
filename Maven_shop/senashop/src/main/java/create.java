@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.criteria.Order;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -48,10 +49,17 @@ public class create extends HttpServlet {
         List<Orders> orders_o = queryDAO.selectOrderByUser(pkey);
         int tupleCount_c = orders_c.size();
         int tupleCount_o = orders_o.size();
+        int orderCount = 0;
+        for (Orders order : orders_o) {
+            if (order.getOrderCheck() == 1) {
+                orderCount++;
+            }
+        }
 
         QueryDAO queryDAOs = new QueryDAO();
 
-        // Map<String, List<Board>> boardLists = new queryDAO.selectAllBoardByUser(pkey);
+        // Map<String, List<Board>> boardLists = new
+        // queryDAO.selectAllBoardByUser(pkey);
         Map<String, List<Board>> boards = queryDAOs.selectAllBoardByUser("od");
 
         // 리소스 해제
@@ -78,6 +86,7 @@ public class create extends HttpServlet {
         // Members user = queryDAO.selectUser(column);
         // queryDAO.selectUser(column);
         // List<Orders> orders_c = queryDAO.selectOrderByUser(pkey, "Cart");
+
         orders_c.size();
         orders_c.clear();
         List<Members> member = queryDAO.selectUser(column);
