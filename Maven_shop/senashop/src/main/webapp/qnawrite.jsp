@@ -7,7 +7,18 @@
 <%
 	String id = (String)session.getAttribute("user_id");
 	String name = (String)session.getAttribute("user_name");
+
+    if (id==null  )   {
+        // Display an alert using JavaScript
+        response.setContentType("text/html");
+        out.println("<script type=\"text/javascript\">");
+        out.println("alert('로그인 해주세요');");
+        out.println("window.location.href='qna.jsp';");
+        out.println("</script>");
+        return; // Return to prevent the rest of the code from executing
+    }
 %>
+
 <html>
 <head>
     <title>세나샵</title>
