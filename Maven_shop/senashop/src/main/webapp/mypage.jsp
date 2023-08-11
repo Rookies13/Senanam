@@ -171,7 +171,7 @@
               </div>
               <div class="icon"> > </div>
             </div>
-            <div class="item" style=" background-color: rgb(255, 255, 255); cursor: pointer;" onclick="location.href='http://howways.blogspot.com';">
+            <div class="item" style=" background-color: rgb(255, 255, 255); cursor: pointer;" onclick="location.href='';">
               <div>
                 <div class="green number">0</div> 
                 <div class="text">구매확정</div>
