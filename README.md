@@ -126,13 +126,13 @@ reference : https://goodteacher.tistory.com/614
 
 ## TEST DB
 
+<resource-ref>
+<description>Oracle Datasource example</description>
+<res-ref-name>jdbc/aws</res-ref-name>
+<res-type>javax.sql.DataSource</res-type>
+<res-auth>Container</res-auth>
+</resource-ref>
 
-## DB Configuration
-
-*Branch* : DB
-*Commit* : 0d00d4ef6c0288df924796ba179bc6ebd85762d6
-
-*webapp - WEB-INF - META-INF - context.xml *
 
 <Context>
     <Resource name="jdbc/aws" auth="Container" type="javax.sql.DataSource"
@@ -142,10 +142,13 @@ reference : https://goodteacher.tistory.com/614
         url="jdbc:oracle:thin:@AWS Address:PORT" />
 </Context>
 
+## DB Configuration
+
+*Branch* : DB
+*Commit* : 0d00d4ef6c0288df924796ba179bc6ebd85762d6
+
+*webapp - WEB-INF - META-INF - context.xml *
+
+
+
 *webapp - WEB-INF - WEB-INF - web.xml *
-<resource-ref>
-<description>Oracle Datasource example</description>
-<res-ref-name>jdbc/aws</res-ref-name>
-<res-type>javax.sql.DataSource</res-type>
-<res-auth>Container</res-auth>
-</resource-ref>
