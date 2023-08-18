@@ -15,6 +15,17 @@
 	String id = (String)session.getAttribute("user_id");
 	String name = (String)session.getAttribute("user_name");
 %>
+<%
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if ("JSESSIONID".equals(cookie.getName())) {
+                cookie.setHttpOnly(false); // HttpOnly 속성 비활성화
+                response.addCookie(cookie); // 변경된 쿠키를 응답에 추가
+            }
+        }
+    }
+%>
 <!--
 	Binary by TEMPLATED
 	templated.co @templatedco

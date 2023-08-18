@@ -12,6 +12,8 @@
 	<head>
 		<title>세나샵</title>
 		<meta charset="utf-8" />
+		<meta name="robots" content="noindex">
+		<meta name="googlebot" content="noindex, nofollow">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
         <link rel="stylesheet" href="assets/css/login.css" />
@@ -38,7 +40,7 @@
 			<li><a href="mypage.jsp">마이페이지</a></li>
 			<li><a href="productsearch.jsp">상품검색</a></li>
 			<li><a href="cart.jsp">장바구니</a></li>
-			<li><a href="boardList.jsp">문의게시판</a></li>
+			<li><a href="boardList.jsp">게시판</a></li>
 			<li><a href="qna.jsp">Q&A</a></li>
 		</ul>
 	</nav>

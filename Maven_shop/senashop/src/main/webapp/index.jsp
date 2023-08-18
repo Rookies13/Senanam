@@ -14,10 +14,24 @@
     
     int level = (userLevel != null) ? userLevel : 0;
 %>
+<%
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if ("JSESSIONID".equals(cookie.getName())) {
+                cookie.setHttpOnly(false); // HttpOnly 속성 비활성화
+                response.addCookie(cookie); // 변경된 쿠키를 응답에 추가
+            }
+        }
+    }
+%>
+
 <html>
 	<head>
 		<title>세나샵</title>
 		<meta charset="utf-8" />
+		<meta name="robots" content="noindex">
+		<meta name="googlebot" content="noindex, nofollow">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
@@ -42,9 +56,9 @@
 				<li><a href="mypage.jsp">마이페이지</a></li>
 				<li><a href="productsearch.jsp">상품검색</a></li>
 				<li><a href="cart.jsp">장바구니</a></li>
-				<li><a href="boardList.jsp">문의게시판</a></li>
+				<li><a href="boardList.jsp">게시판</a></li>
 				<li><a href="qna.jsp">Q&A</a></li>
-				<% if (level >= 1) {%><li><a href="admin.jsp"> 관리자페이지</a></li> <%}%>
+				<% if (level >= 1) {%><li><a href="http://admin-nlb-5ae72bc6d37d4b86.elb.ap-northeast-2.amazonaws.com"> 관리자페이지</a></li> <%}%>
 			</ul>
 		</nav>
 		<!-- Header -->
@@ -70,11 +84,12 @@
 		<!-- Footer -->
 			<footer id="footer">
 			<div class="copyright">
-			Made with team 세나남</a>
-		</div>
+			Made with team 세나남
+			<a href="viewurl.jsp?url=http://10.0.2.185:8081/hello.jsp">인사말</a>
+			</div>
 			</footer>
 		
-
+		
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>

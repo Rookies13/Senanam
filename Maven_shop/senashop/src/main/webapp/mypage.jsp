@@ -93,7 +93,7 @@
         <li><a href="mypage.jsp">마이페이지</a></li>
         <li><a href="productsearch.jsp">상품검색</a></li>
         <li><a href="cart.jsp">장바구니</a></li>
-        <li><a href="boardList.jsp">문의게시판</a></li>
+        <li><a href="boardList.jsp">게시판</a></li>
         <li><a href="qna.jsp">Q&A</a></li>
       </ul>
     </nav>
@@ -143,7 +143,6 @@
           </div>
         </div>
         <% } %>
-        <% member = null; %>
         <div class="shippingStatusContainer">
           <div class="title">
             주문/배송조회
@@ -166,7 +165,7 @@
             </div>
             <div class="item" style=" background-color: rgb(255, 255, 255); cursor: pointer;" onclick="location.href='';">
               <div>
-                <div class="green number"><%= orderCount % ></div> 
+                <div class="green number"><%= orderCount%></div> 
                 <div class="text">배송중</div>
               </div>
               <div class="icon"> > </div>
@@ -208,9 +207,10 @@
             <div class="right"> > </div>
           </a>
         </div>
-        <% for (Members m : member) { %>
         <div class="listContainer">
           <a href="wallet.jsp" class="item">
+            <% for (Members m : member) { %>
+              
             <div class="icon">ii</div>
             <div class="text">
               <span>내지갑</span>
@@ -220,10 +220,11 @@
               </span>
             </div>
             <div class="right">
-              <span class="blct"><%= m.getPoint() %></span> 
-              >
+              <span class="blct"><%= m.getPoint()%></span> 
             </div>
           </a>
+          <% } %>
+          <% member = null; %>
           <a href="#" class="item">
             <div class="icon">ii</div>
             <div class="text">알림</div>
@@ -239,7 +240,6 @@
             </form>
           </a>
         </div>
-        <% } %>
         <div class="infoContainer">
           <a href="#" class="item">
             <div>icon</div>

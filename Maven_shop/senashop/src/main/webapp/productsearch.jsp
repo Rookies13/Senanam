@@ -21,6 +21,8 @@
 	<head>
 		<title>세나샵</title>
 		<meta charset="utf-8" />
+		<meta name="robots" content="noindex">
+		<meta name="googlebot" content="noindex, nofollow">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
@@ -43,7 +45,7 @@
                     <li><a href="mypage.jsp">마이페이지</a></li>
                     <li><a href="productsearch.jsp">상품검색</a></li>
                     <li><a href="cart.jsp">장바구니</a></li>
-                    <li><a href="boardList.jsp">문의게시판</a></li>
+                    <li><a href="boardList.jsp">게시판</a></li>
                     <li><a href="qna.jsp">Q&A</a></li>
                   </ul>
 			</nav>
@@ -53,7 +55,7 @@
         <!--검색-->
         <section id="search">
         <div class="container">
-        <form action="productsearch.jsp" method="get">
+        <form action="searchresult.jsp" method="get">
         <div class="row uniform 50%">
         <div class="4u 12u$(xsmall)">
             <input type="text" name="searchKeyword" placeholder="상품명을 입력하세요" size="20">
@@ -70,139 +72,47 @@
 
       
             <%-- 검색 결과를 표시 --%>
-        <%
-            String searchKeyword = request.getParameter("searchKeyword");
-            if (searchKeyword != null && !searchKeyword.isEmpty()) {
-                try {
-                    // 데이터베이스 연결 정보 설정
-                    String dbUrl = "jdbc:oracle:thin:@aws.c8fgbyyrj5ay.ap-northeast-2.rds.amazonaws.com:1521:orcl"; // 데이터베이스 URL
-                    String dbUsername = "admin"; // 데이터베이스 사용자명
-                    String dbPassword = "12345678"; // 데이터베이스 비밀번호
+       
+    <%!
+        public class Product {
+            private String productName;
+            private int price;
+            private String description;
+            private String image;
+            private int productNumber;
 
-                    // 데이터베이스 연결
-                    Class.forName("oracle.jdbc.driver.OracleDriver");
-                    Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+            public Product(String productName, int price, String description, String image, int productNumber) {
+                this.productName = productName;
+                this.price = price;
+                this.description = description;
+                this.image = image;
+                this. productNumber = productNumber;
+            }
 
-                    // SQL 쿼리 실행
-                    String sql = "SELECT * FROM PRODUCT WHERE PRODUCT_NAME LIKE '%" + searchKeyword + "%' order by 1";
-                    Statement stmt = conn.createStatement();
-                    //stmt.setString(1, "%" + searchKeyword + "%");
-                    ResultSet rs = stmt.executeQuery(sql);
+            public String getProductName() {
+                return productName;
+            }
 
-                    // 검색 결과를 리스트로 만듦
-                    while (rs.next()) {
-                        String productName = rs.getString("PRODUCT_NAME");
-                        String productIamges = "https://senanam.s3.ap-northeast-2.amazonaws.com/"+rs.getString("PRODUCT_IMAGES");
-                        String productText = rs.getString("PRODUCT_TEXT");
-                        int productPrice = rs.getInt("PRODUCT_PRICE");
-                        int productNumber = rs.getInt("PRODUCT_NUM");
-        %>
-    <div class="container">
-                <table class="alt">
-                <thead>
-                    <tr>
-                        <th>image</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><img src="<%= productIamges %>" height="100"></td>
-                        <td><%= productName %></td>
-                        <td><p><%= productText %></p><a>무료배송</a></td>
-                        <td><p><%= productPrice %>원</p><button onclick="handleButtonClick()">장바구니</button>
-                        <select id="myselect">
-                            <option value="">개수선택</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-                        <script>
-                                // JavaScript 함수 정의
-                                function handleButtonClick() {
-                                    // 전달할 파라미터 값을 변수에 저장
-                                    const productNum = "<%= productNumber %>";
-                                    const productCount = document.getElementById("myselect").value;
-                                    const productPrice = "<%= productPrice %>";
-                                    const userId = "<%= id %>";
+            public int getPrice() {
+                return price;
+            }
 
-                                    // 파라미터 값을 URL에 추가하여 장바구니 JSP 파일로 리다이렉트
-                                    if(userId=="null"){
-                                        alert("로그인 하세요!");
-                                        window.location.href = 'index.jsp';
-                                    } else if (productCount == "") {
-                                        alert("개수를 선택하세요!");
-                                    } else {
-                                    window.location.href = 'cartProcess.jsp?productNum=' + productNum + '&productCount=' + productCount + '&productPrice=' + productPrice + '&userId=' + userId;
-                                    }
-                                }
-                            </script>
-                            
-                            
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-      </div>
-                        
-        <%
-                    }
+            public String getDescription() {
+                return description;
+            }
 
-                    // 리소스 정리
-                    rs.close();
-                    stmt.close();
-                    conn.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-        %>
+            public String getImage() {
+                return image;
+            }
 
-        <%!
-    public class Product {
-        private String productName;
-        private double price;
-        private String description;
-        private String image;
-        private double productNumber;
-
-        public Product(String productName, double price, String description, String image, double productNumber) {
-            this.productName = productName;
-            this.price = price;
-            this.description = description;
-            this.image = image;
-            this. productNumber = productNumber;
+            public int getProductNumber() {
+                return productNumber;
+            }
         }
-
-        public String getProductName() {
-            return productName;
-        }
-
-        public double getPrice() {
-            return price;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public String getImage() {
-            return image;
-        }
-
-        public double getProductNumber() {
-            return productNumber;
-        }
-    }
-%>
+    %>
 
 <%!
-    private List<Product> getProducts() {
+        private List<Product> getProducts() {
         List<Product> productList = new ArrayList<>();
 
         try {
@@ -216,7 +126,7 @@
             Connection conn = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 
             // SQL 쿼리 실행
-            String sql = "SELECT * FROM PRODUCT ORDER BY 1";
+            String sql = "SELECT * FROM PRODUCT";
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
 
@@ -244,60 +154,77 @@
     }
 %>
             <div class="container">
-                 <table class="alt">
-                 <thead>
-                    <tr>
-                        <th>image</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                    </tr>
+                <table class="alt">
+                    <thead>
+                        <tr>
+                            <th>image</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                        </tr>
                     </thead>
                     <% List<Product> productList = getProducts(); %>
-                    <% for (Product product : productList) { %>
                     <tbody>
-                    <tr>
-                        <td><img src="<%= product.getImage() %>" height="100"></td>
-                        <td><%= product.getProductName() %></td>
-                        <td><p><%= product.getDescription() %></p><a>무료배송</a></td>
-                        <td><p><%= product.getPrice() %>원</p>
-                        <button onclick="handleButtonClick2('<%= product.getProductNumber() %>', '<%= product.getPrice() %>')">장바구니</button>
-                        <select id="myselect">
-                            <option value="">개수선택</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-
-                        <script>
-                        // JavaScript 함수 정의
-                        function handleButtonClick2(productNum, productPrice) {
-                            // 전달할 파라미터 값을 변수에 저장
-                            const productCount = document.getElementById("myselect").value;
-                            const userId = "<%= id %>";
-
-                            // 파라미터 값을 URL에 추가하여 장바구니 JSP 파일로 리다이렉트
-                            if(userId=="null"){
-                                alert("로그인 하세요!");
-                                window.location.href = 'index.jsp';
-                            } else if(productCount=="") {
-                                alert("개수를 선택하세요!");
-                            } else {
-                            window.location.href = 'cartProcess.jsp?productNum=' + productNum + '&productCount=' + productCount + '&productPrice=' + productPrice + '&userId=' + userId;
-                            }
-                            }
-                        </script>
-                        </td>
-                    </tr>
+                    <% for (int i = 0; i < productList.size(); i++) { %>
+                        <tr>
+                            <td>
+                                <div style="text-align : center;">
+					<a href ="image_connect.jsp?url=<%= productList.get(i).getImage() %>"><img src="<%= productList.get(i).getImage() %>" height="90"></a>
+                                </div>
+                            </td>
+                            <td><%= productList.get(i).getProductName() %></td>
+                            <td><p><%= productList.get(i).getDescription() %></p><a>무료배송</a></td>
+                            <td><p class="formattedPrice"><%= productList.get(i).getPrice() %>원</p>
+                            <button onclick="handleButtonClick2('<%= productList.get(i).getProductNumber() %>', '<%= productList.get(i).getPrice() %>')">장바구니</button>
+                            <select id="myselect<%= i %>">
+                                <option value="">개수선택</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
+                        </tr>
                     <% } %>
-                    </table>
-                </div>
-        <%
+                    </tbody>
+                </table>
+            </div>
+
+        <script>
+            // JavaScript 함수 정의
+            function handleButtonClick2(productNum, productPrice) {
+                const index = event.target.parentNode.parentNode.rowIndex - 1; // 현재 버튼이 속한 행의 인덱스
+                const productCount = document.getElementById("myselect" + index).value;
+                const userId = "<%= id %>";
+
+                if (userId == "null") {
+                    alert("로그인 후 이용해주세요.");
+                    window.location.href = 'login.jsp';
+                } else if (productCount == "") {
+                    alert("개수를 선택하세요!");
+                    window.location.href = 'productsearch.jsp';
+                } else {
+                    window.location.href = 'cartProcess.jsp?productNum=' + productNum + '&productCount=' + productCount + '&productPrice=' + productPrice + '&userId=' + userId;
                 }
-        %>
+            }
+        </script>
+
+        <script>
+            function addCommasToPrice(price) {
+                return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+            // product.getPrice()의 반환값을 가공하여 표시
+            const formattedPriceElements = document.querySelectorAll(".formattedPrice");
+            formattedPriceElements.forEach(element => {
+                const rawProductPrice = element.textContent;
+                const formattedPrice = addCommasToPrice(rawProductPrice);
+                element.textContent = formattedPrice;
+            });
+        </script>
+
+           
     
 
             <!-- Footer -->

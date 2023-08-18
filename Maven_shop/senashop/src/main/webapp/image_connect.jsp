@@ -1,0 +1,54 @@
+   <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.io.BufferedReader"%>
+<%@ page import="java.io.InputStreamReader"%>
+<%@ page import="java.net.URL"%>
+<%@ page import="java.net.HttpURLConnection"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>세나샵</title>
+</head>
+<body>
+
+    <%
+
+String urlString = request.getParameter("url");
+if (urlString != null && !urlString.isEmpty()) {
+    try {
+        URL url = new URL(urlString);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+
+        // 이미지인지 확인하기 위한 Content-Type 가져오기
+        String contentType = connection.getHeaderField("Content-Type");
+        
+        if (contentType != null && contentType.startsWith("image")) {
+            // 이미지인 경우 이미지 태그로 출력
+            out.println("<img src='" + url.toString() + "' alt='Image'>");
+        } else {
+            // 이미지가 아닌 경우 그대로 출력
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+
+            out.println("<pre>");
+
+            while ((line = reader.readLine()) != null) {
+                out.println(line);
+            }
+
+            out.println("</pre>");
+
+            reader.close();
+        }
+
+        connection.disconnect();
+    } catch (Exception e) {
+        out.println("<p>An error occurred: " + e.getMessage() + "</p>");
+    }
+} else {
+    out.println("<p>Please enter a valid URL</p>");
+}
+ %>
+</body>
+</html>

@@ -46,7 +46,7 @@
 
             <%
             // 다운로드할 파일의 경로
-			String awsAccessKey = "";
+			String awsAccessKey = "AKIAXQAF5U3UOQN6MG6B";
 			String awsSecretKey = "/"; 
 			String clientRegion = "ap-northeast-2";
 
