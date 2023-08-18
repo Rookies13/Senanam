@@ -123,3 +123,29 @@ reference : https://goodteacher.tistory.com/614
 
 ![image](https://github.com/Rookies13/Senanam/assets/140288335/0d734bcf-089c-4eef-bda5-d5ab0edd373f)
 
+
+## TEST DB
+
+
+## DB Configuration
+
+*Branch* : DB
+*Commit* : 0d00d4ef6c0288df924796ba179bc6ebd85762d6
+
+> **webapp - WEB-INF - META-INF - context.xml **
+
+<Context>
+    <Resource name="jdbc/aws" auth="Container" type="javax.sql.DataSource"
+        maxTotal="100" maxIdle="30" maxWaitMillis="10000"
+        username="ID" password="PW"
+        driverClassName="oracle.jdbc.OracleDriver"
+        url="jdbc:oracle:thin:@AWS Address:1521:orcl" />
+</Context>
+
+> **webapp - WEB-INF - WEB-INF - web.xml 수정**
+> `<resource-ref>`
+> `<description>`Oracle Datasource example`</description>`
+> `<res-ref-name>`jdbc/aws`</res-ref-name>`
+> `<res-type>`javax.sql.DataSource`</res-type>`
+> `<res-auth>`Container`</res-auth>`
+> `</resource-ref>`
