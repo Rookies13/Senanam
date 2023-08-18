@@ -138,16 +138,14 @@ reference : https://goodteacher.tistory.com/614
     <Resource name="jdbc/aws" auth="Container" type="javax.sql.DataSource"
         maxTotal="100" maxIdle="30" maxWaitMillis="10000"
         username="ID" password="PW"
-        driverClassName="oracle.jdbc.OracleDriver"
-        url="jdbc:oracle:thin:@AWS Address:1521:orcl" />
+        driverClassName="DRIVERNAME"
+        url="jdbc:oracle:thin:@AWS Address:PORT" />
 </Context>
 
 **webapp - WEB-INF - WEB-INF - web.xml **
-'''
 <resource-ref>
 <description>Oracle Datasource example</description>
 <res-ref-name>jdbc/aws</res-ref-name>
 <res-type>javax.sql.DataSource</res-type>
 <res-auth>Container</res-auth>
 </resource-ref>
-'''
