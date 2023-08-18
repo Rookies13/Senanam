@@ -113,7 +113,7 @@ reference : https://goodteacher.tistory.com/614
 ![image](https://github.com/Rookies13/Senanam/assets/140288335/ff5ebebd-78a6-4d41-83e9-362e08c1fbb2)
 
 > push branch 
-![image](https://github.com/Rookies13/Senanam/assets/140288335/cee195f9-657f-486f-bb3c-b9a4a2f8570b)
+
 
 ### DB 
  > info
