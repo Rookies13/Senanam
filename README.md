@@ -143,9 +143,10 @@ reference : https://goodteacher.tistory.com/614
 </Context>
 
 > **webapp - WEB-INF - WEB-INF - web.xml 수정**
-> `<resource-ref>`
-> `<description>`Oracle Datasource example`</description>`
-> `<res-ref-name>`jdbc/aws`</res-ref-name>`
-> `<res-type>`javax.sql.DataSource`</res-type>`
-> `<res-auth>`Container`</res-auth>`
-> `</resource-ref>`
+
+<resource-ref>
+<description>Oracle Datasource example</description>
+<res-ref-name>jdbc/aws</res-ref-name>
+<res-type>javax.sql.DataSource</res-type>
+<res-auth>Container</res-auth>
+</resource-ref>
