@@ -14,7 +14,6 @@ Welcome to the VS Code Java world. Here is a guideline to help you get started t
 ![image](https://github.com/Rookies13/Senanam/assets/140288335/e16fef2b-0d61-46dd-9441-4ffb7e86376f)
 
 
-
 ## Dependency Management
 1. **JDK : ZULU-17**
      https://www.azul.com/downloads/?package=jdk#zulu
