@@ -132,7 +132,7 @@ reference : https://goodteacher.tistory.com/614
 *Branch* : DB
 *Commit* : 0d00d4ef6c0288df924796ba179bc6ebd85762d6
 
-> **webapp - WEB-INF - META-INF - context.xml **
+**webapp - WEB-INF - META-INF - context.xml **
 
 <Context>
     <Resource name="jdbc/aws" auth="Container" type="javax.sql.DataSource"
@@ -142,7 +142,7 @@ reference : https://goodteacher.tistory.com/614
         url="jdbc:oracle:thin:@AWS Address:1521:orcl" />
 </Context>
 
-> **webapp - WEB-INF - WEB-INF - web.xml 수정**
+**webapp - WEB-INF - WEB-INF - web.xml **
 
 <resource-ref>
 <description>Oracle Datasource example</description>
