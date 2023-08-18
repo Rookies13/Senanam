@@ -2,9 +2,9 @@
 
 Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 1. git clone
-  >  C:\git 생성
+  >  C:\git Create
   > cmd termianl
-     - git clone https://(사용자이름)@github.com/Rookies13/Senanam.git
+     - git clone https://(USERNAME)@github.com/Rookies13/Senanam.git
 
 2. vscode - new window
   > open folder - git -> Senanam 
@@ -53,32 +53,33 @@ The `JAVA PROJECTS` view allows you to manage your dependencies. More details ca
 
 # Senanam
 
-VSCODE - Tomcat - JSP - JAVA 개발환경 구성
+VSCODE - Tomcat - JSP - JAVA Development environment configuration
 
-Visaul Code 환경
+Visaul Code configuration
 
-(1) Java 개발 확장팩 설치:
+(1) Java Install development extension pack:
 
-Visual Studio Code를 실행하고, 왼쪽 사이드바에서 "Extensions" 아이콘을 클릭합니다. 검색 창에 "Java Extension Pack"을 입력하여 Java 개발 확장팩을 찾고 설치합니다.
+Visual Studio Code, click the "Extensions" icon in the left sidebar. Type "Java Extension Pack" in the search bar to find and install the Java Development Extension Pack.
 
-(2) Git Graph 설치
+(2) Git Graph installation
 
-Visual Studio Code를 실행하고, 왼쪽 사이드바에서 "Extensions" 아이콘을 클릭합니다. 검색 창에 "Git Graph"을 입력하여 GitGraph 개발 확장팩을 찾고 설치합니다.
+Launch Visual Studio Code and click the "Extensions" icon in the left sidebar. Enter "Git Graph" in the search bar to find and install the GitGraph development extension pack.
 
-(3) Oracle Developer Tools for VS Code 설치 
+(3) Oracle Developer Tools for VS Code installation 
 
-Visual Studio Code를 실행하고, 왼쪽 사이드바에서 "Extensions" 아이콘을 클릭합니다. 검색 창에 "Oracle"을 입력하여 Oracle Developer Tools for VS Code 개발 확장팩을 찾고 설치합니다.
+Launch Visual Studio Code and click the "Extensions" icon in the left sidebar. Enter "Oracle" in the search bar to find and install the Oracle Developer Tools for VS Code development extension pack.
 
-(4) Java Extension Pack (microsoft) 설치:
+(4) Java Extension Pack (microsoft) installation:
 
-Visual Studio Code를 실행한 후, 확장 기능(Extensions) 메뉴에서 "Java Extension Pack"을 검색하여 설치합니다. 이 확장 기능은 Java 개발에 필요한 기능들을 제공합니다.
+After launching Visual Studio Code, search for "Java Extension Pack" in the Extensions menu and install it. This extension provides features necessary for Java development.
 
-(5) Community Server Connector 설치 : 
-참고 : https://goodteacher.tistory.com/614
+(5) Community Server Connector installation : 
 
-(6) maven project manager (microsoft) 설치
+reference : https://goodteacher.tistory.com/614
 
-(7) java project manager (microsoft) 설치 
+(6) maven project manager (microsoft) installation
+
+(7) java project manager (microsoft) installation 
 
 
 ## BUILD & Debugging
@@ -104,7 +105,7 @@ Visual Studio Code를 실행한 후, 확장 기능(Extensions) 메뉴에서 "Jav
    ![image](https://github.com/Rookies13/Senanam/assets/140288335/f0e9a530-9cae-422c-b43e-d33c2deffcf8)
 
 
-(1) 소스제어 - (날짜, 이름) - 변경사항 적고 커밋.  
+(1) Source control - (date, name) - Write down changes and commit them. 
 
 3. **create branch**
     
