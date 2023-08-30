@@ -93,7 +93,11 @@ reference : https://goodteacher.tistory.com/614
 
 
 
-## GitGraph -  PUSH COMMIT DELETE DROP 
+## GitGraph -  configuration management
+
+After creating the brunch, configuration management was performed. The basic function is
+COMMIT PUSH Merge Drop.
+
 1. **main branch checkout**
      > checkout *main* branch
 
@@ -114,14 +118,17 @@ reference : https://goodteacher.tistory.com/614
 
 ![image](https://github.com/Rookies13/Senanam/assets/140288335/ff5ebebd-78a6-4d41-83e9-362e08c1fbb2)
 
-> push branch 
+> push branch
+
+![image](https://github.com/Rookies13/Senanam/assets/140288335/531b2407-f718-4cb7-a1b2-952582a71c6c)
 
 
-### DB 
+## DB
+
  > info
   **AWS RDS oracle 19C**
 
-## ERD 
+> ERD
 
 ![image](https://github.com/Rookies13/Senanam/assets/140288335/0d734bcf-089c-4eef-bda5-d5ab0edd373f)
 
