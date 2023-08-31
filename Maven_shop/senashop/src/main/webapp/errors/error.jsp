@@ -1,5 +1,6 @@
 <%@ page contentType = "text/html; charset=utf-8" %>
 <%@ page isErrorPage = "true" %>
+<!--미사용 페이지-->
 <html>
 <head><title>에러 발생</title></head>
 <body>
