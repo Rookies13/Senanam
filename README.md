@@ -130,7 +130,8 @@ COMMIT PUSH Merge Drop.
 
 > ERD
 
-![image](https://github.com/Rookies13/Senanam/assets/140288335/0d734bcf-089c-4eef-bda5-d5ab0edd373f)
+![image](https://github.com/Rookies13/Senanam/assets/128656964/d8e0dcf4-98ab-4752-a728-59e2492dacf7)
+
 
 
 ## DB Configuration
